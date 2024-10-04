@@ -14,6 +14,7 @@ namespace GamersGrotto.Runtime.Modules.InGameConsole
         [Header("Settings")]
         [SerializeField] private bool timeStampHistory = true;
         [SerializeField] private bool clearConsoleOnStart = true;
+        [SerializeField] private bool showAllCommandsOnStart = true;
         [SerializeField] private bool showUnityConsoleLogs = true;
         [SerializeField] private float fadeInOutDuration = 0.5f;
         
@@ -65,15 +66,19 @@ namespace GamersGrotto.Runtime.Modules.InGameConsole
             Application.logMessageReceivedThreaded += OnDebugLogReceived;
         }
 
-        private void Start()
+        private async void Start()
         {
             commandManager = new CommandManager();
             commandManager.RegisterCommands();
             
-            canvasGroup.alpha = 0f;
-            
             if(clearConsoleOnStart)
                 Clear();
+            
+            if(showAllCommandsOnStart)
+                await commandManager.RunCommand("commands", Array.Empty<string>());
+            
+            canvasGroup.alpha = 0f;
+            parentGameObject.SetActive(false);
         }
 
         private void OnDisable()
