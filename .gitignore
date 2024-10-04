@@ -100,3 +100,5 @@ crashlytics-build.properties
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+
+.idea/**
