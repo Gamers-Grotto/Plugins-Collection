@@ -1,0 +1,10 @@
+{
+  {
+  "name": "com.gamersgrotto.pluginscollection",
+  "version": "1.0.0",
+  "displayName": "Gamers Grotto Plugins Collection",
+  "description": "Such description, much wow",
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  }
+}
