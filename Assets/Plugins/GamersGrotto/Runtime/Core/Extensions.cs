@@ -54,5 +54,12 @@ namespace GamersGrotto.Runtime.Core
             rb.position = Vector3.zero;
             rb.rotation = 0f;
         }
+        
+        //String
+        public static string Colorize(this string text, string color) => $"<color={color}>{text}</color>";
+
+        public static string Bold(this string text) => $"<b>{text}</b>";
+
+        public static string Italic(this string text) => $"<i>{text}</i>";
     }
 }
