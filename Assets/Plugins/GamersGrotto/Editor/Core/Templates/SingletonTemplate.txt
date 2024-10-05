@@ -1,0 +1,22 @@
+public class #SCRIPTNAME#
+{
+    private static #SCRIPTNAME# instance;
+
+    public static #SCRIPTNAME# Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new #SCRIPTNAME#();
+            }
+            return instance;
+        }
+    }
+
+    // Private constructor to prevent instantiation
+    private #SCRIPTNAME#()
+    {
+        // Initialization code here
+    }
+}
