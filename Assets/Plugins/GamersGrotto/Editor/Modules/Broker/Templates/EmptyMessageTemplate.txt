@@ -1,0 +1,3 @@
+using GamersGrotto.Runtime.Modules.Broker;
+
+public class #SCRIPTNAME# : IMessage{}
