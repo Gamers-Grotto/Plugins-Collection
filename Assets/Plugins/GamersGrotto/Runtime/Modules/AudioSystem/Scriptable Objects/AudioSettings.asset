@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0790fbccde799c44af48799fa42a49e, type: 3}
+  m_Name: AudioSettings
+  m_EditorClassIdentifier: 
+  mainMixer: {fileID: 24100000, guid: 8491483f198c2ef4cb218dcb94bf0fcf, type: 2}
+  masterVolume: 0.5
+  musicVolume: 1
+  sfxVolume: 1
+  uiVolume: 1
+  inGameEffectsVolume: 1
+  lowPassCutoffFrequency: 5000
+  maxLowPassCutoffFrequency: 22000
