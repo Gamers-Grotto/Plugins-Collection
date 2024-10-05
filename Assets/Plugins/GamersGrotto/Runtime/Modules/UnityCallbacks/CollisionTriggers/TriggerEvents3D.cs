@@ -2,10 +2,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace GamersGrotto.Runtime.Modules.CollisionTriggers
+namespace GamersGrotto.Runtime.Modules.UnityCallbacks.CollisionTriggers
 {
-    [RequireComponent(typeof(Collider2D))]
-    public class TriggerEvents2D : MonoBehaviour
+    [RequireComponent(typeof(Collider))]
+    public class TriggerEvents3D : MonoBehaviour
     {
         [SerializeField] private LayerMask layerMask;
         
@@ -13,7 +13,7 @@ namespace GamersGrotto.Runtime.Modules.CollisionTriggers
         public UnityEvent<GameObject> onStayTriggerEvent;
         public UnityEvent<GameObject> onExitTriggerEvent;
         
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerEnter(Collider other)
         {
             if(!other.gameObject.IsInLayerMask(layerMask))
                 return;
@@ -21,7 +21,7 @@ namespace GamersGrotto.Runtime.Modules.CollisionTriggers
             onEnterTriggerEvent?.Invoke(other.gameObject);
         }
 
-        private void OnTriggerStay2D(Collider2D other)
+        private void OnTriggerStay(Collider other)
         {
             if(!other.gameObject.IsInLayerMask(layerMask))
                 return;
@@ -29,7 +29,7 @@ namespace GamersGrotto.Runtime.Modules.CollisionTriggers
             onStayTriggerEvent?.Invoke(other.gameObject);
         }
 
-        private void OnTriggerExit2D(Collider2D other)
+        private void OnTriggerExit(Collider other)
         {
             if(!other.gameObject.IsInLayerMask(layerMask))
                 return;

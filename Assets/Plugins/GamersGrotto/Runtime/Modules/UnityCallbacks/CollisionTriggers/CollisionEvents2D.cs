@@ -1,12 +1,11 @@
-﻿using System;
-using GamersGrotto.Runtime.Core;
+﻿using GamersGrotto.Runtime.Core;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace GamersGrotto.Runtime.Modules.CollisionTriggers
+namespace GamersGrotto.Runtime.Modules.UnityCallbacks.CollisionTriggers
 {
-    [RequireComponent(typeof(Collider), typeof(Rigidbody))]
-    public class CollisionEvents3D : MonoBehaviour
+    [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
+    public class CollisionEvents2D : MonoBehaviour
     {
         [SerializeField] private LayerMask layerMask;
         
@@ -14,7 +13,7 @@ namespace GamersGrotto.Runtime.Modules.CollisionTriggers
         public UnityEvent<GameObject> onStayCollisionEvent;
         public UnityEvent<GameObject> onExitCollisionEvent;
         
-        private void OnCollisionEnter(Collision other)
+        private void OnCollisionEnter2D(Collision2D other)
         {
             if(!other.gameObject.IsInLayerMask(layerMask))
                 return;
@@ -22,7 +21,7 @@ namespace GamersGrotto.Runtime.Modules.CollisionTriggers
             onEnterCollisionEvent?.Invoke(other.gameObject);
         }
 
-        private void OnCollisionStay(Collision other)
+        private void OnCollisionStay2D(Collision2D other)
         {
             if(!other.gameObject.IsInLayerMask(layerMask))
                 return;
@@ -30,7 +29,7 @@ namespace GamersGrotto.Runtime.Modules.CollisionTriggers
             onStayCollisionEvent?.Invoke(other.gameObject);
         }
 
-        private void OnCollisionExit(Collision other)
+        private void OnCollisionExit2D(Collision2D other)
         {
             if(!other.gameObject.IsInLayerMask(layerMask))
                 return;
