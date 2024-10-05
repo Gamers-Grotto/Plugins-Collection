@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GamersGrotto.Runtime.Modules.GameEvents.AudioEvents;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AudioLibrary", menuName = "Scriptable Objects/AudioLibrarySO")]
@@ -9,8 +10,8 @@ public class AudioLibrary : ScriptableObject
  {
     return audioCollections[Random.Range(0, audioCollections.Count)];
  }
-  public AudioClip GetRandomClip()
+  public AudioEvent GetRandomAudioEvent()
   {
-    return audioCollections[Random.Range(0, audioCollections.Count)].GetRandomClip();
+    return audioCollections[Random.Range(0, audioCollections.Count)].GetRandomAudioEvent();
   }
 }

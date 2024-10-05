@@ -6,7 +6,7 @@ namespace GamersGrotto.Runtime.Modules.GameEvents.AudioEvents
     public class AudioEvent : ScriptableObject
     {
         public AudioClip clip;
-        public float volume = 1.0f;
+        [Min(0)]public float volume = 1.0f;
         public bool loop = false;
 
         public void Play(AudioSource audioSource)
@@ -20,6 +20,6 @@ namespace GamersGrotto.Runtime.Modules.GameEvents.AudioEvents
             audioSource.Play();
         }
         
-        public static void PlayAudioEvent(AudioEvent audioEvent, AudioSource audioSource) => audioEvent?.Play(audioSource);
+        
     }
 }

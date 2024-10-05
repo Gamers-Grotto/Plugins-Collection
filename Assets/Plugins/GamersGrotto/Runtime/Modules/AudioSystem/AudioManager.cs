@@ -1,4 +1,5 @@
 using System.Collections;
+using GamersGrotto.Runtime.Modules.GameEvents.AudioEvents;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
@@ -6,7 +7,7 @@ public class AudioManager : MonoBehaviour {
     public AudioSource musicPlayer;
 
     private short uiSoundIndex;
-
+    public static void PlayAudioEvent(AudioEvent audioEvent, AudioSource audioSource) => audioEvent?.Play(audioSource);
     #region UI
 
     public void PlayUISound(AudioClip clip) {
@@ -26,12 +27,12 @@ public class AudioManager : MonoBehaviour {
             return;
         }
 
-        PlayUISound(audioCollection.AudioClips[uiSoundIndex]);
+        PlayUISound(audioCollection.AudioClips[uiSoundIndex].clip);
         uiSoundIndex = (short)((uiSoundIndex + 1) % audioCollection.AudioClips.Length);
     }
 
     public void PlayRandomUISound(AudioCollectionSO audioCollection) {
-        PlayUISound(audioCollection.GetRandomClip());
+        PlayUISound(audioCollection.GetRandomAudioEvent().clip);
     }
 
     #endregion
@@ -62,9 +63,9 @@ public class AudioManager : MonoBehaviour {
 
     private IEnumerator PlayMusicRoutine(AudioCollectionSO audioCollection) {
         while (true) {
-            foreach (var clip in audioCollection.AudioClips) {
-                PlayMusic(clip);
-                yield return new WaitForSeconds(clip.length);
+            foreach (var audioEvent in audioCollection.AudioClips) {
+                PlayMusic(audioEvent.clip);
+                yield return new WaitForSeconds(audioEvent.clip.length);
             }
         }
     }

@@ -1,13 +1,14 @@
+using GamersGrotto.Runtime.Modules.GameEvents.AudioEvents;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AudioCollectionSO", menuName = "Scriptable Objects/AudioCollectionSO")]
 public class AudioCollectionSO : ScriptableObject {
-    [SerializeField] AudioClip[] audioClips;
+    [SerializeField] AudioEvent[] audioClips;
 
-    public AudioClip[] AudioClips => audioClips;
+    public AudioEvent[] AudioClips => audioClips;
 
 
-    public AudioClip GetRandomClip() {
+    public AudioEvent GetRandomAudioEvent() {
         Debug.Assert(AudioClips.Length > 0, "AudioCollection is empty");
         return AudioClips[Random.Range(0, AudioClips.Length)];
     }
