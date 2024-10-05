@@ -48,6 +48,13 @@ public class BaseTemplateCreator {
         var filename = "SingletonTemplate.txt";
         CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH, filename);
     }
+    
+    [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX + "Attribute", priority = 30)]
+    public static void CreateAttributeMenuItem()
+    {
+        var filename = "AttributeTemplate.txt";
+        CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH,filename);
+    }
 
     public static void CreateScriptAssetFromTemplateFile(string templatePath, string templateName) {
         var createdFileName = templateName.Insert(0, "New")
