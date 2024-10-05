@@ -1,0 +1,10 @@
+using GamersGrotto.Runtime.Modules.Broker;
+
+public class #SCRIPTNAME# : IMessage
+{	
+  // public CLASSTYPE Value{ get; }
+     #NOTRIM#
+   // public #SCRIPTNAME#(CLASSTYPE value){
+   // Value = value;
+   // }
+}

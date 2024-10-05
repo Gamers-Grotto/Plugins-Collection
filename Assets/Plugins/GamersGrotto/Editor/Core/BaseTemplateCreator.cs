@@ -2,68 +2,64 @@
 using System.IO;
 using UnityEditor;
 
-public static class BaseTemplateCreator
-{
-    static string TEMPLATE_BASE_PATH =  @"Assets/Plugins/GamersGrotto/Editor/Core/Templates";
-    const string ASSET_PATH = "Assets/Create/GamersGrotto/Templates/Base/";
+public class BaseTemplateCreator {
+    static string TEMPLATE_BASE_PATH = @"Assets/Plugins/GamersGrotto/Editor/Core/Templates";
+    protected const string ASSET_PATH = "Assets/Create/GamersGrotto/Templates/";
+    private const string ASSET_PATH_SUFFIX = "Base/";
 
-    [MenuItem(ASSET_PATH + "Scriptable Object", priority = 30)]
-    public static void CreateMessageMenuItem()
-    {
+    [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX+ "Scriptable Object", priority = 30)]
+    public static void CreateScriptableObjectMenuItem() {
         var filename = "ScriptableObjectTemplate.txt";
-        CreateScriptAssetFromTemplateFile(filename);
+        CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH, filename);
     }
-    
-    [MenuItem(ASSET_PATH + "MonoBehaviour", priority = 30)]
-    
-    
-    public static void CreateMonoBehaviourMenuItem()
-    {
+
+    [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX + "MonoBehaviour", priority = 30)]
+    public static void CreateMonoBehaviourMenuItem() {
         var filename = "MonoBehaviourTemplate.txt";
-        CreateScriptAssetFromTemplateFile(filename);
+        CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH, filename);
     }
-    
-    [MenuItem(ASSET_PATH + "Editor", priority = 30)]
-    public static void CreateEditorScriptMenuItem()
-    {
+
+    [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX + "Editor", priority = 30)]
+    public static void CreateEditorScriptMenuItem() {
         var filename = "EditorScriptTemplate.txt";
-        CreateScriptAssetFromTemplateFile(filename);
+        CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH, filename);
     }
-    
-    [MenuItem(ASSET_PATH + "Interface", priority = 30)]
-    public static void CreateInterfaceMenuItem()
-    {
+
+    [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX + "Interface", priority = 30)]
+    public static void CreateInterfaceMenuItem() {
         var filename = "InterfaceTemplate.txt";
-        CreateScriptAssetFromTemplateFile(filename);
+        CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH, filename);
     }
-    
-    [MenuItem(ASSET_PATH + "Enum", priority = 30)]
-    public static void CreateEnumMenuItem()
-    {
+
+    [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX + "Enum", priority = 30)]
+    public static void CreateEnumMenuItem() {
         var filename = "EnumTemplate.txt";
-        CreateScriptAssetFromTemplateFile(filename);
+        CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH, filename);
     }
-    
-    [MenuItem(ASSET_PATH + "Static Class", priority = 30)]
-    public static void CreateStaticClassMenuItem()
-    {
+
+    [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX + "Static Class", priority = 30)]
+    public static void CreateStaticClassMenuItem() {
         var filename = "StaticClassTemplate.txt";
-        CreateScriptAssetFromTemplateFile(filename);
+        CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH, filename);
     }
-    
-    
-    
-    [MenuItem(ASSET_PATH + "Singleton", priority = 30)]
-    public static void CreateSingletonMenuItem()
-    {
+
+    [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX + "Singleton", priority = 30)]
+    public static void CreateSingletonMenuItem() {
         var filename = "SingletonTemplate.txt";
-        CreateScriptAssetFromTemplateFile(filename);
+        CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH, filename);
     }
-    public static void CreateScriptAssetFromTemplateFile(string templateName)
+    
+    [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX + "Attribute", priority = 30)]
+    public static void CreateAttributeMenuItem()
     {
+        var filename = "AttributeTemplate.txt";
+        CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH,filename);
+    }
+
+    public static void CreateScriptAssetFromTemplateFile(string templatePath, string templateName) {
         var createdFileName = templateName.Insert(0, "New")
             .Replace("Template.txt", ".cs");
-        var fullTemplateFilePath = Path.Join (TEMPLATE_BASE_PATH, templateName);
+        var fullTemplateFilePath = Path.Join(templatePath, templateName);
         ProjectWindowUtil.CreateScriptAssetFromTemplateFile(fullTemplateFilePath, createdFileName);
     }
 }
