@@ -7,7 +7,7 @@ namespace GamersGrotto.Runtime.Modules.CollisionTriggers
     [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
     public class CollisionEvents2D : MonoBehaviour
     {
-        [SerializeField] private LayerMask layerMask = LayerMask.NameToLayer("Default");
+        [SerializeField] private LayerMask layerMask;
         
         public UnityEvent<GameObject> onEnterCollisionEvent;
         public UnityEvent<GameObject> onStayCollisionEvent;
