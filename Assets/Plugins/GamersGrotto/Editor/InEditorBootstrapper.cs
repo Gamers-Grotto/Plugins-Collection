@@ -9,13 +9,13 @@ namespace Plugins.GamersGrotto.Editor
     public static class InEditorBootstrapper
     {
         private static readonly string TAG = "Bootstrapper".Colorize("orange");
-        private const string MenuItemName = "GamersGrotto/Editor Bootstrapper/Load Game Scene on EnterPlayMode";
+        private const string MenuItemName = "GamersGrotto/Editor Bootstrapper/Load Core Scene on EnterPlayMode";
         private const string TogglePrefKey = "BootstrapperToggle";
 
         private const string coreSceneName = "Core";
         
 #if UNITY_EDITOR
-        public static bool StartedFromNonGameScene = false;
+        public static bool StartedFromNonCoreScene = false;
         
         [RuntimeInitializeOnLoadMethod]
         public static void Init()
@@ -65,13 +65,13 @@ namespace Plugins.GamersGrotto.Editor
                     
                     if (!SceneManager.GetSceneByName(coreSceneName).isLoaded)
                     {
-                        StartedFromNonGameScene = true;
-                        Debug.Log($"{TAG} Game Scene not loaded, Loading Game Scene");
-                        SceneManager.LoadScene("Game", LoadSceneMode.Additive);
+                        StartedFromNonCoreScene = true;
+                        Debug.Log($"{TAG} Core Scene ({coreSceneName}) not loaded, Loading {coreSceneName} Scene");
+                        SceneManager.LoadScene(coreSceneName, LoadSceneMode.Additive);
                     }
                     break;
                 case PlayModeStateChange.ExitingPlayMode:
-                    StartedFromNonGameScene = false;
+                    StartedFromNonCoreScene = false;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(playModeState), playModeState, null);
