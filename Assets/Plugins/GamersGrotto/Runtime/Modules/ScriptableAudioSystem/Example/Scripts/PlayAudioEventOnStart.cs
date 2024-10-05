@@ -1,0 +1,18 @@
+﻿using System;
+using UnityEngine;
+
+namespace GamersGrotto.Runtime.Modules.ScriptableAudioSystem.Example.Scripts
+{
+    public class PlayAudioEventOnStart : MonoBehaviour
+    {
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioEvent audioEvent;
+        private void Start()
+        {
+            if(!audioSource || !audioEvent)
+                return;
+            
+            audioEvent.Play(audioSource);
+        }
+    }
+}

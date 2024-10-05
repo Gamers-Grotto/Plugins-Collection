@@ -19,5 +19,7 @@ namespace GamersGrotto.Runtime.Modules.ScriptableAudioSystem
             audioSource.loop = loop;
             audioSource.Play();
         }
+        
+        public static void PlayAudioEvent(AudioEvent audioEvent, AudioSource audioSource) => audioEvent?.Play(audioSource);
     }
 }
