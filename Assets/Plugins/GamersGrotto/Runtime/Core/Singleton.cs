@@ -4,6 +4,8 @@ namespace GamersGrotto.Runtime.Core
 {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
+        [Header("Singleton settings")] 
+        [SerializeField] private bool dontDestroyOnLoad = true;
         public static T Instance { get; private set; }
     
         private void Awake()
@@ -15,7 +17,9 @@ namespace GamersGrotto.Runtime.Core
             }
 
             Instance = this as T;
-            DontDestroyOnLoad(gameObject);
+            
+            if(dontDestroyOnLoad)
+                DontDestroyOnLoad(gameObject);
         }
     }
 }
