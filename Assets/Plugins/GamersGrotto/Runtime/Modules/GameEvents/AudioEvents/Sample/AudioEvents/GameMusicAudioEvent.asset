@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GameMusicAudioEvent
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: eb9e3b3a61ed07b489b5dc441d376cb7, type: 3}
-  volume: 1
+  volume: 1.18
   loop: 1

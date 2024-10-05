@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AudioSettings
   m_EditorClassIdentifier: 
   mainMixer: {fileID: 24100000, guid: 8491483f198c2ef4cb218dcb94bf0fcf, type: 2}
-  masterVolume: 0.5
+  masterVolume: 1
   musicVolume: 1
   sfxVolume: 1
   uiVolume: 1

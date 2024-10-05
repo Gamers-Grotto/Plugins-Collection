@@ -6,17 +6,17 @@ namespace GamersGrotto.Runtime.Modules.GameEvents.AudioEvents
     public class AudioEvent : ScriptableObject
     {
         public AudioClip clip;
-        [Min(0)]public float volume = 1.0f;
-        public bool loop = false;
+        [Range(0,2)]public float volume = 1.0f;
 
-        public void Play(AudioSource audioSource)
+        public void Play(AudioSource audioSource, bool loop)
         {
-            if (clip == null || audioSource == null) 
+            if (clip == null || audioSource == null)
                 return;
-        
+
             audioSource.clip = clip;
+            audioSource.time = 0;
             audioSource.volume = volume;
-            audioSource.loop = loop;
+            audioSource.loop =  loop;
             audioSource.Play();
         }
         

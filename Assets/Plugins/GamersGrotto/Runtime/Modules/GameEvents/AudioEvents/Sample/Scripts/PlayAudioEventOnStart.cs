@@ -11,7 +11,7 @@ namespace GamersGrotto.Runtime.Modules.GameEvents.AudioEvents.Sample.Scripts
             if(!audioSource || !audioEvent)
                 return;
             
-            audioEvent.Play(audioSource);
+            audioEvent.Play(audioSource, false);
         }
     }
 }

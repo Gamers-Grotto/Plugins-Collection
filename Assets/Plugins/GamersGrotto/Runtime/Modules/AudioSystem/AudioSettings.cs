@@ -47,12 +47,12 @@ public class AudioSettings : ScriptableObject
         mainMixer.SetFloat(floatName, Mathf.Log10(volume) * 20);
     }
     
-    
+    [Button]
     public void ActivateLowPassFilter()
     {
         mainMixer.SetFloat("masterCutoffFrequency", lowPassCutoffFrequency);
     }
-    
+    [Button]
     public void DeactivateLowPassFilter()
     {
         mainMixer.SetFloat("masterCutoffFrequency", maxLowPassCutoffFrequency);

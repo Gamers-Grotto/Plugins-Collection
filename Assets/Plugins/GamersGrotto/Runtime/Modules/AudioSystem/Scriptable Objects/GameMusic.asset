@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392d99e594923cc48b8aa1d965e08acd, type: 3}
   m_Name: GameMusic
   m_EditorClassIdentifier: 
-  audioClips: []
+  audioClips:
+  - {fileID: 11400000, guid: c06f1aa4f05892e4b902e006845e35bc, type: 2}
+  - {fileID: 11400000, guid: 01915f8adcaab8a47a58e3900839f4a1, type: 2}

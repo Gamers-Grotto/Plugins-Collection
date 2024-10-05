@@ -1,19 +1,21 @@
 using System.Collections;
 using GamersGrotto.Runtime.Modules.GameEvents.AudioEvents;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class AudioManager : MonoBehaviour {
     public AudioSource uiSoundPlayer;
     public AudioSource musicPlayer;
 
     private short uiSoundIndex;
-    public static void PlayAudioEvent(AudioEvent audioEvent, AudioSource audioSource) => audioEvent?.Play(audioSource);
+
+    public static void PlayAudioEvent(AudioEvent audioEvent, AudioSource audioSource, bool loop = false) =>
+        audioEvent?.Play(audioSource, loop);
+
     #region UI
 
-    public void PlayUISound(AudioClip clip) {
-        uiSoundPlayer.clip = clip;
-        uiSoundPlayer.time = 0;
-        uiSoundPlayer.Play();
+    public void PlayUISound(AudioEvent audioEvent) {
+        audioEvent?.Play(uiSoundPlayer, false);
     }
 
     /// <summary>
@@ -27,23 +29,21 @@ public class AudioManager : MonoBehaviour {
             return;
         }
 
-        PlayUISound(audioCollection.AudioClips[uiSoundIndex].clip);
+        PlayUISound(audioCollection.AudioClips[uiSoundIndex]);
         uiSoundIndex = (short)((uiSoundIndex + 1) % audioCollection.AudioClips.Length);
     }
 
+
     public void PlayRandomUISound(AudioCollectionSO audioCollection) {
-        PlayUISound(audioCollection.GetRandomAudioEvent().clip);
+        PlayUISound(audioCollection.GetRandomAudioEvent());
     }
 
     #endregion
 
     #region Music
 
-    public void PlayMusic(AudioClip clip) {
-        musicPlayer.clip = clip;
-        musicPlayer.loop = true;
-        musicPlayer.time = 0;
-        musicPlayer.Play();
+    public void PlayMusic(AudioEvent audioEvent) {
+        audioEvent?.Play(musicPlayer, false);
     }
 
     /// <summary>
@@ -64,7 +64,7 @@ public class AudioManager : MonoBehaviour {
     private IEnumerator PlayMusicRoutine(AudioCollectionSO audioCollection) {
         while (true) {
             foreach (var audioEvent in audioCollection.AudioClips) {
-                PlayMusic(audioEvent.clip);
+                PlayMusic(audioEvent);
                 yield return new WaitForSeconds(audioEvent.clip.length);
             }
         }
