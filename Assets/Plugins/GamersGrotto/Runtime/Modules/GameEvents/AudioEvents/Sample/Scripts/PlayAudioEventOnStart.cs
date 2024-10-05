@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.ScriptableAudioSystem.Example.Scripts
+namespace GamersGrotto.Runtime.Modules.GameEvents.AudioEvents.Sample.Scripts
 {
     public class PlayAudioEventOnStart : MonoBehaviour
     {

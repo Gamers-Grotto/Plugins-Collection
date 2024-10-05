@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.ScriptableAudioSystem
+namespace GamersGrotto.Runtime.Modules.GameEvents.AudioEvents
 {
     [CreateAssetMenu(fileName = "New Audio Event", menuName = "GamersGrotto/Scriptable Audio System/Audio Event")]
     public class AudioEvent : ScriptableObject
