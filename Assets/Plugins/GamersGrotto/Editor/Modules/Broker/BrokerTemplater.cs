@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
 using UnityEditor;
 
-public class BrokerTemplater : BaseTemplateCreator {
+public class BrokerTemplater : BaseTemplater {
     private const string TEMPLATE_PATHS = "Assets/Plugins/GamersGrotto/Editor/Modules/Broker/Templates";
     private const string ASSET_PATH_SUFFIX = "Broker/";
 

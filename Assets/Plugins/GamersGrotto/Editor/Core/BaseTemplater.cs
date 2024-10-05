@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEditor;
 
-public class BaseTemplateCreator {
+public class BaseTemplater {
     static string TEMPLATE_BASE_PATH = @"Assets/Plugins/GamersGrotto/Editor/Core/Templates";
     protected const string ASSET_PATH = "Assets/Create/GamersGrotto/Templates/";
     private const string ASSET_PATH_SUFFIX = "Base/";
