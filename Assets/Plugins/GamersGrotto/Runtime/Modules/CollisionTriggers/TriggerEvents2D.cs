@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 namespace GamersGrotto.Runtime.Modules.CollisionTriggers
 {
+    [RequireComponent(typeof(Collider2D))]
     public class TriggerEvents2D : MonoBehaviour
     {
         [SerializeField] private LayerMask layerMask;
