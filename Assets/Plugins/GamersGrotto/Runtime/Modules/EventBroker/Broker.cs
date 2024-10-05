@@ -22,7 +22,10 @@ namespace GamersGrotto.Runtime.Modules.EventBroker
                 listeners[typeof(IMessage)] = Delegate.Remove(del, onMessageReceived);
         }
         
-        public static void Publish(Type type, IMessage data)
+        public static void Invoke(this IMessage message){
+            Broker.InvokeSubscribers(message.GetType(), message);
+        }
+        private static void InvokeSubscribers(Type type, IMessage data)
         {
             if (listeners.TryGetValue(type, out var listener))
                 listener?.DynamicInvoke(data);
@@ -32,12 +35,4 @@ namespace GamersGrotto.Runtime.Modules.EventBroker
     }
     
     public interface IMessage { }
-    
-    public static class BrokerExtensions
-    {
-        public static void Invoke(this IMessage message)
-        {
-            Broker.Publish(message.GetType(), message);
-        }
-    }
 }
