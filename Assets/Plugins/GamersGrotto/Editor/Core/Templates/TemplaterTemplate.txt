@@ -1,0 +1,15 @@
+#if UNITY_EDITOR
+
+using UnityEditor;
+
+public class #SCRIPTNAME# : BaseTemplater {
+    private const string TEMPLATE_PATHS = ADD PATH TO TEMPLATE FOLDER IN THE CURRENT MODULE/PACKAGE
+    private const string ASSET_PATH_SUFFIX = "EXAMPLE/";
+
+    [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX + "EXAMPLE", priority = 30)]
+    public static void CreateTEMPLATENAMEMenuItem() {
+        var filename = "EXAMPLETemplate.txt";
+        CreateScriptAssetFromTemplateFile(TEMPLATE_PATHS, filename);
+    }
+}
+#endif

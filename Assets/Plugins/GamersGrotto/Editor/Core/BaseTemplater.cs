@@ -55,6 +55,14 @@ public class BaseTemplater {
         var filename = "AttributeTemplate.txt";
         CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH,filename);
     }
+    
+    [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX + "Templater", priority = 30)]
+    public static void CreateTemplaterMenuItem()
+    {
+        var filename = "TemplaterTemplate.txt";
+        CreateScriptAssetFromTemplateFile(TEMPLATE_BASE_PATH,filename);
+    }
+
 
     public static void CreateScriptAssetFromTemplateFile(string templatePath, string templateName) {
         var createdFileName = templateName.Insert(0, "New")
