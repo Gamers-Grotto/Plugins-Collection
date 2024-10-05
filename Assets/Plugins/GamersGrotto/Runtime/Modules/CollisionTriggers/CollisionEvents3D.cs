@@ -1,13 +1,14 @@
-﻿using GamersGrotto.Runtime.Core;
+﻿using System;
+using GamersGrotto.Runtime.Core;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace GamersGrotto.Runtime.Modules.CollisionTriggers
 {
-    [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(Collider), typeof(Rigidbody))]
     public class CollisionEvents3D : MonoBehaviour
     {
-        [SerializeField] private LayerMask layerMask;
+        [SerializeField] private LayerMask layerMask = LayerMask.NameToLayer("Default");
         
         public UnityEvent<GameObject> onEnterCollisionEvent;
         public UnityEvent<GameObject> onStayCollisionEvent;
