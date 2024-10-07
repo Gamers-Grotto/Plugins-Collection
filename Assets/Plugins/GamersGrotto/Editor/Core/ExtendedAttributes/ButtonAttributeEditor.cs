@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 
-    [CustomEditor(typeof(object), editorForChildClasses: true)]
+    [CustomEditor(typeof(object), editorForChildClasses: true), CanEditMultipleObjects]
     public class ButtonAttributeEditor : UnityEditor.Editor
     {
         private const int LabelFontSize = 24;

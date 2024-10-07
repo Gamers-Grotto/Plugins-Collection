@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
-
-public class #SCRIPTNAME#Attribute : PropertyAttribute
+[AttributeUsage(AttributeTargets.REPLACE_WITH_ATTRIBUTE_TARGET_OF_CHOICE)]
+public class #SCRIPTNAME# : PropertyAttribute
 {
 
 }
