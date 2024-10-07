@@ -2,7 +2,7 @@
 
 namespace GamersGrotto.Runtime.Modules.GameEvents.AudioEvents
 {
-    [CreateAssetMenu(fileName = "New Audio Event", menuName = "GamersGrotto/Scriptable Audio System/Audio Event")]
+    [CreateAssetMenu(fileName = "New Audio Event", menuName = "GamersGrotto/Audio System/Audio Event")]
     public class AudioEvent : ScriptableObject
     {
         public AudioClip clip;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-[CreateAssetMenu(fileName = "NewAudioSettings", menuName = "Scriptable Objects/AudioSettings")]
+[CreateAssetMenu(fileName = "NewAudioSettings", menuName = "GamersGrotto/Audio System/AudioSettings")]
 public class AudioSettings : ScriptableObject
 {	
     public AudioMixer mainMixer;

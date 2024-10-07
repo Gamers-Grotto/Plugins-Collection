@@ -1,7 +1,7 @@
 using GamersGrotto.Runtime.Modules.GameEvents.AudioEvents;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AudioCollectionSO", menuName = "Scriptable Objects/AudioCollectionSO")]
+[CreateAssetMenu(fileName = "AudioCollectionSO", menuName = "GamersGrotto/Audio System/AudioCollectionSO")]
 public class AudioCollectionSO : ScriptableObject {
     [SerializeField] AudioEvent[] audioClips;
 
