@@ -50,8 +50,9 @@ namespace GamersGrotto.Runtime.Modules.UISystem
         {
             if(Application.isPlaying)
                 return;
-
-            StartCoroutine(Repaint());
+            
+            if(isActiveAndEnabled)
+                StartCoroutine(Repaint());
         }
         #endregion
     }

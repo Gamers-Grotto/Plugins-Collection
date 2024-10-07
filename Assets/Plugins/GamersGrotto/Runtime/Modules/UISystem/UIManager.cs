@@ -15,7 +15,6 @@ namespace GamersGrotto.Runtime.Modules.UISystem
         [SerializeField] private float splashScreenShowDuration = 4f;
         private IEnumerator Start()
         {
-            yield return null;
             ExecuteCommand(new NavigateToPageCommand(null, splashScreen));
             yield return new WaitForSeconds(splashScreenShowDuration);
             ExecuteCommand(new ClosePageCommand(splashScreen));
