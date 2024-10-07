@@ -21,7 +21,7 @@ namespace Plugins.GamersGrotto.Editor
         [RuntimeInitializeOnLoadMethod]
         public static void Init()
         {
-            if(EditorPrefs.GetBool(LoggingEnabledPrefKey))
+            if(EditorPrefs.GetBool(LoggingEnabledPrefKey, false))
                 Debug.Log($"{TAG} Init");
             
             EditorApplication.playModeStateChanged -= EditorApplicationOnplayModeStateChanged;
