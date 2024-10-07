@@ -1,0 +1,14 @@
+using System.Threading.Tasks;
+
+namespace GamersGrotto.Runtime.Modules.InGameConsole.Commands
+{
+    [Command(COMMAND_NAME)]
+    public class #SCRIPTNAME# : ConsoleCommand
+    {
+        public override Task Execute(string[] parameters)
+        {
+            // Add your code here
+            return Task.CompletedTask;
+        }
+    }
+}
