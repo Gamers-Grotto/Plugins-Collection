@@ -1,9 +1,10 @@
 using System.Collections;
+using GamersGrotto.Runtime.Core;
 using GamersGrotto.Runtime.Modules.GameEvents.AudioEvents;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : Singleton<AudioManager> {
     public AudioSource uiSoundPlayer;
     public AudioSource musicPlayer;
 
