@@ -8,12 +8,15 @@ namespace Plugins.GamersGrotto.Editor
 {
     public static class InEditorBootstrapper
     {
-        private static readonly string TAG = "[Bootstrapper]".Colorize("orange");
-        private const string MenuItemName = "GamersGrotto/Editor Bootstrapper/Load Core Scene on EnterPlayMode";
-        private const string LoggingMenuItemName = "GamersGrotto/Editor Bootstrapper/Logging...";
-        private const string TogglePrefKey = "BootstrapperToggle";
-        private const string LoggingEnabledPrefKey = "EnableLogging";
+        // Rename this to match the name of the scene you would like to have loaded before your current scene
         private const string coreSceneName = "Core";
+        
+        private const string BootstrapperMenuItem = "GamersGrotto/Editor Bootstrapper/Load Core Scene on EnterPlayMode";
+        private const string LoggingMenuItem = "GamersGrotto/Editor Bootstrapper/Logging...";
+        private const string BootstrappleEnabledPrefKey = "BootstrapperToggle";
+        private const string LoggingEnabledPrefKey = "EnableLogging";
+        
+        private static readonly string TAG = "[Bootstrapper]".Colorize("orange");
         
 #if UNITY_EDITOR
         public static bool StartedFromNonCoreScene = false;
@@ -21,14 +24,14 @@ namespace Plugins.GamersGrotto.Editor
         [RuntimeInitializeOnLoadMethod]
         public static void Init()
         {
-            if(EditorPrefs.GetBool(LoggingEnabledPrefKey, false))
+            if(EditorPrefs.GetBool(LoggingEnabledPrefKey, false) && EditorPrefs.GetBool(BootstrappleEnabledPrefKey, false))
                 Debug.Log($"{TAG} Init");
             
             EditorApplication.playModeStateChanged -= EditorApplicationOnplayModeStateChanged;
             EditorApplication.playModeStateChanged += EditorApplicationOnplayModeStateChanged;
         }
 
-        [MenuItem(LoggingMenuItemName)]
+        [MenuItem(LoggingMenuItem)]
         public static void EnableLogging()
         {
             var isToggled = EditorPrefs.GetBool(LoggingEnabledPrefKey, false);
@@ -36,20 +39,21 @@ namespace Plugins.GamersGrotto.Editor
             EditorPrefs.SetBool(LoggingEnabledPrefKey, isToggled);
         }
         
-        [MenuItem(LoggingMenuItemName, true)]
+        [MenuItem(LoggingMenuItem, true)]
         private static bool LoggingItemValidate()
         {
             var isToggled = EditorPrefs.GetBool(LoggingEnabledPrefKey, false);
-            Menu.SetChecked(LoggingMenuItemName, isToggled);
-            return true;
+            var bootstrapperIsEnabled = EditorPrefs.GetBool(BootstrappleEnabledPrefKey, false);
+            Menu.SetChecked(LoggingMenuItem, isToggled);
+            return bootstrapperIsEnabled;
         }
         
-        [MenuItem(MenuItemName)]
+        [MenuItem(BootstrapperMenuItem)]
         public static void MenuItem()
         {
-            var isToggled = EditorPrefs.GetBool(TogglePrefKey, false);
+            var isToggled = EditorPrefs.GetBool(BootstrappleEnabledPrefKey, false);
             isToggled = !isToggled;
-            EditorPrefs.SetBool(TogglePrefKey, isToggled);
+            EditorPrefs.SetBool(BootstrappleEnabledPrefKey, isToggled);
             
             if(!EditorPrefs.GetBool(LoggingEnabledPrefKey))
                 return;
@@ -61,16 +65,21 @@ namespace Plugins.GamersGrotto.Editor
             Debug.Log($"{TAG} Loading Game Scene when entering Play Mode : {enabledText}");
         }
         
-        [MenuItem(MenuItemName, true)]
+        [MenuItem(BootstrapperMenuItem, true)]
         private static bool ToggleItemValidate()
         {
-            var isToggled = EditorPrefs.GetBool(TogglePrefKey, false);
-            Menu.SetChecked(MenuItemName, isToggled);
+            var isToggled = EditorPrefs.GetBool(BootstrappleEnabledPrefKey, false);
+            Menu.SetChecked(BootstrapperMenuItem, isToggled);
             return true;
         }
         
         private static void EditorApplicationOnplayModeStateChanged(PlayModeStateChange playModeState)
         {
+            var isEnabled = EditorPrefs.GetBool(BootstrappleEnabledPrefKey, false);
+            
+            if(!isEnabled)
+                return;
+            
             var loggingEnabled = EditorPrefs.GetBool(LoggingEnabledPrefKey, true);
             
             if(loggingEnabled)
@@ -84,7 +93,7 @@ namespace Plugins.GamersGrotto.Editor
                     break;
                 case PlayModeStateChange.EnteredPlayMode:
                     
-                    if(!EditorPrefs.GetBool(TogglePrefKey, false))
+                    if(!EditorPrefs.GetBool(BootstrappleEnabledPrefKey, false))
                         return;
                     
                     if (!SceneManager.GetSceneByName(coreSceneName).isLoaded)
@@ -95,7 +104,6 @@ namespace Plugins.GamersGrotto.Editor
                             Debug.Log($"{TAG} Core Scene ({coreSceneName}) not loaded, Loading {coreSceneName} Scene");
 
                         SceneManager.LoadScene(coreSceneName, LoadSceneMode.Additive);
-
                     }
                     break;
                 case PlayModeStateChange.ExitingPlayMode:
