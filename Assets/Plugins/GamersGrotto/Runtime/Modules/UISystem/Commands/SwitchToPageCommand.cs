@@ -2,12 +2,12 @@
 
 namespace GamersGrotto.Runtime.Modules.UISystem.Commands
 {
-    public class NavigateToPageCommand : ICommand
+    public class SwitchToPageCommand : ICommand
     {
         private Page currentPage;
         private Page targetPage;
 
-        public NavigateToPageCommand(Page targetPage)
+        public SwitchToPageCommand(Page targetPage)
         {
             this.targetPage = targetPage;
             
@@ -17,13 +17,13 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Commands
 
         public void Execute()
         {
-            UIManager.Instance.GotoPage(targetPage);
+            UIManager.Instance.SwitchToPage(targetPage);
         }
 
         public void Undo()
         {
             if(currentPage != null)
-                UIManager.Instance.GotoPage(currentPage);
+                UIManager.Instance.SwitchToPage(currentPage);
         }
     }
 }
