@@ -11,6 +11,10 @@ namespace GamersGrotto.Runtime.Modules.UISystem
         [Header("UI Settings")]
         [SerializeField] private UIDocument document;
         [SerializeField] private StyleSheet styleSheet;
+
+        private WaitForEndOfFrame waitForEndOfFrame;
+
+        public bool IsOpen => isActiveAndEnabled;
         
         protected T Create<T>(params string[] classes) where T : VisualElement, new()
         {
@@ -65,7 +69,7 @@ namespace GamersGrotto.Runtime.Modules.UISystem
             if(!document)
                 yield break; 
                 
-            yield return null; //have had issues in the past with UI toolkit if you dont wait a frame
+            yield return waitForEndOfFrame;
         
             var root = document.rootVisualElement;
             root.Clear();
@@ -78,7 +82,11 @@ namespace GamersGrotto.Runtime.Modules.UISystem
 
         #region Monobehaviour
 
-        protected void Awake() => document = GetComponent<UIDocument>();
+        protected void Awake()
+        {
+            waitForEndOfFrame = new WaitForEndOfFrame();
+            document = GetComponent<UIDocument>();
+        }
 
         protected virtual void OnEnable() => StartCoroutine(Repaint());
 

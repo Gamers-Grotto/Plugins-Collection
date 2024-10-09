@@ -24,9 +24,9 @@ namespace GamersGrotto.Runtime.Modules.UISystem
         #region MonoBahaviour
         private IEnumerator Start()
         {
-            ExecuteCommand(new NavigateToPageCommand(splashScreen));
+            ExecuteCommand(new SwitchToPageCommand(splashScreen));
             yield return new WaitForSeconds(splashScreenShowDuration);
-            ExecuteCommand(new NavigateToPageCommand(mainMenuPage));
+            ExecuteCommand(new SwitchToPageCommand(mainMenuPage));
         }
         #endregion
 
@@ -36,7 +36,7 @@ namespace GamersGrotto.Runtime.Modules.UISystem
             commandStack.Push(command);
         }
         
-        public void GotoPage(Page newPage)
+        public void SwitchToPage(Page newPage)
         {
             if(CurrentPage != null)
                 CurrentPage.gameObject.SetActive(false);
@@ -45,9 +45,9 @@ namespace GamersGrotto.Runtime.Modules.UISystem
             newPage.gameObject.SetActive(true);
         }
 
-        public void GotoMainMenuPage() => ExecuteCommand(new NavigateToPageCommand(mainMenuPage));
+        public void GotoMainMenuPage() => ExecuteCommand(new SwitchToPageCommand(mainMenuPage));
         
-        public void GotoSettingsPage() => ExecuteCommand(new NavigateToPageCommand(settingsPage));
+        public void GotoSettingsPage() => ExecuteCommand(new SwitchToPageCommand(settingsPage));
 
         public void GoBack()
         {
