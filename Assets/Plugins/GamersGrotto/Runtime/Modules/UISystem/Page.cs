@@ -42,6 +42,7 @@ namespace GamersGrotto.Runtime.Modules.UISystem
         protected Label CreateLabel(string text, params string[] classes)
         {
             var label = Create<Label>(classes);
+            label.AddToClassList("default-text");
             label.text = text;
             return label;
         }

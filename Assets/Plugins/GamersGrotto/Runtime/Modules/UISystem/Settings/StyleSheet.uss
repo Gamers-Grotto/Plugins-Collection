@@ -17,8 +17,14 @@
     padding-bottom: 5%;
 }
 
+.menu-title{
+    align-self: center;
+    padding-bottom: 5%;
+}
+
 .default-text{
-    
+    color: var(--text-color);
+    font-size: 32px;
 }
 
 .button {
@@ -29,13 +35,13 @@
     background-color: var(--background-color);
     color: gray;
     margin: 10px;
-    -unity-text-align: middle-center; /* Center text inside the button */
-    transition: background-color 0.3s, font-size 0.3s, border-color 0.3s; /* Smooth transition effects */
+    -unity-text-align: middle-center;
+    transition: background-color 0.3s, border-color 0.3s;
 }
 
 .button:hover {
     background-color: var(--primary-color);
-    border-color: var(--secondary-color); /* Change border color on hover */
+    border-color: var(--secondary-color);
     color: var(--secondary-color);
 }
 
@@ -56,10 +62,9 @@
     background-position: center;
     width: 100%;
     height: 100%;
-
     display: flex;
-    justify-content: center; /* Horizontally center the box */
-    align-items: center; /* Vertically center the box */
+    justify-content: center;
+    align-items: center;
 }
 
 .box{
@@ -74,7 +79,17 @@
     flex-direction: column;
 }
 
+.labeled-slider-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: auto;
+    width: 100%;
+}
+
 .slider{
     background-color: var(--background-color);
     color: var(--primary-color);
+    width: 250px;
+    margin: 10px;
 }
