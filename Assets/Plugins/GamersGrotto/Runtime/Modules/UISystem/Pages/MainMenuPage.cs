@@ -40,8 +40,6 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Pages
             root.Add(background);
             
             yield return null;
-            
-            box.AddToClassList("enter");
         }
 
         private void OnQuitButtonClicked()
