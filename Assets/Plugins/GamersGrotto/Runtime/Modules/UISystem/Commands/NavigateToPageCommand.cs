@@ -7,20 +7,23 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Commands
         private Page currentPage;
         private Page targetPage;
 
-        public NavigateToPageCommand(Page currentPage, Page targetPage)
+        public NavigateToPageCommand(Page targetPage)
         {
-            this.currentPage = currentPage;
             this.targetPage = targetPage;
+            
+            if(UIManager.Instance.CurrentPage != null)
+                currentPage = UIManager.Instance.CurrentPage;
         }
 
         public void Execute()
         {
-            if(currentPage != null)
-                currentPage.gameObject.SetActive(false);
-            
-            UIManager.Instance.NavigateToPage(targetPage);
+            UIManager.Instance.GotoPage(targetPage);
         }
 
-        public void Undo() => UIManager.Instance.NavigateToPage(currentPage);
+        public void Undo()
+        {
+            if(currentPage != null)
+                UIManager.Instance.GotoPage(currentPage);
+        }
     }
 }

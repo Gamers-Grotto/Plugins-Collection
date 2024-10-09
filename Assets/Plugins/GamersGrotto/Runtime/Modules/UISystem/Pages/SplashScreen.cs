@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace GamersGrotto.Runtime.Modules.UISystem
+namespace GamersGrotto.Runtime.Modules.UISystem.Pages
 {
     public class SplashScreen : Page
     {
@@ -10,10 +10,11 @@ namespace GamersGrotto.Runtime.Modules.UISystem
         
         protected override IEnumerator DrawUI(VisualElement root)
         {
-            var backgroundImage = Create<VisualElement>("splash-screen");
+            var backgroundImage = Create("full-screen");
             backgroundImage.style.backgroundImage = new StyleBackground(background);
             
             root.Add(backgroundImage);
+            
             yield break;
         }
     }

@@ -1,0 +1,82 @@
+:root{
+    --primary-color: orangered;
+    --secondary-color: white;
+    --background-color: rgba(0,0,0,0);
+    --border-radius: 15px;
+    --text-color: gray;
+    background-color: var(--background-color);
+    font-size: 32px;
+}
+
+.title-text{
+    font-size: 48px;
+    -unity-font-style: bold;
+    color: var(--text-color);
+    align-self: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.default-text{
+    
+}
+
+.button {
+    padding: 10px 20px;
+    border-width: 5px;
+    border-color: var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+    color: gray;
+    margin: 10px;
+    -unity-text-align: middle-center; /* Center text inside the button */
+    transition: background-color 0.3s, font-size 0.3s, border-color 0.3s; /* Smooth transition effects */
+}
+
+.button:hover {
+    font-size: 28px;
+    -unity-font-style: bold;
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color); /* Change border color on hover */
+    color: var(--secondary-color);
+}
+
+.button-text {
+    color: var(--text-color);
+}
+
+.bottom-right-button{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    align-self: flex-end;
+}
+
+.full-screen{
+    background-color: black;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center; /* Horizontally center the box */
+    align-items: center; /* Vertically center the box */
+}
+
+.box{
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    border-width: 2px;
+    border-color: var(--primary-color);
+    padding: 10px;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.slider{
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
