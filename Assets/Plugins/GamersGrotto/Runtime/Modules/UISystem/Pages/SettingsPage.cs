@@ -35,7 +35,7 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Pages
             background.Add(settingsMenuPanel);
             
             #region Absolute
-            var backButton = CreateButton("Back", () => UIManager.Instance.GoBack());
+            var backButton = CreateButton("Back", () => UIManager.Instance.GotoMainMenuPage());
             backButton.AddToClassList("bottom-right-button");
             root.Add(backButton);
             #endregion

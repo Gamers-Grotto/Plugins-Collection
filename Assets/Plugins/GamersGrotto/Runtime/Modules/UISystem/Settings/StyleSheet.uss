@@ -2,14 +2,14 @@
     --primary-color: orangered;
     --secondary-color: white;
     --background-color: rgba(0,0,0,0);
+    --backing-color: rgba(0,0,0,0.5);
     --border-radius: 15px;
-    --text-color: gray;
-    background-color: var(--background-color);
+    --text-color: white;
     font-size: 32px;
 }
 
 .title-text{
-    font-size: 48px;
+    font-size: 72px;
     -unity-font-style: bold;
     color: var(--text-color);
     align-self: center;
@@ -57,7 +57,7 @@
 }
 
 .full-screen{
-    background-color: black;
+    background-color: var(--background-color);
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -68,7 +68,7 @@
 }
 
 .box{
-    background-color: var(--background-color);
+    background-color: var(--backing-color);
     border-radius: var(--border-radius);
     border-width: 2px;
     border-color: var(--primary-color);
@@ -92,4 +92,5 @@
     color: var(--primary-color);
     width: 250px;
     margin: 10px;
+    align-items: center;
 }
