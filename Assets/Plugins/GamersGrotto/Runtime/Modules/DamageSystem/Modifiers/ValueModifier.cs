@@ -8,7 +8,7 @@ namespace GamersGrotto.Runtime.Modules.DamageSystem {
         [Min(0)] public float modifier = 1f;
 
         /// <summary>
-        /// Returns the amount multiplied by the modifier.
+        /// Returns the amount modified by the modifier.
         /// </summary>
         /// <param name="amount"></param>
         /// <returns></returns>
