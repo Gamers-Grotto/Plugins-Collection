@@ -1,0 +1,18 @@
+﻿-- Damage System Documentation --
+
+# How to deal damage to an entity
+1. Give an entity a Health Component.
+2. Create an entity, be it a player, a sword, a spell or anything else that can deal damage.
+3. Assign a Damage Component to the entity that can deal damage.
+4. Find the entity with the health component and call the TakeDamage method on it.
+
+
+# How To Buff/Nerf Damage
+1. Create a DamageModifier object, ex. EnrageBuffDamageModifier. Give it a value over 1f
+2. Assign the DamageModifier to the DamageComponent of the entity that you want to buff, either as a permanent buff, or create a script that applies the buff for a certain amount of time.
+
+
+
+# Reason for DamageModifier Inheriting from ValueModifier
+1. It's simply to allow for more flexibility in the future.
+2. Also to allow for sorting between different types of modifiers.

@@ -1,0 +1,5 @@
+using GamersGrotto.Runtime.Modules.GameEvents;
+using UnityEngine;
+    
+[CreateAssetMenu(fileName = "#SCRIPTNAME#", menuName = "GamersGrotto/Game Events/#SCRIPTNAME#", order = 3)]
+public class #SCRIPTNAME# : GameEvent<T> { }
