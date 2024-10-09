@@ -31,7 +31,7 @@ namespace GamersGrotto.Runtime.Modules.DamageSystem {
         #region Debugging
 
         [Button]
-        public void PrintModifiedDamage() {
+        public void TestAttackDebugTarget() {
             var damage = damageSO.Damage;
             
             //Apply crit if applicable
