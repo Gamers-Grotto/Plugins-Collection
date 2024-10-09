@@ -81,7 +81,7 @@ namespace GamersGrotto.Runtime.Modules.DamageSystem
             Current += healing;
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, bool isCrit, DamageType? damageType = null)
         {
             if(Invulnerable)
                 return;
@@ -104,7 +104,7 @@ namespace GamersGrotto.Runtime.Modules.DamageSystem
         [ContextMenu("Test Damage")]
         public void TestDamage()
         {
-            TakeDamage(10f);
+            TakeDamage(10f, true);
         }
 
         #endregion

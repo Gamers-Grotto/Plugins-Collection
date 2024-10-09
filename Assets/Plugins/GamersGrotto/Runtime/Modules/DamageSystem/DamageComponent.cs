@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Attributes;
 using UnityEngine;
 
 namespace GamersGrotto.Runtime.Modules.DamageSystem {
@@ -13,11 +14,18 @@ namespace GamersGrotto.Runtime.Modules.DamageSystem {
         public void DealDamage(Health health) {
             var damage = damageSO.Damage;
 
+            //Apply crit if applicable
+            bool isCrit = damageSO.IsCrit();
+            if (isCrit) {
+                damage *= damageSO.CritMultiplier;
+            }
+
+            //Apply all damage modifiers if any
             foreach (var modifier in damageModifiers) {
                 damage = modifier.ApplyModifier(damage);
             }
 
-            health.TakeDamage(damage);
+            health.TakeDamage(damage, isCrit, damageSO.DamageType);
         }
 
         #region Debugging
@@ -25,12 +33,24 @@ namespace GamersGrotto.Runtime.Modules.DamageSystem {
         [Button]
         public void PrintModifiedDamage() {
             var damage = damageSO.Damage;
+            
+            //Apply crit if applicable
+            bool isCrit = damageSO.IsCrit();
+            if (isCrit) {
+                damage *= damageSO.CritMultiplier;
+            }
 
+            //Apply all damage modifiers if any
             foreach (var modifier in damageModifiers) {
                 damage = modifier.ApplyModifier(damage);
             }
 
-            Debug.Log($"[{gameObject.name}] Modified damage: {damage}.", this);
+            var objectToAdd = new GameObject();
+            objectToAdd.AddComponent<Health>();
+            objectToAdd.name = $"Debug Target of [{gameObject.name}]";
+            objectToAdd.GetComponent<Health>().TakeDamage(damage, isCrit, damageSO.DamageType);
+            Destroy(objectToAdd, 5f);
+            Debug.Log($"[{gameObject.name}] Modified damage: {damage}. Crit? ({isCrit}). Damage Type ({damageSO.DamageType})", this);
         }
 
         #endregion

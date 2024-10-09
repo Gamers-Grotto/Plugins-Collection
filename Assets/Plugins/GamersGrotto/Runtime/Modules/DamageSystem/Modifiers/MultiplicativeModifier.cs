@@ -1,8 +1,8 @@
 using GamersGrotto.Runtime.Modules.DamageSystem;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewDamageModifier", menuName = "GamersGrotto/Damage System/DamageModifier")]
-public class MultiplicativeDamageModifier : ValueModifier {
+[CreateAssetMenu(fileName = "NewMultiplicativeModifier", menuName = "GamersGrotto/Damage System/MultiplicativeModifier")]
+public class MultiplicativeModifier : ValueModifier {
     
     /// <summary>
     /// Returns the amount multiplied by the modifier.
