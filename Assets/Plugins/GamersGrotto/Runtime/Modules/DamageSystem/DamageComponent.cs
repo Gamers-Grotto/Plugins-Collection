@@ -8,7 +8,7 @@ namespace GamersGrotto.Runtime.Modules.DamageSystem {
     public class DamageComponent : MonoBehaviour {
         public DamageSO damageSO;
 
-        public List<MultiplicativeDamageModifier> damageModifiers = new List<MultiplicativeDamageModifier>();
+        public List<ValueModifier> damageModifiers = new List<ValueModifier>();
 
         public void DealDamage(Health health) {
             var damage = damageSO.Damage;
