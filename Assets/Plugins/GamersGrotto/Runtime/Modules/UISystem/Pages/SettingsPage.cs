@@ -46,7 +46,7 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Pages
             var settingsMenuTitle = CreateLabel("Settings", "menu-title");
 
             var masterSliderLabel = CreateLabel("Master Volume", "default-text");
-            var masterSlider = CreateSlider(0f, 1f);
+            var masterSlider = CreateSlider(0.0001f, 1f);
             masterSlider.SetValueWithoutNotify(masterVolumePref);
             masterSlider.RegisterValueChangedCallback(OnMasterVolumeChanged);
             var masterVolumeSliderContainer = Create("labeled-slider-container");
@@ -55,7 +55,7 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Pages
             
             var musicVolumeSliderContainer = Create("labeled-slider-container");
             var musicLabel = CreateLabel("Music", "default-text");
-            var musicSlider = CreateSlider(0f, 1f);
+            var musicSlider = CreateSlider(0.0001f, 1f);
             musicSlider.SetValueWithoutNotify(musicVolumePref);
             musicSlider.RegisterValueChangedCallback(OnMusicVolumeChanged);
             musicVolumeSliderContainer.Add(musicLabel);
@@ -63,7 +63,7 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Pages
             
             var effectsVolumeSliderContainer = Create("labeled-slider-container");
             var effectsLabel = CreateLabel("Effects", "default-text");
-            var effectsSlider = CreateSlider(0f, 1f);
+            var effectsSlider = CreateSlider(0.0001f, 1f);
             effectsSlider.SetValueWithoutNotify(effectsVolumePref);
             effectsSlider.RegisterValueChangedCallback(OnEffectsVolumeChanged);
             effectsVolumeSliderContainer.Add(effectsLabel);
