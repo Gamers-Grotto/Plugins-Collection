@@ -20,6 +20,11 @@ public class AudioSettings : ScriptableObject
     
     private void Awake()
     {
+        SetMixerVolumes();
+        LoadVolumes();
+    }
+
+    void SetMixerVolumes() {
         //These variables are found in the Audio mixer, then Exposed Parameters
         SetMixerVolume("masterVolume",masterVolume);
         SetMixerVolume("musicVolume",musicVolume);
@@ -30,11 +35,7 @@ public class AudioSettings : ScriptableObject
 
     private void OnValidate()
     {
-        SetMixerVolume("masterVolume",masterVolume);
-        SetMixerVolume("musicVolume",musicVolume);
-        SetMixerVolume("sfxVolume",sfxVolume);
-        SetMixerVolume("uiVolume",uiVolume);
-        SetMixerVolume("inGameEffectsVolume",inGameEffectsVolume);
+        SetMixerVolumes();
     }
     
     /// <summary>
@@ -45,6 +46,7 @@ public class AudioSettings : ScriptableObject
     private void SetMixerVolume(string floatName, float volume)
     {
         mainMixer.SetFloat(floatName, Mathf.Log10(volume) * 20);
+        SaveVolume(floatName, volume);
     }
     
     [Button]
@@ -56,5 +58,23 @@ public class AudioSettings : ScriptableObject
     public void DeactivateLowPassFilter()
     {
         mainMixer.SetFloat("masterCutoffFrequency", maxLowPassCutoffFrequency);
+    }
+    
+    
+    private void SaveVolume(string key, float volume)
+    {
+        PlayerPrefs.SetFloat(key, volume);
+        PlayerPrefs.Save();
+    }
+
+    private void LoadVolumes()
+    {
+        masterVolume = PlayerPrefs.GetFloat("masterVolume", masterVolume);
+        musicVolume = PlayerPrefs.GetFloat("musicVolume", musicVolume);
+        sfxVolume = PlayerPrefs.GetFloat("sfxVolume", sfxVolume);
+        uiVolume = PlayerPrefs.GetFloat("uiVolume", uiVolume);
+        inGameEffectsVolume = PlayerPrefs.GetFloat("inGameEffectsVolume", inGameEffectsVolume);
+        
+        SetMixerVolumes();
     }
 }
