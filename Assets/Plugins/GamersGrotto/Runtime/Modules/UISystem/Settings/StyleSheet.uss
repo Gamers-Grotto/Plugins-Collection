@@ -1,9 +1,9 @@
 :root{
     /* Colours */
-    --primary-color-1: #4A4A4A;
-    --primary-color-2: #3A3A3A;
-    --accent-color-1: #d88c2d;
-    --accent-color-2: #805216;
+    --primary-color-1: rgba(74, 74, 74, 0.6);
+    --primary-color-2: #2b2a2a;
+    --accent-color-1: #ef2558;
+    --accent-color-2: #90336a;
     --neutral-light: #E0E0E0;
     --neutral-dark: #1C1C1C;
     --text-color-primary: #ffffff; /* White text on dark backgrounds */
@@ -35,15 +35,15 @@
     align-items: center;
 }
 
-.box{
-    background-color: var(--primary-color-1);
-    padding: 5%;
+.box {
+    padding: 15px;
     width: auto;
     height: auto;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color-1);
 }
 
 /* Text  - I think these could be better as H1, H2, H3 */
@@ -52,8 +52,7 @@
     -unity-font-style: bold;
     color: var(--accent-color-1);
     align-self: center;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    margin-bottom: 50px;
 }
 
 .menu-title{
@@ -62,26 +61,41 @@
 }
 
 .default-text{
+    -unity-text-align: middle-left;
+}
+
+.loading-screen-text {
+    position: absolute;
+    bottom: 10%;
+    left: 15%;
+    font-size: 45px;
+    -unity-text-align: middle-center;
     color: var(--text-color-primary);
-    background-color: var(--primary-color-1);
 }
 
 /* Slider */
-.slider{
-    background-color: var(--primary-color-1);
-    color: var(--accent-color-1);
-    width: 250px;
-    margin: 10px;
-    align-items: center;
-}
-
-.labeled-slider-container{
+.labeled-slider-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: auto;
+    align-items: center;
     width: 100%;
-    background-color: var(--primary-color-1);
+    background-color: rgba(0,0,0,0);
+}
+
+.labeled-slider-container label {
+    flex-shrink: 0;
+    margin-right: 10px;
+    max-width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.labeled-slider-container .slider{
+    color: var(--accent-color-1);
+    flex-grow: 1;
+    min-width: 150px;
 }
 
 /* Buttons */

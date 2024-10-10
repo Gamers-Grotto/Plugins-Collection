@@ -22,8 +22,8 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Pages
             }
             
             var title = CreateLabel("Gamers Grotto");
-            title.RemoveFromClassList("default-text");
             title.AddToClassList("title-text");
+            title.style.color = new StyleColor(Color.white);
             
             var playButton = CreateButton("Play", () => playButtonClicked?.Invoke());
             var settingsButton = CreateButton("Settings", () => UIManager.Instance.GotoSettingsPage());

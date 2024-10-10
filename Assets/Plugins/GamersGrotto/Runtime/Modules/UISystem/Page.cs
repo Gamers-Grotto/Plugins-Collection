@@ -47,10 +47,11 @@ namespace GamersGrotto.Runtime.Modules.UISystem
             return label;
         }
 
-        protected Slider CreateSlider(float minValue, float maxValue, params string[] classes)
+        protected Slider CreateSlider(float minValue, float maxValue, string label = null, params string[] classes)
         {
             var slider = Create<Slider>(classes);
-            slider.AddToClassList("slider");
+            slider.AddToClassList("labeled-slider-container");
+            if (label != null) slider.label = label;
             slider.lowValue = minValue;
             slider.highValue = maxValue;
             return slider;
@@ -59,8 +60,8 @@ namespace GamersGrotto.Runtime.Modules.UISystem
         protected Box CreateBox(params string[] classes)
         {
             var box = Create<Box>(classes);
-            box.AddToClassList("box");
             box.AddToClassList("bordered");
+            box.AddToClassList("box");
             return box;
         }
 
@@ -84,7 +85,7 @@ namespace GamersGrotto.Runtime.Modules.UISystem
 
         #region Monobehaviour
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             waitForEndOfFrame = new WaitForEndOfFrame();
             document = GetComponent<UIDocument>();

@@ -12,25 +12,32 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Pages
         public UnityEvent<float> masterVolumeChanged;
         public UnityEvent<float> musicVolumeChanged;
         public UnityEvent<float> effectsVolumeChanged;
-        
-        private float masterVolumePref;
-        private float musicVolumePref;
-        private float effectsVolumePref;
-        
-        private void Start()
+
+        private float masterVolSetting;
+        private float musicVolSetting;
+        private float sfxVolSetting;
+
+        protected override void Awake()
         {
-            masterVolumePref = PlayerPrefs.GetFloat(nameof(masterVolumePref), 1f);
-            musicVolumePref = PlayerPrefs.GetFloat(nameof(musicVolumePref), 1f);
-            effectsVolumePref = PlayerPrefs.GetFloat(nameof(effectsVolumePref), 1f);
+            base.Awake();
+            masterVolSetting = Mathf.Clamp(PlayerPrefs.GetFloat("masterVolume", 1f), 0.0001f, 1f);
+            musicVolSetting = Mathf.Clamp(PlayerPrefs.GetFloat("musicVolume", 1f), 0.001f, 1f);
+            sfxVolSetting = Mathf.Clamp(PlayerPrefs.GetFloat("sfxVolume", 1f), 0.001f, 1f);
         }
 
         protected override IEnumerator DrawUI(VisualElement root)
         {
-            var background = Create("full-screen");
-            root.Add(background);
+            var settingsMenuPanel = CreateBox();
+            settingsMenuPanel.style.minWidth = 600;
             
-            var settingsMenuPanel = CreateAudioSettingsPanel();
+            var background = Create("full-screen");
+            var settingMenuTitleLabel = CreateLabel("Settings", "menu-title");
+            var audioSettingsPanel = CreateAudioSettingsPanel();
+            
+            settingsMenuPanel.Add(settingMenuTitleLabel);
+            settingsMenuPanel.Add(audioSettingsPanel);
             background.Add(settingsMenuPanel);
+            root.Add(background);
             
             #region Absolute
             var backButton = CreateButton("Back", () => UIManager.Instance.GotoMainMenuPage());
@@ -43,59 +50,44 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Pages
 
         private Box CreateAudioSettingsPanel()
         {
-            var settingsMenuTitle = CreateLabel("Settings", "menu-title");
-
-            var masterSliderLabel = CreateLabel("Master Volume", "default-text");
-            var masterSlider = CreateSlider(0.0001f, 1f);
-            masterSlider.SetValueWithoutNotify(masterVolumePref);
+            var audioSettingsContainer = CreateBox();
+            audioSettingsContainer.style.width = new StyleLength(Length.Percent(100f));
+            audioSettingsContainer.Add(CreateLabel("Volume Settings", "menu-title"));
+            
+            var masterSlider = CreateSlider(0.0001f, 1f, "Master");
+            masterSlider.SetValueWithoutNotify(masterVolSetting);
             masterSlider.RegisterValueChangedCallback(OnMasterVolumeChanged);
-            var masterVolumeSliderContainer = Create("labeled-slider-container");
-            masterVolumeSliderContainer.Add(masterSliderLabel);
-            masterVolumeSliderContainer.Add(masterSlider);
+            audioSettingsContainer.Add(masterSlider);
             
-            var musicVolumeSliderContainer = Create("labeled-slider-container");
-            var musicLabel = CreateLabel("Music", "default-text");
-            var musicSlider = CreateSlider(0.0001f, 1f);
-            musicSlider.SetValueWithoutNotify(musicVolumePref);
+            var musicSlider = CreateSlider(0.0001f, 1f, "Music");
+            musicSlider.SetValueWithoutNotify(musicVolSetting);
             musicSlider.RegisterValueChangedCallback(OnMusicVolumeChanged);
-            musicVolumeSliderContainer.Add(musicLabel);
-            musicVolumeSliderContainer.Add(musicSlider);
+            audioSettingsContainer.Add(musicSlider);
             
-            var effectsVolumeSliderContainer = Create("labeled-slider-container");
-            var effectsLabel = CreateLabel("Effects", "default-text");
-            var effectsSlider = CreateSlider(0.0001f, 1f);
-            effectsSlider.SetValueWithoutNotify(effectsVolumePref);
+            var effectsSlider = CreateSlider(0.0001f, 1f, "Effects");
+            effectsSlider.SetValueWithoutNotify(sfxVolSetting);
             effectsSlider.RegisterValueChangedCallback(OnEffectsVolumeChanged);
-            effectsVolumeSliderContainer.Add(effectsLabel);
-            effectsVolumeSliderContainer.Add(effectsSlider);
-            
-            var settingsMenuPanel = CreateBox();
-            settingsMenuPanel.Add(settingsMenuTitle);
-            settingsMenuPanel.Add(masterVolumeSliderContainer);
-            settingsMenuPanel.Add(musicVolumeSliderContainer);
-            settingsMenuPanel.Add(effectsVolumeSliderContainer);
-            return settingsMenuPanel;
+            audioSettingsContainer.Add(effectsSlider);
+
+            return audioSettingsContainer;
         }
 
         private void OnMasterVolumeChanged(ChangeEvent<float> evt)
         {
-            masterVolumePref = Mathf.Clamp01(evt.newValue);
-            PlayerPrefs.SetFloat(nameof(masterVolumePref), masterVolumePref);
-            masterVolumeChanged?.Invoke(masterVolumePref);
+            masterVolSetting = evt.newValue;
+            masterVolumeChanged?.Invoke(masterVolSetting);
         }
 
         private void OnMusicVolumeChanged(ChangeEvent<float> evt)
         {
-            musicVolumePref = Mathf.Clamp01(evt.newValue);
-            PlayerPrefs.SetFloat(nameof(musicVolumePref), musicVolumePref);
-            musicVolumeChanged?.Invoke(musicVolumePref);
+            musicVolSetting = evt.newValue;
+            musicVolumeChanged?.Invoke(musicVolSetting);
         }
 
         private void OnEffectsVolumeChanged(ChangeEvent<float> evt)
         {
-            effectsVolumePref = Mathf.Clamp01(evt.newValue);
-            PlayerPrefs.SetFloat(nameof(effectsVolumePref), effectsVolumePref);
-            effectsVolumeChanged?.Invoke(effectsVolumePref);
+            sfxVolSetting = evt.newValue;
+            effectsVolumeChanged?.Invoke(sfxVolSetting);
         }
     }
 }

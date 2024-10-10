@@ -10,23 +10,33 @@ namespace GamersGrotto.Runtime.Modules.UISystem
 {
     public class UIManager : Singleton<UIManager>
     {
-        private Stack<ICommand> commandStack = new ();
-
-        [Header("Splash Screen")]
+        [Header("Startup Behaviour")]
+        [SerializeField] private bool showSplashScreenOnStartup = true;
+        [Tooltip("main menu will be displayed after splash screen, if its enabled")]
+        [SerializeField] private bool openMainMenuOnStartup = true;
+        [Header("Splash Screen")] 
         [SerializeField] private Page splashScreen;
-        [SerializeField] private float splashScreenShowDuration = 4f;
+        [SerializeField] private float splashScreenShowDuration = 3f;
         [Header("Pages")]
         [SerializeField] private Page mainMenuPage;
         [SerializeField] private SettingsPage settingsPage;
+        [SerializeField] private LoadingScreen loadingScreen;
+        
+        private Stack<ICommand> commandStack = new ();
         
         public Page CurrentPage { get; private set; }
 
         #region MonoBahaviour
         private IEnumerator Start()
         {
-            ExecuteCommand(new SwitchToPageCommand(splashScreen));
-            yield return new WaitForSeconds(splashScreenShowDuration);
-            ExecuteCommand(new SwitchToPageCommand(mainMenuPage));
+            if (showSplashScreenOnStartup && splashScreen)
+            {
+                SwitchToPage(splashScreen);
+                yield return new WaitForSeconds(splashScreenShowDuration);
+            }
+            
+            if(openMainMenuOnStartup)
+                GotoMainMenuPage();
         }
         #endregion
 

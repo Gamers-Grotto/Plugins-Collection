@@ -66,10 +66,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   document: {fileID: 4319245822165476097}
   styleSheet: {fileID: 7433441132597879392, guid: d91babc40f774ba1920ef8458c7ef2da, type: 3}
-  backgroundImage: {fileID: 0}
+  backgroundImage: {fileID: 21300000, guid: 32ef063a3bf5ce643a4b513213cce48a, type: 3}
   playButtonClicked:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8831365982708682468}
+        m_TargetAssemblyTypeName: GamersGrotto.Runtime.Modules.UISystem.UIManager,
+          Assembly-CSharp-firstpass
+        m_MethodName: SwitchToPage
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2172171233611894141}
+          m_ObjectArgumentAssemblyTypeName: GamersGrotto.Runtime.Modules.UISystem.Page,
+            Assembly-CSharp-firstpass
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &832384809217097098
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +115,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3355703289137174404}
+  - {fileID: 8162420427964759612}
   - {fileID: 7922326764355745276}
   - {fileID: 4178950521485671447}
   m_Father: {fileID: 0}
@@ -118,10 +133,81 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
+  showSplashScreenOnStartup: 1
+  openMainMenuOnStartup: 1
   splashScreen: {fileID: 24456038593812634}
-  splashScreenShowDuration: 4
+  splashScreenShowDuration: 3
   mainMenuPage: {fileID: 1209221333479989757}
   settingsPage: {fileID: 9169862065544341072}
+  loadingScreen: {fileID: 2172171233611894141}
+--- !u!1 &4900887206936558167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8162420427964759612}
+  - component: {fileID: 6588846156995311248}
+  - component: {fileID: 2172171233611894141}
+  m_Layer: 0
+  m_Name: LoadingScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8162420427964759612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4900887206936558167}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8964113051618683820}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6588846156995311248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4900887206936558167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 64358392a226e104397909054eb95a37, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 0}
+  m_SortingOrder: 999
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+--- !u!114 &2172171233611894141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4900887206936558167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80997115d7a442569d2b9bcbe66b4145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  document: {fileID: 6588846156995311248}
+  styleSheet: {fileID: 7433441132597879392, guid: d91babc40f774ba1920ef8458c7ef2da, type: 3}
+  background: {fileID: 21300000, guid: 32ef063a3bf5ce643a4b513213cce48a, type: 3}
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0.3529412}
 --- !u!1 &5987171595223438557
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,3 +341,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   document: {fileID: 3284334566303702871}
   styleSheet: {fileID: 7433441132597879392, guid: d91babc40f774ba1920ef8458c7ef2da, type: 3}
+  masterVolumeChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  musicVolumeChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  effectsVolumeChanged:
+    m_PersistentCalls:
+      m_Calls: []
