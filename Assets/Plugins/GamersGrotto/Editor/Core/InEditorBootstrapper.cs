@@ -62,7 +62,7 @@ namespace Plugins.GamersGrotto.Editor
                 ? "Enabled".Colorize("green") 
                 : "Disabled".Colorize("red");
             
-            Debug.Log($"{TAG} Loading Game Scene when entering Play Mode : {enabledText}");
+            Debug.Log($"{TAG} Loading Scene({coreSceneName}) when entering Play Mode : {enabledText}");
         }
         
         [MenuItem(BootstrapperMenuItem, true)]
