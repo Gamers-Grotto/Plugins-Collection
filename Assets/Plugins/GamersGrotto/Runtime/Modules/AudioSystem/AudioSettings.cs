@@ -20,6 +20,10 @@ public class AudioSettings : ScriptableObject
     
     private void OnEnable()
     {
+        Initialize();
+    }
+
+    public void Initialize() {
         SetMixerVolumes();
         LoadVolumes();
     }
@@ -43,6 +47,7 @@ public class AudioSettings : ScriptableObject
         mainMixer.SetFloat(floatName, Mathf.Log10(volume) * 20);
         SaveVolume(floatName, volume);
     }
+    
     
     [Button]
     public void ActivateLowPassFilter()
