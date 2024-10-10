@@ -7,6 +7,7 @@ namespace GamersGrotto.Runtime.Modules.GameEvents.AudioEvents
     {
         public AudioClip clip;
         [Range(0,2)]public float volume = 1.0f;
+        [Range(-3,3)]public float pitch = 1.0f;
 
         public void Play(AudioSource audioSource, bool loop)
         {
@@ -16,6 +17,7 @@ namespace GamersGrotto.Runtime.Modules.GameEvents.AudioEvents
             audioSource.clip = clip;
             audioSource.time = 0;
             audioSource.volume = volume;
+            audioSource.pitch = pitch;
             audioSource.loop =  loop;
             audioSource.Play();
         }
