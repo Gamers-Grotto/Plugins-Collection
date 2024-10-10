@@ -1,17 +1,56 @@
 :root{
-    --primary-color: orangered;
-    --secondary-color: white;
-    --background-color: rgba(0,0,0,0);
-    --backing-color: rgba(0,0,0,0.5);
+    /* Colours */
+    --primary-color-1: #4A4A4A;
+    --primary-color-2: #3A3A3A;
+    --accent-color-1: #d88c2d;
+    --accent-color-2: #805216;
+    --neutral-light: #E0E0E0;
+    --neutral-dark: #1C1C1C;
+    --text-color-primary: #ffffff; /* White text on dark backgrounds */
+    --text-color-secondary: #2c2a2a; /* Light grey for less prominent text */
+    
+    /* Border Properties */
     --border-radius: 15px;
-    --text-color: white;
+    --border-width: 4px;
+}
+
+* { /* Setting these properties applies them to all visual elements and will be the default unless overridden */
+    color: var(--text-color-primary);
     font-size: 32px;
 }
 
+.bordered{
+    border-width: var(--border-width);
+    border-color: var(--neutral-dark);
+    border-radius: var(--border-radius);
+}
+
+.full-screen{
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box{
+    background-color: var(--primary-color-1);
+    padding: 5%;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+/* Text  - I think these could be better as H1, H2, H3 */
 .title-text{
     font-size: 72px;
     -unity-font-style: bold;
-    color: var(--text-color);
+    color: var(--accent-color-1);
     align-self: center;
     padding-top: 5%;
     padding-bottom: 5%;
@@ -23,60 +62,17 @@
 }
 
 .default-text{
-    color: var(--text-color);
-    font-size: 32px;
+    color: var(--text-color-primary);
+    background-color: var(--primary-color-1);
 }
 
-.button {
-    padding: 10px 20px;
-    border-width: 5px;
-    border-color: var(--primary-color);
-    border-radius: var(--border-radius);
-    background-color: var(--background-color);
-    color: gray;
+/* Slider */
+.slider{
+    background-color: var(--primary-color-1);
+    color: var(--accent-color-1);
+    width: 250px;
     margin: 10px;
-    -unity-text-align: middle-center;
-    transition: background-color 0.3s, border-color 0.3s;
-}
-
-.button:hover {
-    background-color: var(--primary-color);
-    border-color: var(--secondary-color);
-    color: var(--secondary-color);
-}
-
-.button-text {
-    color: var(--text-color);
-}
-
-.bottom-right-button{
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    align-self: flex-end;
-}
-
-.full-screen{
-    background-color: var(--background-color);
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.box{
-    background-color: var(--backing-color);
-    border-radius: var(--border-radius);
-    border-width: 2px;
-    border-color: var(--primary-color);
-    padding: 10px;
-    width: auto;
-    height: auto;
-    display: flex;
-    flex-direction: column;
 }
 
 .labeled-slider-container{
@@ -85,12 +81,35 @@
     justify-content: space-between;
     align-items: auto;
     width: 100%;
+    background-color: var(--primary-color-1);
 }
 
-.slider{
-    background-color: var(--background-color);
-    color: var(--primary-color);
-    width: 250px;
-    margin: 10px;
-    align-items: center;
+/* Buttons */
+.button {
+    background-color: var(--primary-color-2);
+    color: var(--text-color-primary);
+    margin: 5px;
+    padding: 15px;
+    transition: background-color 0.3s ease;
+    -unity-text-align: middle-center;
+}
+
+.button:hover {
+    background-color: var(--accent-color-1);
+    color: var(--text-color-secondary);
+}
+
+.button:active {
+    background-color: var(--accent-color-2);
+}
+
+.button:focus{
+    color: var(--accent-color-1);
+}
+
+.bottom-right-button{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    align-self: flex-end;
 }

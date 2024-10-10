@@ -30,7 +30,7 @@ namespace GamersGrotto.Runtime.Modules.UISystem
         
         protected Button CreateButton(string text, Action onClick = null)
         {
-            var button = Create<Button>("button", "button-text");
+            var button = Create<Button>("button", "bordered");
             button.text = text;
 
             if (onClick != null)
@@ -60,6 +60,7 @@ namespace GamersGrotto.Runtime.Modules.UISystem
         {
             var box = Create<Box>(classes);
             box.AddToClassList("box");
+            box.AddToClassList("bordered");
             return box;
         }
 

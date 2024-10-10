@@ -22,14 +22,19 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Pages
             }
             
             var title = CreateLabel("Gamers Grotto");
+            title.RemoveFromClassList("default-text");
             title.AddToClassList("title-text");
             
             var playButton = CreateButton("Play", () => playButtonClicked?.Invoke());
             var settingsButton = CreateButton("Settings", () => UIManager.Instance.GotoSettingsPage());
             var quitButton = CreateButton("Quit", OnQuitButtonClicked);
+
+            playButton.style.width = 300;
+            settingsButton.style.width = 300;
+            quitButton.style.width = 300;
             
             var box = CreateBox();
-            
+            box.style.alignContent = new StyleEnum<Align>(Align.Center);
             box.Add(playButton);
             box.Add(settingsButton);
             box.Add(quitButton);
