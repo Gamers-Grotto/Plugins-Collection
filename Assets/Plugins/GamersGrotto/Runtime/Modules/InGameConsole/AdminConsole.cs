@@ -90,6 +90,7 @@ namespace GamersGrotto.Runtime.Modules.InGameConsole
             autoCompleteKey.performed -= OnAutoCompletePressed;
         
             inputField.onSubmit.RemoveListener(OnInputFieldSubmit);
+            inputField.onValueChanged.RemoveListener(OnInputFieldValueChanged);
             inputField.onSelect.RemoveListener(OnInputFieldSelected);
             
             Application.logMessageReceivedThreaded -= OnDebugLogReceived;
