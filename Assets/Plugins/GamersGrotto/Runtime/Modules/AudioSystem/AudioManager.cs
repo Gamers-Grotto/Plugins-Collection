@@ -7,11 +7,16 @@ using UnityEngine.Playables;
 public class AudioManager : Singleton<AudioManager> {
     public AudioSource uiSoundPlayer;
     public AudioSource musicPlayer;
-
+    [SerializeField] AudioSettings audioSettings;
     private short uiSoundIndex;
 
     public static void PlayAudioEvent(AudioEvent audioEvent, AudioSource audioSource, bool loop = false) =>
         audioEvent?.Play(audioSource, loop);
+
+
+    public void Start() {
+        audioSettings.Initialize();
+    }
 
     #region UI
 

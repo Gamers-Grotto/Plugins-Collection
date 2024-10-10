@@ -16,27 +16,10 @@ public class AudioSettings : ScriptableObject
     public float SFXVolume{  get { return sfxVolume; }  set { sfxVolume = value; SetMixerVolume("sfxVolume",sfxVolume); } }
     public float UIVolume{  get { return uiVolume; }  set { uiVolume = value; SetMixerVolume("uiVolume",uiVolume); } }
     public float InGameEffectsVolume{  get { return inGameEffectsVolume; }  set { inGameEffectsVolume = value; SetMixerVolume("inGameEffectsVolume",inGameEffectsVolume); } }
-    
-    
-    private void OnEnable()
-    {
-        Initialize();
-    }
-
     public void Initialize() {
-        SetMixerVolumes();
         LoadVolumes();
+        SetMixerVolumes();
     }
-
-    void SetMixerVolumes() {
-        //These variables are found in the Audio mixer, then Exposed Parameters
-        SetMixerVolume("masterVolume",masterVolume);
-        SetMixerVolume("musicVolume",musicVolume);
-        SetMixerVolume("sfxVolume",sfxVolume);
-        SetMixerVolume("uiVolume",uiVolume);
-        SetMixerVolume("inGameEffectsVolume",inGameEffectsVolume);
-    }
-
     /// <summary>
     /// This method converts the volume from a linear scale to a logarithmic scale, which is what the AudioMixer uses.
     /// </summary>
@@ -47,7 +30,14 @@ public class AudioSettings : ScriptableObject
         mainMixer.SetFloat(floatName, Mathf.Log10(volume) * 20);
         SaveVolume(floatName, volume);
     }
-    
+    void SetMixerVolumes() {
+        //These variables are found in the Audio mixer, then Exposed Parameters
+        SetMixerVolume("masterVolume",masterVolume);
+        SetMixerVolume("musicVolume",musicVolume);
+        SetMixerVolume("sfxVolume",sfxVolume);
+        SetMixerVolume("uiVolume",uiVolume);
+        SetMixerVolume("inGameEffectsVolume",inGameEffectsVolume);
+    }
     
     [Button]
     public void ActivateLowPassFilter()
@@ -66,7 +56,7 @@ public class AudioSettings : ScriptableObject
         PlayerPrefs.SetFloat(key, volume);
         PlayerPrefs.Save();
     }
-
+    
     private void LoadVolumes()
     {
         masterVolume = PlayerPrefs.GetFloat("masterVolume", masterVolume);
@@ -74,7 +64,5 @@ public class AudioSettings : ScriptableObject
         sfxVolume = PlayerPrefs.GetFloat("sfxVolume", sfxVolume);
         uiVolume = PlayerPrefs.GetFloat("uiVolume", uiVolume);
         inGameEffectsVolume = PlayerPrefs.GetFloat("inGameEffectsVolume", inGameEffectsVolume);
-        
-        SetMixerVolumes();
     }
 }

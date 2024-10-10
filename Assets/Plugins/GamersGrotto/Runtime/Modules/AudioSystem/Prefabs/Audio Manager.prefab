@@ -175,8 +175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5273c3bb1184f184eb79f208e2b0dc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
   uiSoundPlayer: {fileID: 8982620527885696107}
   musicPlayer: {fileID: 2725204731936172017}
+  audioSettings: {fileID: 11400000, guid: b4e49b845c734e1429502b8b5d2e48d9, type: 2}
 --- !u!1 &4063404872375108629
 GameObject:
   m_ObjectHideFlags: 0
