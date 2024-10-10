@@ -18,7 +18,7 @@ public class AudioSettings : ScriptableObject
     public float InGameEffectsVolume{  get { return inGameEffectsVolume; }  set { inGameEffectsVolume = value; SetMixerVolume("inGameEffectsVolume",inGameEffectsVolume); } }
     
     
-    private void Awake()
+    private void OnEnable()
     {
         SetMixerVolumes();
         LoadVolumes();
@@ -33,11 +33,6 @@ public class AudioSettings : ScriptableObject
         SetMixerVolume("inGameEffectsVolume",inGameEffectsVolume);
     }
 
-    private void OnValidate()
-    {
-        SetMixerVolumes();
-    }
-    
     /// <summary>
     /// This method converts the volume from a linear scale to a logarithmic scale, which is what the AudioMixer uses.
     /// </summary>
