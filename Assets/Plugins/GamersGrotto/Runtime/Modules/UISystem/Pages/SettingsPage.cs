@@ -26,8 +26,6 @@ namespace GamersGrotto.Runtime.Modules.UISystem.Pages
 
         protected override IEnumerator DrawUI(VisualElement root)
         {
-            Debug.Log("Settings Page");
-
             var background = Create("full-screen");
             root.Add(background);
             
