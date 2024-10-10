@@ -59,6 +59,10 @@ namespace GamersGrotto.Runtime.Modules.UISystem
         
         public void GotoSettingsPage() => ExecuteCommand(new SwitchToPageCommand(settingsPage));
 
+        public void ShowLoadingScreen() => ExecuteCommand(new SwitchToPageCommand(loadingScreen));
+
+        public void HideLoadingScreen() => ExecuteCommand(new ClosePageCommand(loadingScreen));
+
         public void GoBack()
         {
             if (commandStack.Count > 0)
