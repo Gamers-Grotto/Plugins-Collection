@@ -72,13 +72,13 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8831365982708682468}
         m_TargetAssemblyTypeName: GamersGrotto.Runtime.Modules.UISystem.UIManager,
-          Assembly-CSharp-firstpass
+          gamersgrotto.ui_system.runtime
         m_MethodName: SwitchToPage
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2172171233611894141}
           m_ObjectArgumentAssemblyTypeName: GamersGrotto.Runtime.Modules.UISystem.Page,
-            Assembly-CSharp-firstpass
+            gamersgrotto.ui_system.runtime
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
