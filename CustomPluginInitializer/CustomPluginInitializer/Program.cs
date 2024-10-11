@@ -2,16 +2,19 @@
 
 class Program
 {
-    static string basePath = @"D:\Projects\Unity\CustomPlugins\Packages\";
-    static string companyName = "partisanprogrammer";
-    static string packageName = "Better-Singletons"; //Avoid spaces, dashes
+    static string basePath = @"D:\Projects\Unity\Gamers' Grotto\Plugins-Collection\Assets\Plugins\GamersGrotto\Core/";
+    static string companyName = "gamersgrotto";
+    static string packageName = "Extended Attributes"; // Gets converted to lowercase // Space or dash will be replaced with underscore
+    static string[] editorReferences = new string[] { "gamersgrotto.core.runtime", "gamersgrotto.core.editor" };
+    static string[] runtimeReferences = new string[] { "gamersgrotto.core.runtime" };
+    static string[] testsEditorReferences = new string[] {  };
+    static string[] testsRuntimeReferences = new string[] { };
     static string version = "0.0.1";
 
-    static string FullName => $"{companyName}.{packageName}".ToLower();
+    static string FullName => $"{companyName}.{packageName}".ToLower().Replace(" ", "_").Replace("-", "_");
     static string FullPath => $"{basePath}{FullName}".ToLower();
     static void Main(string[] args)
     {
-        
         var defaultPackage = new Package(companyName, packageName,version);
         var defaultReadme = new Readme();
         var defaultChangeLog = new ChangeLog( version, "Initial release");
@@ -19,10 +22,10 @@ class Program
         var partisanThirdParty = new ThirdParty();
         var defaultThirdPartyNotices = new ThirdPartyNotices(partisanThirdParty);
         
-        var editorAssembly = new AssemblyDefinition(companyName, packageName, false, true);
-        var runtimeAssembly = new AssemblyDefinition(companyName, packageName, false, false);
-        var testsAssembly = new AssemblyDefinition(companyName, packageName, true, false);
-        var testsEditorAssembly = new AssemblyDefinition(companyName, packageName, true, true);
+        var editorAssembly = new AssemblyDefinition(companyName, packageName, false, true,editorReferences);
+        var runtimeAssembly = new AssemblyDefinition(companyName, packageName, false, false,runtimeReferences);
+        var testsAssembly = new AssemblyDefinition(companyName, packageName, true, false,testsEditorReferences);
+        var testsEditorAssembly = new AssemblyDefinition(companyName, packageName, true, true,testsRuntimeReferences);
         
         var editorDirectory = Path.Combine(FullPath, "Editor");
         var runtimeDirectory = Path.Combine(FullPath, "Runtime");

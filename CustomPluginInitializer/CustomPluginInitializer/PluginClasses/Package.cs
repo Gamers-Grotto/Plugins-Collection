@@ -30,8 +30,8 @@ public class Package:IFile
         this.displayName = packageName;
         name = $"com.{companyName}.{packageName.ToLower().Replace(" ", "-")}";
         description = "Description of the package, what it does and how to use it.";
-        unity = "2022.3";
-        unityRelease = "23f1";
+        unity = "6000.0";
+        unityRelease = "20f1";
         documentationUrl = "https://example.com/";
         changelogUrl = "https://example.com/changelog.html";
         licensesUrl = "https://example.com/licensing.html";
@@ -44,9 +44,9 @@ public class Package:IFile
         keywords = new List<string> { "keyword1", "keyword2", "keyword3" };
         author = new Author
         {
-            name = "PartisanProgrammer",
-            email = "oliver.kallerfors@outlook.com",
-            url = "https://example.com/"
+            name = "GamersGrotto",
+           // email = "",
+          //  url = "https://example.com/"
         };
     }
     public Package(string name, string version, string displayName, string description, string unity, string unityRelease, string documentationUrl, string changelogUrl, string licensesUrl, Dictionary<string, string> dependencies, List<string> keywords, Author author)

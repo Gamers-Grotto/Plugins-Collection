@@ -1,0 +1,18 @@
+{
+    "name": "gamersgrotto.core.editor",
+    "rootNamespace": "gamersgrotto.core.editor",
+    "references": [
+        "GUID:7a2a6876f0a934c4ba904bb34b0ea728"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

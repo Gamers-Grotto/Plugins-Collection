@@ -1,0 +1,14 @@
+{
+    "name": "gamersgrotto.ui_system.tests",
+    "rootNamespace": "gamersgrotto.ui_system.tests",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

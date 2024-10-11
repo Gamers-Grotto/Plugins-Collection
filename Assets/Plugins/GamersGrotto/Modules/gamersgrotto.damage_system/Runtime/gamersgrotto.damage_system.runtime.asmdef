@@ -1,0 +1,16 @@
+{
+    "name": "gamersgrotto.damage_system.runtime",
+    "rootNamespace": "gamersgrotto.damage_system.runtime",
+    "references": [
+        "GUID:7a2a6876f0a934c4ba904bb34b0ea728"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

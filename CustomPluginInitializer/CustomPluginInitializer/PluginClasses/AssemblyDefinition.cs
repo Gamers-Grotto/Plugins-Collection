@@ -8,17 +8,19 @@ public class AssemblyDefinition : IFile
 {
     [JsonIgnore] public string FileName { get; set; }
     public string name { get; set; }
+    public string[] references { get; set; }
     public string[] includePlatforms { get; set; }
     public string rootNamespace { get; set; }
     [JsonIgnore] public bool TestAssembly { get; set; }
     [JsonIgnore] public bool EditorAssembly { get; set; }
-    public AssemblyDefinition(string companyName, string packageName, bool testAssembly, bool editorAssembly)
+    public AssemblyDefinition(string companyName, string packageName, bool testAssembly, bool editorAssembly, string [] references)
     {
 
         var path = "";
         
         path = $"{companyName}.{packageName}".ToLower();
         path = path.Replace("-", "_");
+        path = path.Replace(" ", "_");
         var pathEnding = ".asmdef";
         
         if(editorAssembly)
@@ -28,14 +30,21 @@ public class AssemblyDefinition : IFile
             
         }
         
+        
         if (testAssembly)
         {
             path += ".Tests";
         }
         
+        if(!testAssembly && !editorAssembly)
+        {
+            path += ".Runtime";
+        }
+        
         FileName =$"{path}{pathEnding}".ToLower();
         name = path.ToLower();
         rootNamespace = path.ToLower();;
+        this.references = references;
     }
     public string GenerateFileContent()
     {
