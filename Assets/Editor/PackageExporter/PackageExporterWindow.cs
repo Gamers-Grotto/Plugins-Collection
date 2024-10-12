@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 
 namespace Editor {
@@ -19,6 +20,7 @@ namespace Editor {
             packageCollection =
                 EditorGUILayout.ObjectField("Package Collection", packageCollection, typeof(PackageCollection), false)
                     as PackageCollection;
+
             GUILayout.Space(10);
 
             SelectSaveDestination();
@@ -49,3 +51,4 @@ namespace Editor {
         }
     }
 }
+#endif

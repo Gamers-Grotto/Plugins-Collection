@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -5,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 
 public static class PackageExporter {
-    private static string packagePath = "Assets/Builds/ExportedPackage.unitypackage";
+   
     public static void ExportPackage(List<string> foldersToInclude, string packagePath = "Assets/Builds/ExportedPackage.unitypackage", ExportPackageOptions exportOptions = ExportPackageOptions.Default)
     {
         if (foldersToInclude == null || foldersToInclude.Count == 0)
@@ -55,3 +57,4 @@ public static class PackageExporter {
         return allAssetPaths.ToArray();
     }
 }
+#endif

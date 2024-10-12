@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
+using Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,12 +12,20 @@ public class PackageCollection : ScriptableObject {
 
     [Button]
     public void AddFolder() {
-        var folder = EditorUtility.OpenFolderPanel("Select Folder", "Assets", "");
+        var folder = EditorUtility.OpenFolderPanel("Select Folder", "Assets/Plugins/GamersGrotto/", "");
         if (string.IsNullOrEmpty(folder))
             return;
 
+        
+        
         if (folder.StartsWith(Application.dataPath)) {
             folder = "Assets" + folder.Substring(Application.dataPath.Length);
+            
+            if (packageFolderPaths.Contains(folder)) {
+                Debug.LogWarning("Folder already added to the package collection. Not adding again.");
+                return;
+            }
+            
             packageFolderPaths.Add(folder);
         }
         else {
@@ -28,6 +37,11 @@ public class PackageCollection : ScriptableObject {
     [Button]
     public void BuildPackage() {
         PackageExporter.ExportPackage(packageFolderPaths);
+    }
+
+    [Button]
+    public void OpenExporterWindow() {
+        PackageExporterWindow.ShowWindow();
     }
 }
 
