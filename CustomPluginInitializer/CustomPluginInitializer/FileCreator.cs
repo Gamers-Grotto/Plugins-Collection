@@ -10,7 +10,7 @@ public class FileCreator<T> where T : IFile
     {
         Data = data;
     }
-    public void CreateFile(string path)
+    public void CreateFile<T>(string path) where T : IFile
     {
         // Generate the content for the file
         string content = Data.GenerateFileContent();
