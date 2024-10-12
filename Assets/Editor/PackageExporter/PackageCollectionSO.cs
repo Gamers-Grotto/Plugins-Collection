@@ -10,11 +10,6 @@ public class PackageCollection : ScriptableObject {
     public List<string> packageFolderPaths;
 
     [Button]
-    public void BuildPackage() {
-        PackageExporter.ExportPackage(packageFolderPaths);
-    }
-
-    [Button]
     public void AddFolder() {
         var folder = EditorUtility.OpenFolderPanel("Select Folder", "Assets", "");
         if (string.IsNullOrEmpty(folder))
@@ -28,6 +23,11 @@ public class PackageCollection : ScriptableObject {
             Debug.LogError(
                 "Selected folder is outside the project. Please select a folder within the 'Assets' folder.");
         }
+    }
+
+    [Button]
+    public void BuildPackage() {
+        PackageExporter.ExportPackage(packageFolderPaths);
     }
 }
 
