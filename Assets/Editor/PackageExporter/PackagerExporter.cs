@@ -21,6 +21,12 @@ public static class PackageExporter {
             Debug.LogWarning("No assets found in the specified folders.");
             return;
         }
+        
+        //if path doesnt exist, create it
+        if (!Directory.Exists(Path.GetDirectoryName(packagePath)))
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(packagePath));
+        }
 
         AssetDatabase.ExportPackage(assetPaths, packagePath, exportOptions);
         AssetDatabase.Refresh();
