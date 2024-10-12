@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Editor {
     public class PackageExporterWindow : EditorWindow {
-        private string packagePath = "Assets/Builds/ExportedPackage.unitypackage";
+        private string packagePath = "Assets/Builds/";
+        private string packageName = "ExportedPackage";
         private ExportPackageOptions exportOptions = ExportPackageOptions.Default;
 
         public PackageCollection packageCollection;
@@ -26,12 +27,16 @@ namespace Editor {
             SelectSaveDestination();
 
             GUILayout.Space(10);
+            
+            SelectPackageName();
+            
+            GUILayout.Space(10);
 
             GUILayout.Label("Export Package Options:", EditorStyles.label);
             exportOptions = (ExportPackageOptions)EditorGUILayout.EnumPopup("Package Options", exportOptions);
 
             if (GUILayout.Button("Export Package"))
-                PackageExporter.ExportPackage(packageCollection.packageFolderPaths, packagePath, exportOptions);
+                PackageExporter.ExportPackage(packageCollection.packageFolderPaths, packagePath, packageName,exportOptions);
         }
 
         private void SelectSaveDestination() {
@@ -48,6 +53,12 @@ namespace Editor {
                         packagePath = "Assets" + path.Substring(Application.dataPath.Length);
                 }
             }
+        }
+        
+        private void SelectPackageName() {
+            GUILayout.Label("Output Package Name:", EditorStyles.label);
+
+            packageName = EditorGUILayout.TextField(packageName);
         }
     }
 }

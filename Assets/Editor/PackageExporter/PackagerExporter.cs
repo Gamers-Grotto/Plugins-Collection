@@ -8,7 +8,7 @@ using UnityEngine;
 
 public static class PackageExporter {
    
-    public static void ExportPackage(List<string> foldersToInclude, string packagePath = "Assets/Builds/ExportedPackage.unitypackage", ExportPackageOptions exportOptions = ExportPackageOptions.Default)
+    public static void ExportPackage(List<string> foldersToInclude, string packagePath = "Assets/Builds/",string packageName = "ExportedPackage", ExportPackageOptions exportOptions = ExportPackageOptions.Default)
     {
         if (foldersToInclude == null || foldersToInclude.Count == 0)
         {
@@ -24,15 +24,15 @@ public static class PackageExporter {
             return;
         }
         
-        //if path doesnt exist, create it
-        if (!Directory.Exists(Path.GetDirectoryName(packagePath)))
+        var fullPackagePath = Path.Combine(packagePath, packageName + ".unitypackage").Replace(" ", "_");
+        if (!Directory.Exists(Path.GetDirectoryName(fullPackagePath)))
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(packagePath));
+            Directory.CreateDirectory(Path.GetDirectoryName(fullPackagePath));
         }
 
-        AssetDatabase.ExportPackage(assetPaths, packagePath, exportOptions);
+        AssetDatabase.ExportPackage(assetPaths, fullPackagePath, exportOptions);
         AssetDatabase.Refresh();
-        Debug.Log("Package exported to: " + packagePath);
+        Debug.Log("Package exported to: " + fullPackagePath);
     }
 
     private static string[] GetAllAssetPathsFromFolders(List<string> folders)

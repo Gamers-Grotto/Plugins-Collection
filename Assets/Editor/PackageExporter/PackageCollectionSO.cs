@@ -9,6 +9,7 @@ using UnityEngine;
  Serializable]
 public class PackageCollection : ScriptableObject {
     public List<string> packageFolderPaths;
+    public string packageName;
 
     [Button]
     public void AddFolder() {
@@ -36,7 +37,7 @@ public class PackageCollection : ScriptableObject {
 
     [Button]
     public void BuildPackage() {
-        PackageExporter.ExportPackage(packageFolderPaths);
+        PackageExporter.ExportPackage(packageFolderPaths,packageName:packageName);
     }
 
     [Button]
