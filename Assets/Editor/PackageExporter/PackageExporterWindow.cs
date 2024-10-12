@@ -9,7 +9,7 @@ namespace Editor {
         private string packageName = "ExportedPackage";
         private ExportPackageOptions exportOptions = ExportPackageOptions.Default;
 
-        [FormerlySerializedAs("packageCollection")] public PluginCollection pluginCollection;
+        public PluginCollection pluginCollection;
 
         [MenuItem("GamersGrotto/Package Exporter Window")]
         public static void ShowWindow() {
@@ -25,8 +25,8 @@ namespace Editor {
 
             if (pluginCollection == null)
             {
-                if (GUILayout.Button("Create New Package Collection"))
-                    CreateNewPackageCollection();
+                if (GUILayout.Button("Create New Plugin Collection"))
+                    CreateNewPluginCollection();
             }
             
             GUILayout.Space(10);
@@ -73,15 +73,15 @@ namespace Editor {
             packageName = EditorGUILayout.TextField(packageName);
         }
         
-        private void CreateNewPackageCollection()
+        private void CreateNewPluginCollection()
         {
-            var path = EditorUtility.SaveFilePanelInProject("Save New Package Collection", "NewPackageCollection", "asset", "Please enter a file name to save the package collection");
+            var path = EditorUtility.SaveFilePanelInProject("Save New Plugin Collection", "NewPluginCollection", "asset", "Please enter a file name to save the package collection");
 
             if (string.IsNullOrEmpty(path)) 
                 return;
             
-            var newPackageCollection = CreateInstance<PluginCollection>();
-            AssetDatabase.CreateAsset(newPackageCollection, path);
+            var newPluginCollection = CreateInstance<PluginCollection>();
+            AssetDatabase.CreateAsset(newPluginCollection, path);
             AssetDatabase.SaveAssets();
 
             pluginCollection = AssetDatabase.LoadAssetAtPath<PluginCollection>(path);
