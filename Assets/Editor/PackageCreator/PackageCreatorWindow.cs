@@ -17,7 +17,7 @@ namespace Editor.PackageCreator {
 
         bool includeEditor, includeRuntime, includeTests;
         string version = "0.0.1";
-        string outputDirectory = "Assets/Plugins/GamersGrotto/";
+        string outputDirectory = "Assets/Plugins/GamersGrotto/Modules/";
 
         ReorderableList editorReferencesList;
         ReorderableList runtimeReferencesList;
