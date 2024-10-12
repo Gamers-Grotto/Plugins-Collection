@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEditorInternal;
-using UnityEngine;
 
-namespace Editor.PackageCreator {
+namespace Editor.PluginCreator {
     public class AssemblyDefinition : IFile {
         [JsonIgnore] public string FileName { get; set; }
         public string name { get; set; }

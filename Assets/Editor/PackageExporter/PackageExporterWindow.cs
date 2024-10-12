@@ -1,6 +1,7 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Editor {
     public class PackageExporterWindow : EditorWindow {
@@ -8,7 +9,7 @@ namespace Editor {
         private string packageName = "ExportedPackage";
         private ExportPackageOptions exportOptions = ExportPackageOptions.Default;
 
-        public PackageCollection packageCollection;
+        [FormerlySerializedAs("packageCollection")] public PluginCollection pluginCollection;
 
         [MenuItem("GamersGrotto/Package Exporter Window")]
         public static void ShowWindow() {
@@ -18,11 +19,11 @@ namespace Editor {
         private void OnGUI() {
             GUILayout.Label("Package Exporter", EditorStyles.boldLabel);
 
-            packageCollection =
-                EditorGUILayout.ObjectField("Package Collection", packageCollection, typeof(PackageCollection), false)
-                    as PackageCollection;
+            pluginCollection =
+                EditorGUILayout.ObjectField("Package Collection", pluginCollection, typeof(PluginCollection), false)
+                    as PluginCollection;
 
-            if (packageCollection == null)
+            if (pluginCollection == null)
             {
                 if (GUILayout.Button("Create New Package Collection"))
                     CreateNewPackageCollection();
@@ -43,8 +44,8 @@ namespace Editor {
 
             if (GUILayout.Button("Export Package"))
             {
-                if(packageCollection != null)
-                    PackageExporter.ExportPackage(packageCollection.packageFolderPaths, packagePath, packageName,exportOptions);
+                if(pluginCollection != null)
+                    PackageExporter.ExportPackage(pluginCollection.pluginFolderPaths, packagePath, packageName,exportOptions);
                 else 
                     Debug.LogError("No Package Collection selected");
             }
@@ -79,13 +80,13 @@ namespace Editor {
             if (string.IsNullOrEmpty(path)) 
                 return;
             
-            var newPackageCollection = CreateInstance<PackageCollection>();
+            var newPackageCollection = CreateInstance<PluginCollection>();
             AssetDatabase.CreateAsset(newPackageCollection, path);
             AssetDatabase.SaveAssets();
 
-            packageCollection = AssetDatabase.LoadAssetAtPath<PackageCollection>(path);
+            pluginCollection = AssetDatabase.LoadAssetAtPath<PluginCollection>(path);
             EditorUtility.FocusProjectWindow();
-            Selection.activeObject = packageCollection;
+            Selection.activeObject = pluginCollection;
         }
     }
 }

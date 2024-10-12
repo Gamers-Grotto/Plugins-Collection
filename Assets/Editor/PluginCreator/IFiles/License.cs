@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace Editor.PackageCreator {
+namespace Editor.PluginCreator {
     public class License : IFile {
         [JsonIgnore] public string FileName { get; set; }
         public string HeaderText { get; set; }

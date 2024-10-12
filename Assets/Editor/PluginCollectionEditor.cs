@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Editor
 {
-    [CustomEditor(typeof(PackageCollection))]
-    public class PackageCollectionEditor : UnityEditor.Editor
+    [CustomEditor(typeof(PluginCollection))]
+    public class PluginCollectionEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
-            var packageCollection = (PackageCollection)target;
+            var pluginCollection = (PluginCollection)target;
 
             DrawDefaultInspector();
 
@@ -20,8 +20,8 @@ namespace Editor
                     if (folder.StartsWith(Application.dataPath))
                     {
                         folder = "Assets" + folder.Substring(Application.dataPath.Length);
-                        packageCollection.packageFolderPaths.Add(folder);
-                        EditorUtility.SetDirty(packageCollection);
+                        pluginCollection.pluginFolderPaths.Add(folder);
+                        EditorUtility.SetDirty(pluginCollection);
                     }
                     else
                     {
@@ -32,14 +32,14 @@ namespace Editor
 
             if (GUILayout.Button("Clear Folders"))
             {
-                packageCollection.packageFolderPaths.Clear();
-                EditorUtility.SetDirty(packageCollection); 
+                pluginCollection.pluginFolderPaths.Clear();
+                EditorUtility.SetDirty(pluginCollection); 
             }
 
             GUILayout.Space(10);
 
             if (GUILayout.Button("Export Package"))
-                PackageExporter.ExportPackage(packageCollection.packageFolderPaths);
+                PackageExporter.ExportPackage(pluginCollection.pluginFolderPaths,packageName: pluginCollection.packageName);
         }
     }
 }

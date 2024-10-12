@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace Editor.PackageCreator {
+namespace Editor.PluginCreator {
     public class FileCreator<T> where T : IFile {
         public T Data { get; set; }
 

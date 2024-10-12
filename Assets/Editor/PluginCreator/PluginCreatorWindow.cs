@@ -1,14 +1,12 @@
-﻿using System.Linq;
-
-namespace Editor.PackageCreator {
+﻿namespace Editor.PluginCreator {
     using System.Collections.Generic;
     using System.IO;
     using UnityEditor;
     using UnityEditorInternal;
     using UnityEngine;
 
-    public class PackageCreatorWindow : EditorWindow {
-        string packageName = "NewPackage";
+    public class PluginCreatorWindow : EditorWindow {
+        string pluginName = "NewPlugin";
         string companyName = "GamersGrotto";
         List<AssemblyDefinitionAsset> editorReferences = new List<AssemblyDefinitionAsset>();
         List<AssemblyDefinitionAsset> runtimeReferences = new List<AssemblyDefinitionAsset>();
@@ -27,9 +25,9 @@ namespace Editor.PackageCreator {
         bool showReferences = true;
         
 
-        [MenuItem("GamersGrotto/Package Creator")]
+        [MenuItem("GamersGrotto/Plugin Creator")]
         public static void ShowWindow() {
-            GetWindow<PackageCreatorWindow>("Package Creator");
+            GetWindow<PluginCreatorWindow>("Plugin Creator");
         }
 
         void OnEnable() {
@@ -64,9 +62,9 @@ namespace Editor.PackageCreator {
         }
 
         void OnGUI() {
-            GUILayout.Label("Package Settings", EditorStyles.boldLabel);
+            GUILayout.Label("Plugin Settings", EditorStyles.boldLabel);
 
-            packageName = EditorGUILayout.TextField("Package Name", packageName);
+            pluginName = EditorGUILayout.TextField("Plugin Name", pluginName);
             companyName = EditorGUILayout.TextField("Company Name", companyName);
             version = EditorGUILayout.TextField("Version", version);
             outputDirectory = EditorGUILayout.TextField("Output Directory", outputDirectory);
@@ -120,8 +118,8 @@ namespace Editor.PackageCreator {
 
            
 
-            if (GUILayout.Button("Create Package", new GUIStyle(GUI.skin.button) { fontSize = 16 , fontStyle = FontStyle.Bold, fixedHeight = 50})) {
-                CreatePackage();
+            if (GUILayout.Button("Create Plugin", new GUIStyle(GUI.skin.button) { fontSize = 16 , fontStyle = FontStyle.Bold, fixedHeight = 50})) {
+                CreatePlugin();
             }
         }
 
@@ -155,13 +153,13 @@ namespace Editor.PackageCreator {
             }
         }
 
-        void CreatePackage() {
+        void CreatePlugin() {
             CreateDirectories();
             CreateFiles();
         }
 
         void CreateDirectories() {
-            var fullPath = $"{outputDirectory}/{packageName}";
+            var fullPath = $"{outputDirectory}/{pluginName}";
             var editorPath = $"{fullPath}/Editor";
             var runtimePath = $"{fullPath}/Runtime";
             var testsPath = $"{fullPath}/Tests";
@@ -169,7 +167,7 @@ namespace Editor.PackageCreator {
             var testsRuntimePath = $"{testsPath}/Runtime";
 
             if (!AssetDatabase.IsValidFolder(fullPath))
-                AssetDatabase.CreateFolder(outputDirectory, packageName);
+                AssetDatabase.CreateFolder(outputDirectory, pluginName);
 
             if (includeEditor && !AssetDatabase.IsValidFolder(editorPath))
                 AssetDatabase.CreateFolder(fullPath, "Editor");
@@ -188,8 +186,8 @@ namespace Editor.PackageCreator {
         }
 
         void CreateFiles() {
-            var fullPath = $"{outputDirectory}/{packageName}";
-            var defaultPackage = new Package(companyName, packageName, version);
+            var fullPath = $"{outputDirectory}/{pluginName}";
+            var defaultPackage = new Package(companyName, pluginName, version);
             var defaultReadme = new Readme();
             var defaultChangeLog = new ChangeLog(version, "Initial release");
             var defaultLicense =
@@ -197,11 +195,11 @@ namespace Editor.PackageCreator {
             var exampleThirdParty = new ThirdParty();
             var defaultThirdPartyNotices = new ThirdPartyNotices(exampleThirdParty);
 
-            var editorAssembly = new AssemblyDefinition(companyName, packageName, false, true, editorReferences);
-            var runtimeAssembly = new AssemblyDefinition(companyName, packageName, false, false, runtimeReferences);
-            var testsAssembly = new AssemblyDefinition(companyName, packageName, true, false, testsEditorReferences);
+            var editorAssembly = new AssemblyDefinition(companyName, pluginName, false, true, editorReferences);
+            var runtimeAssembly = new AssemblyDefinition(companyName, pluginName, false, false, runtimeReferences);
+            var testsAssembly = new AssemblyDefinition(companyName, pluginName, true, false, testsEditorReferences);
             var testsEditorAssembly =
-                new AssemblyDefinition(companyName, packageName, true, true, testsRuntimeReferences);
+                new AssemblyDefinition(companyName, pluginName, true, true, testsRuntimeReferences);
 
             if (includeEditor)
                 CreateFile(editorAssembly, Path.Combine(fullPath, "Editor"));

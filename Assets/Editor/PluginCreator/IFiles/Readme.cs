@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Editor.PackageCreator {
+namespace Editor.PluginCreator {
     internal class Readme : IFile {
         [JsonIgnore] public string FileName { get; set; } = "README.md";
 

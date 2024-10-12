@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Editor.PackageCreator {
+﻿namespace Editor.PluginCreator {
     public class ThirdParty {
         public string Name { get; set; }
         public string LicenseType { get; set; }

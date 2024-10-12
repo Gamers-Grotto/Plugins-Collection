@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Editor.PackageCreator {
+namespace Editor.PluginCreator {
     public class Package : IFile {
         [JsonIgnore] public string FileName { get; set; } = "package.json";
 

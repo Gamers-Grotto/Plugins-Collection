@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Editor.PackageCreator {
+namespace Editor.PluginCreator {
     public class Documentation : IFile {
         [JsonIgnore] public string FileName { get; set; } = "Documentation.md";
 

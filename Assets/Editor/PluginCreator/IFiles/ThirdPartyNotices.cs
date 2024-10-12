@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Editor.PackageCreator {
+namespace Editor.PluginCreator {
     public class ThirdPartyNotices : IFile {
         [JsonIgnore] public string FileName { get; set; }
         public string HeaderText { get; set; }

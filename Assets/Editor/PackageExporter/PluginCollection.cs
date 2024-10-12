@@ -6,12 +6,12 @@ using Editor;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewPackageCollection", menuName = "GamersGrotto/Package Management/PackageCollection"),
+[CreateAssetMenu(fileName = "NewPackageCollection", menuName = "GamersGrotto/Plugin Management/PluginCollection"),
  Serializable]
-public class PackageCollection : ScriptableObject {
+public class PluginCollection : ScriptableObject {
     [Tooltip("Default: ExportedPackage. Empty also defaults it. Spaces -> _")] 
     public string packageName =  "ExportedPackage";
-    public List<string> packageFolderPaths;
+    public List<string> pluginFolderPaths;
 
 
     [Button]
@@ -24,12 +24,12 @@ public class PackageCollection : ScriptableObject {
         if (folder.StartsWith(Application.dataPath)) {
             folder = "Assets" + folder.Substring(Application.dataPath.Length);
 
-            if (packageFolderPaths.Contains(folder)) {
-                Debug.LogWarning("Folder already added to the package collection. Not adding again.");
+            if (pluginFolderPaths.Contains(folder)) {
+                Debug.LogWarning("Folder already added to the Plugin collection. Not adding again.");
                 return;
             }
 
-            packageFolderPaths.Add(folder);
+            pluginFolderPaths.Add(folder);
         }
         else {
             Debug.LogError(
@@ -39,7 +39,7 @@ public class PackageCollection : ScriptableObject {
 
     [Button]
     public void BuildPackage() {
-        PackageExporter.ExportPackage(packageFolderPaths, packageName: packageName);
+        PackageExporter.ExportPackage(pluginFolderPaths, packageName: packageName);
     }
 
     [Button]
