@@ -22,6 +22,12 @@ namespace Editor {
                 EditorGUILayout.ObjectField("Package Collection", packageCollection, typeof(PackageCollection), false)
                     as PackageCollection;
 
+            if (packageCollection == null)
+            {
+                if (GUILayout.Button("Create New Package Collection"))
+                    CreateNewPackageCollection();
+            }
+            
             GUILayout.Space(10);
 
             SelectSaveDestination();
@@ -36,7 +42,12 @@ namespace Editor {
             exportOptions = (ExportPackageOptions)EditorGUILayout.EnumPopup("Package Options", exportOptions);
 
             if (GUILayout.Button("Export Package"))
-                PackageExporter.ExportPackage(packageCollection.packageFolderPaths, packagePath, packageName,exportOptions);
+            {
+                if(packageCollection != null)
+                    PackageExporter.ExportPackage(packageCollection.packageFolderPaths, packagePath, packageName,exportOptions);
+                else 
+                    Debug.LogError("No Package Collection selected");
+            }
         }
 
         private void SelectSaveDestination() {
@@ -59,6 +70,22 @@ namespace Editor {
             GUILayout.Label("Output Package Name:", EditorStyles.label);
 
             packageName = EditorGUILayout.TextField(packageName);
+        }
+        
+        private void CreateNewPackageCollection()
+        {
+            var path = EditorUtility.SaveFilePanelInProject("Save New Package Collection", "NewPackageCollection", "asset", "Please enter a file name to save the package collection");
+
+            if (string.IsNullOrEmpty(path)) 
+                return;
+            
+            var newPackageCollection = CreateInstance<PackageCollection>();
+            AssetDatabase.CreateAsset(newPackageCollection, path);
+            AssetDatabase.SaveAssets();
+
+            packageCollection = AssetDatabase.LoadAssetAtPath<PackageCollection>(path);
+            EditorUtility.FocusProjectWindow();
+            Selection.activeObject = packageCollection;
         }
     }
 }
