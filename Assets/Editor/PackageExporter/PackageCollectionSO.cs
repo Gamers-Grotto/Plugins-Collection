@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
+using Attributes;
 using Editor;
 using UnityEditor;
 using UnityEngine;
@@ -8,8 +9,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewPackageCollection", menuName = "GamersGrotto/Package Management/PackageCollection"),
  Serializable]
 public class PackageCollection : ScriptableObject {
+    [Tooltip("Default: ExportedPackage. Empty also defaults it. Spaces -> _")] 
+    public string packageName =  "ExportedPackage";
     public List<string> packageFolderPaths;
-    public string packageName;
+
 
     [Button]
     public void AddFolder() {
@@ -17,16 +20,15 @@ public class PackageCollection : ScriptableObject {
         if (string.IsNullOrEmpty(folder))
             return;
 
-        
-        
+
         if (folder.StartsWith(Application.dataPath)) {
             folder = "Assets" + folder.Substring(Application.dataPath.Length);
-            
+
             if (packageFolderPaths.Contains(folder)) {
                 Debug.LogWarning("Folder already added to the package collection. Not adding again.");
                 return;
             }
-            
+
             packageFolderPaths.Add(folder);
         }
         else {
@@ -37,7 +39,7 @@ public class PackageCollection : ScriptableObject {
 
     [Button]
     public void BuildPackage() {
-        PackageExporter.ExportPackage(packageFolderPaths,packageName:packageName);
+        PackageExporter.ExportPackage(packageFolderPaths, packageName: packageName);
     }
 
     [Button]

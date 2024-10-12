@@ -7,26 +7,26 @@ using UnityEditor;
 using UnityEngine;
 
 public static class PackageExporter {
-   
     public static void ExportPackage(List<string> foldersToInclude, string packagePath = "Assets/Builds/",string packageName = "ExportedPackage", ExportPackageOptions exportOptions = ExportPackageOptions.Default)
     {
-        if (foldersToInclude == null || foldersToInclude.Count == 0)
-        {
+        if (foldersToInclude == null || foldersToInclude.Count == 0) {
             Debug.LogError("No folders specified for export.");
             return;
         }
 
         var assetPaths = GetAllAssetPathsFromFolders(foldersToInclude);
 
-        if (assetPaths.Length == 0)
-        {
+        if (assetPaths.Length == 0) {
             Debug.LogWarning("No assets found in the specified folders.");
             return;
         }
-        
+
+        if (packageName == "") {
+            packageName = "ExportedPackage";
+        }
+
         var fullPackagePath = Path.Combine(packagePath, packageName + ".unitypackage").Replace(" ", "_");
-        if (!Directory.Exists(Path.GetDirectoryName(fullPackagePath)))
-        {
+        if (!Directory.Exists(Path.GetDirectoryName(fullPackagePath))) {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPackagePath));
         }
 
@@ -35,14 +35,11 @@ public static class PackageExporter {
         Debug.Log("Package exported to: " + fullPackagePath);
     }
 
-    private static string[] GetAllAssetPathsFromFolders(List<string> folders)
-    {
+    private static string[] GetAllAssetPathsFromFolders(List<string> folders) {
         var allAssetPaths = new List<string>();
 
-        foreach (var folder in folders)
-        {
-            if (!AssetDatabase.IsValidFolder(folder))
-            {
+        foreach (var folder in folders) {
+            if (!AssetDatabase.IsValidFolder(folder)) {
                 Debug.LogError($"Invalid folder path: {folder}");
                 continue;
             }
