@@ -14,7 +14,7 @@ namespace Editor
 
             if (GUILayout.Button("Add Folder"))
             {
-                var folder = EditorUtility.OpenFolderPanel("Select Folder", "Assets", "");
+                var folder = EditorUtility.OpenFolderPanel("Select Folder", "Assets/Plugins/GamersGrotto", "");
                 if (!string.IsNullOrEmpty(folder))
                 {
                     if (folder.StartsWith(Application.dataPath))

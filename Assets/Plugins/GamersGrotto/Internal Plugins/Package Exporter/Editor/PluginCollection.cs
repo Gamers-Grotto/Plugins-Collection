@@ -16,7 +16,7 @@ public class PluginCollection : ScriptableObject {
 
     [Button]
     public void AddFolder() {
-        var folder = EditorUtility.OpenFolderPanel("Select Folder", "Assets/Plugins/GamersGrotto/", "");
+        var folder = EditorUtility.OpenFolderPanel("Select Folder", "Assets/Plugins/GamersGrotto", "");
         if (string.IsNullOrEmpty(folder))
             return;
 
