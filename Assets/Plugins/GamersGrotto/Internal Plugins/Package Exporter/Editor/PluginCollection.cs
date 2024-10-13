@@ -1,7 +1,6 @@
 #if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
-using Attributes;
 using Editor;
 using UnityEditor;
 using UnityEngine;
@@ -14,7 +13,6 @@ public class PluginCollection : ScriptableObject {
     public List<string> pluginFolderPaths;
 
 
-    [Button]
     public void AddFolder() {
         var folder = EditorUtility.OpenFolderPanel("Select Folder", "Assets/Plugins/GamersGrotto", "");
         if (string.IsNullOrEmpty(folder))
@@ -37,12 +35,10 @@ public class PluginCollection : ScriptableObject {
         }
     }
 
-    [Button]
     public void BuildPackage() {
         PackageExporter.ExportPackage(pluginFolderPaths, packageName: packageName);
     }
 
-    [Button]
     public void OpenExporterWindow() {
         PackageExporterWindow.ShowWindow();
     }
