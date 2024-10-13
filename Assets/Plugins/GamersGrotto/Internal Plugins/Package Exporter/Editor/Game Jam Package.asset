@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: Game Jam Package
   m_EditorClassIdentifier: 
   packageName: Game Jam Package
-  packageFolderPaths:
-  - Assets/Plugins/GamersGrotto/Modules/Broker
-  - Assets/Plugins/GamersGrotto/Modules/In Game Console
-  - Assets/Plugins/GamersGrotto/Modules/UI System
+  pluginFolderPaths:
+  - Assets/Plugins/GamersGrotto/Modules/Audio System
