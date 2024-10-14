@@ -1,0 +1,22 @@
+{
+  "name": "gamersgrotto.core",
+  "version": "0.0.1",
+  "displayName": "Core",
+  "description": "A collection of core scripts and utilities for Unity projects.",
+  "unity": "6000.0",
+  "unityRelease": "20f1",
+  "documentationUrl": "https://example.com/",
+  "changelogUrl": "https://example.com/changelog.html",
+  "licensesUrl": "https://example.com/licensing.html",
+  "dependencies": {},
+  "keywords": [
+    "core",
+    "utilities",
+    "scripts"],
+  
+  "author": {
+    "name": "GamersGrotto",
+    "email": null,
+    "url": null
+  }
+}

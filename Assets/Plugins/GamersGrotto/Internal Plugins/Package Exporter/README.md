@@ -1,7 +1,11 @@
-# Package Creator
+# Package Exporter
+
+## Description
+1. This package allows for an easier .unitypackage creation
+2. Can be found under GamersGrotto -> Package Exporter Window
 
 ## Workflow Post Package Creation
-1. Upload the package to GitHub.
+1. Upload the package to GitHub as a new release.
 2. Import the package via the Package Manager.
 3. By default, the package is stored in Library/PackageCache, not under Packages. While it's in the cache, any changes made are temporary and can be overridden.
 4. This works fine for most users.

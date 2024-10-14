@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b541a926b617f747ae65991a89f3a78, type: 3}
   m_Name: In Game Console
   m_EditorClassIdentifier: 
-  packageName: ExportedPackage
-  pluginFolderPaths: []
+  packageName: In Game Console
+  pluginFolderPaths:
+  - Assets/Plugins/GamersGrotto/Core
+  - Assets/Plugins/GamersGrotto/Modules/In Game Console
