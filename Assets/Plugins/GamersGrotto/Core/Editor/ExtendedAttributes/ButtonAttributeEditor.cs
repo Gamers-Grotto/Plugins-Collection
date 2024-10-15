@@ -10,9 +10,7 @@ using UnityEngine;
     [CustomEditor(typeof(object), editorForChildClasses: true), CanEditMultipleObjects]
     public class ButtonAttributeEditor : UnityEditor.Editor
     {
-        private const int LabelFontSize = 24;
         private const float ButtonPadding = 100f;
-        private const int ButtonFontSize = 16;
         private const int HeaderSpacing = 10;
         private const int ButtonSpacing = 10;
 
@@ -59,7 +57,7 @@ using UnityEngine;
         private void SetGUIStyles()
         {
             GUI.color = Color.white;
-            GUI.backgroundColor = Color.cyan;
+            GUI.backgroundColor = Color.yellow;
             GUI.contentColor = Color.white;
         }
 
@@ -76,12 +74,7 @@ using UnityEngine;
 
             string labelName = script.GetType().Name;
             string splitLabelWords = Regex.Replace(labelName, @"(?<!^)(?=[A-Z])", " ");
-            GUIStyle labelStyle = new GUIStyle(EditorStyles.label)
-            {
-                fontSize = LabelFontSize,
-                fontStyle = FontStyle.Bold,
-                alignment = TextAnchor.MiddleCenter
-            };
+            GUIStyle labelStyle = new GUIStyle(CustomEditorStyles.HeaderLabel);
             GUILayout.Label(splitLabelWords, labelStyle);
 
             GUILayout.EndVertical();
@@ -90,11 +83,7 @@ using UnityEngine;
         private void DrawToggleButton()
         {
             string toggleButtonText = isMethodListOpen ? "Close" : "Open";
-            GUIStyle buttonStyle = new GUIStyle(EditorStyles.toolbarButton)
-            {
-                fontSize = ButtonFontSize,
-                fontStyle = FontStyle.Bold
-            };
+            GUIStyle buttonStyle = new GUIStyle(CustomEditorStyles.MediumButton);
 
             if (GUILayout.Button(toggleButtonText, buttonStyle))
             {
@@ -121,11 +110,9 @@ using UnityEngine;
             string splitButtonName = Regex.Replace(buttonName, @"(?<!^)(?=[A-Z])", " ");
 
             float buttonWidth = EditorGUIUtility.currentViewWidth - ButtonPadding;
-            GUIStyle buttonStyle = new GUIStyle(EditorStyles.toolbarButton)
+            GUIStyle buttonStyle = new GUIStyle(CustomEditorStyles.MediumButton)
             {
-                fontSize = ButtonFontSize,
-                fontStyle = FontStyle.Bold,
-                fixedWidth = buttonWidth
+                fixedWidth =    buttonWidth
             };
 
             if (GUILayout.Button(splitButtonName, buttonStyle))
