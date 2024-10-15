@@ -44,8 +44,7 @@ namespace Editor {
             GUILayout.Space(10);
             SelectSaveDestination();
             GUILayout.Space(10);
-
-            GUILayout.Label("Export Package Options:", EditorStyles.label);
+            
             exportOptionsTooltip = GetExportOptionsTooltip(exportOptions);
             EditorGUILayout.HelpBox(exportOptionsTooltip, MessageType.Info);
             exportOptions = (ExportPackageOptions)EditorGUILayout.EnumPopup("Package Options", exportOptions);
