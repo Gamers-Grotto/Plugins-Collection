@@ -62,13 +62,13 @@
         }
 
         void OnGUI() {
-            GUILayout.Label("Plugin Settings", EditorStyles.boldLabel);
+            GUILayout.Label("Plugin Settings", CustomEditorStyles.HeaderLabel);
 
             pluginName = EditorGUILayout.TextField("Plugin Name", pluginName);
             companyName = EditorGUILayout.TextField("Company Name", companyName);
             version = EditorGUILayout.TextField("Version", version);
             outputDirectory = EditorGUILayout.TextField("Output Directory", outputDirectory);
-            if (GUILayout.Button("Set Output Directory")) {
+            if (GUILayout.Button("Set Output Directory", CustomEditorStyles.MediumButton)) {
                 SetOutputDirectory();
             }
 
@@ -76,14 +76,8 @@
             includeRuntime = EditorGUILayout.Toggle("Include Runtime", includeRuntime);
             includeTests = EditorGUILayout.Toggle("Include Tests", includeTests);
             
-            var foldoutStyle = new GUIStyle(EditorStyles.foldout) {
-                fontStyle = FontStyle.Bold,
-                fontSize = 16,
-                normal = {
-                    textColor = Color.white
-                }
-            };
-            showReferences = EditorGUILayout.Foldout(showReferences, "References", true, foldoutStyle); 
+            
+            showReferences = EditorGUILayout.Foldout(showReferences, "References", true, CustomEditorStyles.Foldout); 
             if (showReferences) {
                 if (includeEditor) {
                     editorReferencesList.DoLayoutList();
@@ -118,7 +112,7 @@
 
            
 
-            if (GUILayout.Button("Create Plugin", new GUIStyle(GUI.skin.button) { fontSize = 16 , fontStyle = FontStyle.Bold, fixedHeight = 50})) {
+            if (GUILayout.Button("Create Plugin", CustomEditorStyles.LargeButton)) {
                 CreatePlugin();
             }
         }

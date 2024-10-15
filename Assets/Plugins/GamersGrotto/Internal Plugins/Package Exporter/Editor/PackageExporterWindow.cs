@@ -26,20 +26,30 @@ namespace Editor {
         }
 
         private void OnGUI() {
-            GUILayout.Label("Package Exporter", EditorStyles.boldLabel);
+            GUILayout.Label("Package Exporter", CustomEditorStyles.HeaderLabel);
             reorderablePluginCollection.DoLayoutList();
 
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Add All Plugin Collections")) {
+            if (position.width > 600) {
+                GUILayout.BeginHorizontal();
+            } else {
+                GUILayout.BeginVertical();
+            }
+
+            if (GUILayout.Button("Add All Plugin Collections", CustomEditorStyles.MediumButton)) {
                 FindAllPluginCollections();
             }
-            if (GUILayout.Button("Create New Plugin Collection")) {
+            if (GUILayout.Button("Create New Plugin Collection", CustomEditorStyles.MediumButton)) {
                 CreateNewPluginCollection();
             }
-            if (GUILayout.Button("Clear Plugin Collections")) {
+            if (GUILayout.Button("Clear Plugin Collections", CustomEditorStyles.MediumButton)) {
                 pluginCollections.Clear();
             }
-            GUILayout.EndHorizontal();
+
+            if (position.width > 600) {
+                GUILayout.EndHorizontal();
+            } else {
+                GUILayout.EndVertical();
+            }
 
             GUILayout.Space(10);
             SelectSaveDestination();
@@ -50,7 +60,7 @@ namespace Editor {
             exportOptions = (ExportPackageOptions)EditorGUILayout.EnumPopup("Package Options", exportOptions);
 
             var buttonText = pluginCollections.Count > 1 ? "Export Packages" : "Export Package";
-            if (GUILayout.Button(buttonText, new GUIStyle(GUI.skin.button) { fontSize = 16, fontStyle = FontStyle.Bold, fixedHeight = 50 })) {
+            if (GUILayout.Button(buttonText,CustomEditorStyles.LargeButton)) {
                 ExportSelectedPackages();
             }
         }
@@ -97,10 +107,10 @@ namespace Editor {
         }
 
         private void SelectSaveDestination() {
-            GUILayout.Label("Output Package Path:", EditorStyles.label);
+            GUILayout.Label("Output Package Path:", CustomEditorStyles.SubHeaderLabel);
             packagePath = EditorGUILayout.TextField(packagePath);
 
-            if (GUILayout.Button("Choose Package Destination")) {
+            if (GUILayout.Button("Choose Package Destination", CustomEditorStyles.MediumButton)) {
                 var path = EditorUtility.SaveFilePanel("Save Unity Package", "Assets/", "NewPackage", "unitypackage");
                 if (!string.IsNullOrEmpty(path)) {
                     packagePath = path.StartsWith(Application.dataPath) ? "Assets" + path.Substring(Application.dataPath.Length) : path;
@@ -118,7 +128,7 @@ namespace Editor {
 
                     list[index] = (PluginCollection)EditorGUI.ObjectField(fieldRect, element, typeof(PluginCollection), false);
 
-                    if (GUI.Button(buttonRect, "Export")) {
+                    if (GUI.Button(buttonRect, "Export", CustomEditorStyles.BasicButton)) {
                         PackageExporter.ExportPackage(element.pluginFolderPaths, packagePath, element.packageName, exportOptions);
                     }
                 },

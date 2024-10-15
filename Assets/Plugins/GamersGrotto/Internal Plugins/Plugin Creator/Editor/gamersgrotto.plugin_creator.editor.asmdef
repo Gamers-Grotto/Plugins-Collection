@@ -1,7 +1,9 @@
 {
     "name": "gamersgrotto.plugin_creator.editor",
     "rootNamespace": "gamersgrotto.plugin_creator.editor",
-    "references": [],
+    "references": [
+        "GUID:7ac65d2cd30c05745930c26fd3ea30d6"
+    ],
     "includePlatforms": [
         "Editor"
     ],

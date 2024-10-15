@@ -1,9 +1,7 @@
 {
-    "name": "gamersgrotto.package_exporter.editor",
-    "rootNamespace": "gamersgrotto.package_exporter.editor",
-    "references": [
-        "GUID:7ac65d2cd30c05745930c26fd3ea30d6"
-    ],
+    "name": "gamersgrotto.custom_editor_styles.editor",
+    "rootNamespace": "gamersgrotto.custom_editor_styles.editor",
+    "references": [],
     "includePlatforms": [
         "Editor"
     ],
