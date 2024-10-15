@@ -32,6 +32,13 @@ namespace GamersGrotto.Runtime.Modules.DamageSystem {
 
         [Button]
         public void TestAttackDebugTarget() {
+            
+            if(!Application.isPlaying)
+            {
+                Debug.LogWarning("Enter Play Mode to Test Attacking");
+                return;
+            }
+            
             var damage = damageSO.Damage;
             
             //Apply crit if applicable
