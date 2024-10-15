@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace GamersGrotto.LocalCaching
+namespace GamersGrotto.ScriptablePreferences.PreferenceTypes
 {
-    [CreateAssetMenu(menuName = "GamersGrotto/LocalCache/Boolean LocalCache", fileName = "BoolLocalCache")]
-    public class BoolLocalCache : LocalCache
+    [CreateAssetMenu(menuName = "GamersGrotto/Scriptable Preferences/Boolean ScriptablePreference", fileName = "BoolScriptablePreference")]
+    public class BoolScriptablePreference : ScriptablePreference
     {
         [SerializeField] private bool defaultValue;
 

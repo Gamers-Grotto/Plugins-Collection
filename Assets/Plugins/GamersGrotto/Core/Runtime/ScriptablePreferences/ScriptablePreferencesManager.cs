@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace GamersGrotto.LocalCaching
+namespace GamersGrotto.ScriptablePreferences
 {
-    public class LocalCacheManager : Singleton<LocalCacheManager>
+    public class ScriptablePreferencesManager : Singleton<ScriptablePreferencesManager>
     {
-        public List<LocalCache> caches;
+        public List<ScriptablePreference> preferences;
         
         protected override void Awake()
         {
@@ -20,15 +20,15 @@ namespace GamersGrotto.LocalCaching
         [Button]
         public void SaveAll()
         {
-            foreach (var cache in caches)
-                cache.Save();
+            foreach (var pref in preferences)
+                pref.Save();
         }
         
         [Button]
         public void LoadAll()
         {
-            foreach (var cache in caches)
-                cache.Load();
+            foreach (var pref in preferences)
+                pref.Load();
         }
     }
 }

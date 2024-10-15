@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace GamersGrotto.LocalCaching
+namespace GamersGrotto.ScriptablePreferences.PreferenceTypes
 {
-    [CreateAssetMenu(menuName = "GamersGrotto/LocalCache/Vector2 LocalCache", fileName = "Vector2LocalCache")]
-    public class Vector2LocalCache : LocalCache
+    [CreateAssetMenu(menuName = "GamersGrotto/Scriptable Preferences/Vector2 ScriptablePreference", fileName = "Vector2ScriptablePreference")]
+    public class Vector2ScriptablePreference : ScriptablePreference
     {
         [SerializeField] private Vector2 defaultValue;
 

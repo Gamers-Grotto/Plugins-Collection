@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace GamersGrotto.LocalCaching
+namespace GamersGrotto.ScriptablePreferences
 {
-    public abstract class LocalCache : ScriptableObject
+    public abstract class ScriptablePreference : ScriptableObject
     {
         [field: SerializeField] public string Key { get; private set; }
 

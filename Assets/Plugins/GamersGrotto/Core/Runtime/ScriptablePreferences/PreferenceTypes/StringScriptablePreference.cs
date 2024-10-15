@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace GamersGrotto.LocalCaching
+namespace GamersGrotto.ScriptablePreferences.PreferenceTypes
 {
-    [CreateAssetMenu(menuName = "GamersGrotto/LocalCache/String LocalCache", fileName = "StringLocalCache")]
-    public class StringLocalCache : LocalCache
+    [CreateAssetMenu(menuName = "GamersGrotto/Scriptable Preferences/String ScriptablePreference", fileName = "StringScriptablePreference")]
+    public class StringScriptablePreference : ScriptablePreference
     {
         [SerializeField] private string defaultValue;
 
