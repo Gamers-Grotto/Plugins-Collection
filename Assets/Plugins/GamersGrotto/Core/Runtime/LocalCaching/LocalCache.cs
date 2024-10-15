@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace GamersGrotto.Modules.Settings_System
+namespace GamersGrotto.LocalCaching
 {
-    public abstract class Setting : ScriptableObject
+    public abstract class LocalCache : ScriptableObject
     {
         [field: SerializeField] public string Key { get; private set; }
 
