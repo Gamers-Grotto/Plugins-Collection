@@ -23,3 +23,4 @@ MonoBehaviour:
   - Assets/Plugins/GamersGrotto/Modules/Save Game System
   - Assets/Plugins/GamersGrotto/Modules/UI System
   - Assets/Plugins/GamersGrotto/Modules/Unity Callbacks
+  - Assets/Plugins/GamersGrotto/Internal Plugins/Custom Editor Styles

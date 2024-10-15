@@ -16,3 +16,4 @@ MonoBehaviour:
   pluginFolderPaths:
   - Assets/Plugins/GamersGrotto/Internal Plugins/Package Exporter
   - Assets/Plugins/GamersGrotto/Internal Plugins/Plugin Creator
+  - Assets/Plugins/GamersGrotto/Internal Plugins/Custom Editor Styles
