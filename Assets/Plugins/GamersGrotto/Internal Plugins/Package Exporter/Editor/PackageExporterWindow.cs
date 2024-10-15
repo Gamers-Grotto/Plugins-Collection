@@ -1,92 +1,132 @@
 ﻿#if UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Editor {
     public class PackageExporterWindow : EditorWindow {
         private string packagePath = "Assets/Builds/";
-        private string packageName = "ExportedPackage";
         private ExportPackageOptions exportOptions = ExportPackageOptions.Default;
-
-        public PluginCollection pluginCollection;
+        public List<PluginCollection> pluginCollections;
+        ReorderableList reorderablePluginCollection;
+        const string createPluginCollectionPath = "Assets/Plugins/GamersGrotto/Internal Plugins/Package Exporter/Editor/Plugin Collections";
 
         [MenuItem("GamersGrotto/Package Exporter Window")]
         public static void ShowWindow() {
             GetWindow<PackageExporterWindow>("Package Exporter");
         }
 
+        private void OnEnable() {
+            pluginCollections ??= new List<PluginCollection>();
+            reorderablePluginCollection = CreateReorderableList(pluginCollections, "Plugin Collections");
+        }
+
         private void OnGUI() {
             GUILayout.Label("Package Exporter", EditorStyles.boldLabel);
+            reorderablePluginCollection.DoLayoutList();
 
-            pluginCollection =
-                EditorGUILayout.ObjectField("Package Collection", pluginCollection, typeof(PluginCollection), false)
-                    as PluginCollection;
-
-            if (pluginCollection == null)
-            {
-                if (GUILayout.Button("Create New Plugin Collection"))
-                    CreateNewPluginCollection();
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Add All Plugin Collections")) {
+                FindAllPluginCollections();
             }
-            
-            GUILayout.Space(10);
+            if (GUILayout.Button("Create New Plugin Collection")) {
+                CreateNewPluginCollection();
+            }
+            if (GUILayout.Button("Clear Plugin Collections")) {
+                pluginCollections.Clear();
+            }
+            GUILayout.EndHorizontal();
 
+            GUILayout.Space(10);
             SelectSaveDestination();
-
-            GUILayout.Space(10);
-            
-            SelectPackageName();
-            
             GUILayout.Space(10);
 
             GUILayout.Label("Export Package Options:", EditorStyles.label);
             exportOptions = (ExportPackageOptions)EditorGUILayout.EnumPopup("Package Options", exportOptions);
 
-            if (GUILayout.Button("Export Package"))
-            {
-                if(pluginCollection != null)
-                    PackageExporter.ExportPackage(pluginCollection.pluginFolderPaths, packagePath, packageName,exportOptions);
-                else 
-                    Debug.LogError("No Package Collection selected");
+            var buttonText = pluginCollections.Count > 1 ? "Export Packages" : "Export Package";
+            if (GUILayout.Button(buttonText, new GUIStyle(GUI.skin.button) { fontSize = 16, fontStyle = FontStyle.Bold, fixedHeight = 50 })) {
+                ExportSelectedPackages();
             }
+        }
+
+        private void FindAllPluginCollections() {
+            var guids = AssetDatabase.FindAssets("t:PluginCollection");
+            foreach (var guid in guids) {
+                var path = AssetDatabase.GUIDToAssetPath(guid);
+                var pluginCollection = AssetDatabase.LoadAssetAtPath<PluginCollection>(path);
+                if (pluginCollection != null) {
+                    AddPluginCollection(pluginCollection);
+                }
+            }
+
+            EditorUtility.FocusProjectWindow();
+            if (pluginCollections.Count > 0) {
+                Selection.activeObject = pluginCollections[^1];
+            }
+        }
+
+        private void AddPluginCollection(PluginCollection pluginCollection) {
+            if (pluginCollections.Contains(pluginCollection)) {
+                Debug.LogWarning($"Plugin Collection {pluginCollection.packageName} already added to the list. Not adding again.");
+                return;
+            }
+            pluginCollections.Add(pluginCollection);
         }
 
         private void SelectSaveDestination() {
             GUILayout.Label("Output Package Path:", EditorStyles.label);
-
             packagePath = EditorGUILayout.TextField(packagePath);
 
             if (GUILayout.Button("Choose Package Destination")) {
                 var path = EditorUtility.SaveFilePanel("Save Unity Package", "Assets/", "NewPackage", "unitypackage");
                 if (!string.IsNullOrEmpty(path)) {
-                    packagePath = path;
-
-                    if (path.StartsWith(Application.dataPath))
-                        packagePath = "Assets" + path.Substring(Application.dataPath.Length);
+                    packagePath = path.StartsWith(Application.dataPath) ? "Assets" + path.Substring(Application.dataPath.Length) : path;
                 }
             }
         }
-        
-        private void SelectPackageName() {
-            GUILayout.Label("Output Package Name:", EditorStyles.label);
 
-            packageName = EditorGUILayout.TextField(packageName);
+        private ReorderableList CreateReorderableList(List<PluginCollection> list, string title) {
+            return new ReorderableList(list, typeof(PluginCollection), true, true, true, true) {
+                drawHeaderCallback = rect => EditorGUI.LabelField(rect, title),
+                drawElementCallback = (rect, index, isActive, isFocused) => {
+                    var element = list[index];
+                    var fieldRect = new Rect(rect.x, rect.y, rect.width - 60, EditorGUIUtility.singleLineHeight);
+                    var buttonRect = new Rect(rect.x + rect.width - 55, rect.y, 50, EditorGUIUtility.singleLineHeight);
+
+                    list[index] = (PluginCollection)EditorGUI.ObjectField(fieldRect, element, typeof(PluginCollection), false);
+
+                    if (GUI.Button(buttonRect, "Export")) {
+                        PackageExporter.ExportPackage(element.pluginFolderPaths, packagePath, element.packageName, exportOptions);
+                    }
+                },
+                onAddCallback = reorderableList => list.Add(null)
+            };
         }
-        
-        private void CreateNewPluginCollection()
-        {
-            var path = EditorUtility.SaveFilePanelInProject("Save New Plugin Collection", "NewPluginCollection", "asset", "Please enter a file name to save the package collection");
 
-            if (string.IsNullOrEmpty(path)) 
-                return;
-            
+        private void CreateNewPluginCollection() {
+            var path = EditorUtility.SaveFilePanelInProject("Save New Plugin Collection", "NewPluginCollection", "asset", "Please enter a file name to save the package collection", createPluginCollectionPath);
+            if (string.IsNullOrEmpty(path)) return;
+
             var newPluginCollection = CreateInstance<PluginCollection>();
             AssetDatabase.CreateAsset(newPluginCollection, path);
             AssetDatabase.SaveAssets();
 
-            pluginCollection = AssetDatabase.LoadAssetAtPath<PluginCollection>(path);
+            pluginCollections.Add(AssetDatabase.LoadAssetAtPath<PluginCollection>(path));
             EditorUtility.FocusProjectWindow();
-            Selection.activeObject = pluginCollection;
+            Selection.activeObject = pluginCollections[^1];
+        }
+
+        private void ExportSelectedPackages() {
+            if (pluginCollections == null) {
+                Debug.LogError("No Package Collection selected");
+                return;
+            }
+
+            foreach (var collection in pluginCollections) {
+                PackageExporter.ExportPackage(collection.pluginFolderPaths, packagePath, collection.packageName, exportOptions);
+            }
         }
     }
 }
