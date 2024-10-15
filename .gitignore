@@ -563,3 +563,5 @@ Assets/Wwise/Editor/ProjectData/AkWwiseProjectData.asset*
 ## --------------- ##
 ## End WWise Stuff ##
 ## --------------- ##
+Assets/Builds
+Assets/Builds.meta
