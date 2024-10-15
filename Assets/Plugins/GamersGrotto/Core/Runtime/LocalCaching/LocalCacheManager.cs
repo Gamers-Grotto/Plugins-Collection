@@ -4,7 +4,7 @@ namespace GamersGrotto.LocalCaching
 {
     public class LocalCacheManager : Singleton<LocalCacheManager>
     {
-        public List<LocalCache> cache;
+        public List<LocalCache> caches;
         
         protected override void Awake()
         {
@@ -20,15 +20,15 @@ namespace GamersGrotto.LocalCaching
         [Button]
         public void SaveAll()
         {
-            foreach (var setting in cache)
-                setting.Save();
+            foreach (var cache in caches)
+                cache.Save();
         }
         
         [Button]
         public void LoadAll()
         {
-            foreach (var setting in cache)
-                setting.Load();
+            foreach (var cache in caches)
+                cache.Load();
         }
     }
 }
