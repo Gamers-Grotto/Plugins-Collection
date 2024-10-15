@@ -55,6 +55,7 @@ public class AudioSettings : ScriptableObject
     {
         PlayerPrefs.SetFloat(key, volume);
         PlayerPrefs.Save();
+        
     }
     
     private void LoadVolumes()
