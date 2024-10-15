@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.Windows;
 
 namespace Editor {
     public class PackageExporterWindow : EditorWindow {
         private string packagePath = "Assets/Builds/";
-        private ExportPackageOptions exportOptions = ExportPackageOptions.Default;
+        private ExportPackageOptions exportOptions = ExportPackageOptions.Recurse;
         public List<PluginCollection> pluginCollections;
         ReorderableList reorderablePluginCollection;
         const string createPluginCollectionPath = "Assets/Plugins/GamersGrotto/Internal Plugins/Package Exporter/Editor/Plugin Collections";
+
+        private string exportOptionsTooltip;
 
         [MenuItem("GamersGrotto/Package Exporter Window")]
         public static void ShowWindow() {
@@ -43,11 +46,30 @@ namespace Editor {
             GUILayout.Space(10);
 
             GUILayout.Label("Export Package Options:", EditorStyles.label);
+            exportOptionsTooltip = GetExportOptionsTooltip(exportOptions);
+            EditorGUILayout.HelpBox(exportOptionsTooltip, MessageType.Info);
             exportOptions = (ExportPackageOptions)EditorGUILayout.EnumPopup("Package Options", exportOptions);
 
             var buttonText = pluginCollections.Count > 1 ? "Export Packages" : "Export Package";
             if (GUILayout.Button(buttonText, new GUIStyle(GUI.skin.button) { fontSize = 16, fontStyle = FontStyle.Bold, fixedHeight = 50 })) {
                 ExportSelectedPackages();
+            }
+        }
+
+        private string GetExportOptionsTooltip(ExportPackageOptions options) {
+            switch (options) {
+                case ExportPackageOptions.Default:
+                    return "Will not include dependencies or subdirectories nor include Library assets unless specifically included in the asset list.";
+                case ExportPackageOptions.Interactive:
+                    return "The export operation will be run asynchronously and reveal the exported package file in a file browser window after the export is finished.";
+                case ExportPackageOptions.Recurse:
+                    return "Will recurse through any subdirectories listed and include all assets inside them.";
+                case ExportPackageOptions.IncludeDependencies:
+                    return "In addition to the assets paths listed, all dependent assets will be included as well.";
+                case ExportPackageOptions.IncludeLibraryAssets:
+                    return "The exported package will include all library assets, i.e., the project settings located in the Library folder of the project.";
+                default:
+                    return "Unknown option.";
             }
         }
 
