@@ -25,7 +25,7 @@
         ReorderableList testsRuntimeReferencesList;
         bool showReferences = true;
         bool isExportPackage = false;
-
+        bool advancedPackageControl = false;
         public List<PluginCollection> pluginCollections;
 
         private ExportPackageOptions exportOptions = ExportPackageOptions.Recurse;
@@ -45,11 +45,33 @@
             DrawPluginDetails();
             if (isExportPackage) {
                 DrawExportOptions();
+                DrawAdvancedPackageControl();
                 reorderablePluginCollection.DoLayoutList();
+                if (advancedPackageControl) {
+                    DrawCreatePluginButton();
+                    DrawExportButton();
+                    DrawMoveBackButton();
+                }
+                
                 DrawCreateExportAndMoveButton();
             } else {
                 DisplayReferences();
                 DrawCreatePluginButton();
+            }
+        }
+
+        void DrawAdvancedPackageControl() {
+            advancedPackageControl = EditorGUILayout.Toggle("Advanced Options", advancedPackageControl);
+        }
+
+        void DrawMoveBackButton() {
+            if (GUILayout.Button("Move Back Plugins", CustomEditorStyles.LargeButton)) {
+                MovePluginsBack();
+            }
+        }
+        void DrawExportButton() {
+            if (GUILayout.Button("Export Package", CustomEditorStyles.LargeButton)) {
+                ExportPackage();
             }
         }
 
