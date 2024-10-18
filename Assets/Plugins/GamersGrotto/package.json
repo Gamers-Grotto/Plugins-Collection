@@ -1,9 +1,24 @@
 {
-  "name": "com.gamersgrotto.pluginscollection",
-  "version": "1.0.0",
-  "displayName": "Gamers Grotto Plugins Collection",
-  "description": "Such description, much wow",
+  "name": "com.gamersgrotto.gamersgrottotoolkit",
+  "version": "0.1.2",
+  "displayName": "GamersGrottoToolkit",
+  "description": "Description of the package, what it does and how to use it.",
+  "unity": "6000.0",
+  "unityRelease": "20f1",
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.2.1"
+  },
+  "keywords": [
+    "gamersgrotto",
+    "toolkit"
+  ],
+  "author": {
+    "name": "GamersGrotto",
+    "email": "gamersgrottodevelopers@gmail.com",
+    "url": null
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gamers-Grotto/GamersGrottoToolkit.git"
   }
 }
