@@ -74,7 +74,11 @@ using UnityEngine;
 
             string labelName = script.GetType().Name;
             string splitLabelWords = Regex.Replace(labelName, @"(?<!^)(?=[A-Z])", " ");
-            GUIStyle labelStyle = new GUIStyle(CustomEditorStyles.HeaderLabel);
+            GUIStyle labelStyle = new GUIStyle(EditorStyles.label)
+            {
+                alignment = TextAnchor.MiddleCenter,
+                fontStyle = FontStyle.Bold
+            };
             GUILayout.Label(splitLabelWords, labelStyle);
 
             GUILayout.EndVertical();
@@ -83,7 +87,7 @@ using UnityEngine;
         private void DrawToggleButton()
         {
             string toggleButtonText = isMethodListOpen ? "Close" : "Open";
-            GUIStyle buttonStyle = new GUIStyle(CustomEditorStyles.MediumButton);
+            GUIStyle buttonStyle = new GUIStyle(EditorStyles.toolbarButton);
 
             if (GUILayout.Button(toggleButtonText, buttonStyle))
             {
@@ -110,9 +114,10 @@ using UnityEngine;
             string splitButtonName = Regex.Replace(buttonName, @"(?<!^)(?=[A-Z])", " ");
 
             float buttonWidth = EditorGUIUtility.currentViewWidth - ButtonPadding;
-            GUIStyle buttonStyle = new GUIStyle(CustomEditorStyles.MediumButton)
+            GUIStyle buttonStyle = new GUIStyle(EditorStyles.toolbarButton)
             {
                 fixedWidth =    buttonWidth
+                
             };
 
             if (GUILayout.Button(splitButtonName, buttonStyle))
