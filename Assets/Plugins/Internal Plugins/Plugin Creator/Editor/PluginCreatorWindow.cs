@@ -15,7 +15,7 @@
 
         bool includeEditor, includeRuntime, includeTests;
         string version = "0.0.1";
-        string outputDirectory = "Assets/Plugins/GamersGrotto/Modules/";
+        string outputDirectory = "Assets/Plugins/GamersGrottoToolkit/Modules/";
         string combinedOutputDirectoryAndName => Path.Combine(outputDirectory, pluginName);
 
         ReorderableList reorderablePluginCollection;
