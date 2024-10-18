@@ -26,6 +26,13 @@
         bool showReferences = true;
         bool isExportPackage = false;
         bool advancedPackageControl = false;
+
+        bool includeReadme = true;
+        bool includeLicense = true;
+        bool includeThirdPartyNotices;
+        bool includeChangeLog;
+        bool includeDocumentation;
+        
         public List<PluginCollection> pluginCollections;
 
         private ExportPackageOptions exportOptions = ExportPackageOptions.Recurse;
@@ -43,6 +50,10 @@
         void OnGUI() {
             DrawHeader();
             DrawPluginDetails();
+            DrawFileOptions();
+            
+            EditorGUILayout.Separator();
+            
             if (isExportPackage) {
                 DrawExportOptions();
                 DrawAdvancedPackageControl();
@@ -58,6 +69,15 @@
                 DisplayReferences();
                 DrawCreatePluginButton();
             }
+        }
+
+        void DrawFileOptions() {
+            if (isExportPackage) return;
+            includeReadme = EditorGUILayout.Toggle("Include Readme", includeReadme);
+            includeLicense = EditorGUILayout.Toggle("Include License", includeLicense);
+            includeThirdPartyNotices = EditorGUILayout.Toggle("Include Third Party Notices", includeThirdPartyNotices);
+            includeChangeLog = EditorGUILayout.Toggle("Include Change Log", includeChangeLog);
+            includeDocumentation = EditorGUILayout.Toggle("Include Documentation", includeDocumentation);
         }
 
         void DrawAdvancedPackageControl() {
@@ -265,11 +285,11 @@
             }
 
             CreateFile(defaultPackage, fullPath);
-            CreateFile(defaultReadme, fullPath);
-            CreateFile(defaultChangeLog, fullPath);
-            CreateFile(defaultLicense, fullPath);
-            CreateFile(defaultThirdPartyNotices, fullPath);
-            CreateFile(new Documentation(), fullPath);
+            if(includeReadme)CreateFile(defaultReadme, fullPath);
+            if(includeChangeLog)CreateFile(defaultChangeLog, fullPath);
+            if(includeLicense)CreateFile(defaultLicense, fullPath);
+            if(includeThirdPartyNotices)CreateFile(defaultThirdPartyNotices, fullPath);
+            if(includeDocumentation)CreateFile(new Documentation(), fullPath);
         }
 
         void CreateFile<T>(T file, string path) where T : IFile {
