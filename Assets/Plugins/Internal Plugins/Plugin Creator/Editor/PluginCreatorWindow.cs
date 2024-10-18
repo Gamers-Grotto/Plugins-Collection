@@ -87,12 +87,12 @@
         void InitializeReorderableLists() {
             reorderablePluginCollection = CreateReorderableList(pluginCollections, "Plugin Collections");
 
-            editorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrotto/Core/Editor/gamersgrotto.core.editor.asmdef"));
-            editorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrotto/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
-            runtimeReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrotto/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
-            testsEditorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrotto/Core/Editor/gamersgrotto.core.editor.asmdef"));
-            testsEditorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrotto/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
-            testsRuntimeReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrotto/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
+            editorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Editor/gamersgrotto.core.editor.asmdef"));
+            editorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
+            runtimeReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
+            testsEditorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Editor/gamersgrotto.core.editor.asmdef"));
+            testsEditorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
+            testsRuntimeReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
 
             editorReferencesList = CreateReorderableList(editorReferences, "Editor References");
             runtimeReferencesList = CreateReorderableList(runtimeReferences, "Runtime References");
@@ -335,7 +335,7 @@
         }
 
         void SetOutputDirectory() {
-            var folder = EditorUtility.OpenFolderPanel("Select Folder", "Assets/Plugins/GamersGrotto/", "");
+            var folder = EditorUtility.OpenFolderPanel("Select Folder", "Assets/Plugins/GamersGrottoToolkit/", "");
             if (string.IsNullOrEmpty(folder))
                 return;
 
