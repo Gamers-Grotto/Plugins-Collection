@@ -3,7 +3,7 @@ using UnityEditor;
 
 
 public class BrokerTemplater : BaseTemplater {
-    private const string TEMPLATE_PATHS = "Assets/Plugins/GamersGrotto/Modules/Broker/Editor/Templates/";
+    private const string TEMPLATE_PATHS = "Assets/Plugins/GamersGrottoToolkit/Modules/Broker/Editor/Templates/";
     private const string ASSET_PATH_SUFFIX = "Broker/";
 
     [MenuItem(ASSET_PATH + ASSET_PATH_SUFFIX + "Empty Message", priority = 30)]
