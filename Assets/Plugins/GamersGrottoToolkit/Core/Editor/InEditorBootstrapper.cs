@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Plugins.GamersGrotto.Editor
+namespace GamersGrotto.Core.Editor
 {
     public static class InEditorBootstrapper
     {

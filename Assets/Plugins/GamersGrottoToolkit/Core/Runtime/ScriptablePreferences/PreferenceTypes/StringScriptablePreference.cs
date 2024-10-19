@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GamersGrotto.ScriptablePreferences.PreferenceTypes
+namespace GamersGrotto.Core.ScriptablePreferences.PreferenceTypes
 {
     [CreateAssetMenu(menuName = "GamersGrotto/Scriptable Preferences/String ScriptablePreference", fileName = "StringScriptablePreference")]
     public class StringScriptablePreference : ScriptablePreference

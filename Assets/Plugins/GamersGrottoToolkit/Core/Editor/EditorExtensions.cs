@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace GamersGrotto.Editor
+namespace GamersGrotto.Core.Editor
 {
     public static class EditorExtensions
     {

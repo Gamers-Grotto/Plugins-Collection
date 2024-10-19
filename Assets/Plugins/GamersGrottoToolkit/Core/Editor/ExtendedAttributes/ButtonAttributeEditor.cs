@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using GamersGrotto.Core.Extended_Attributes;
 using UnityEditor;
 using UnityEngine;
 
+namespace GamersGrotto.Core.Editor.ExtendedAttributes {
     [CustomEditor(typeof(object), editorForChildClasses: true), CanEditMultipleObjects]
     public class ButtonAttributeEditor : UnityEditor.Editor
     {
@@ -130,5 +132,6 @@ using UnityEngine;
             GUILayout.EndHorizontal();
         }
     }
+}
 
 #endif

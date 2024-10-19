@@ -1,5 +1,7 @@
-﻿    public interface ICommand
-    {
-        void Execute();
-        void Undo();
+﻿    namespace GamersGrotto.Core {
+        public interface ICommand
+        {
+            void Execute();
+            void Undo();
+        }
     }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+namespace GamersGrotto.Core {
     public static class Extensions
     {
         //Vector2
@@ -60,3 +61,4 @@
 
         public static string Italic(this string text) => $"<i>{text}</i>";
     }
+}

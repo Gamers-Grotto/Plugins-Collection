@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using GamersGrotto.Core.Extended_Attributes;
 
-namespace GamersGrotto.ScriptablePreferences
+namespace GamersGrotto.Core.ScriptablePreferences
 {
     public class ScriptablePreferencesManager : Singleton<ScriptablePreferencesManager>
     {

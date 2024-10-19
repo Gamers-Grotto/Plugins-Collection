@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GamersGrotto.Core.Extended_Attributes;
 using GamersGrotto.Damage_System.Modifiers;
 using UnityEngine;
 

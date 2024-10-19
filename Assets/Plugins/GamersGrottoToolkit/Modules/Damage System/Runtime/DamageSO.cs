@@ -1,4 +1,4 @@
-﻿using Attributes;
+﻿using GamersGrotto.Core.Extended_Attributes;
 using UnityEngine;
 
 namespace GamersGrotto.Damage_System {

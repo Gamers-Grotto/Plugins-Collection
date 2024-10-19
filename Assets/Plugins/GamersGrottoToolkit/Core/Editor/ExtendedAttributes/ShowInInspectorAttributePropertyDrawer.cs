@@ -1,8 +1,8 @@
-﻿using UnityEditor;
+﻿using GamersGrotto.Core.Extended_Attributes;
+using UnityEditor;
 using UnityEngine;
-using GamersGrotto.ExtendedAttributes;
 
-namespace GamersGrotto.Editor.ExtendedAttributes
+namespace GamersGrotto.Core.Editor.ExtendedAttributes
 {
     [CustomPropertyDrawer(typeof(ShowInInspectorAttribute))]
     public class ShowInInspectorAttributePropertyDrawer : PropertyDrawer

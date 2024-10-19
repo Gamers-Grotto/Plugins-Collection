@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GamersGrotto.Core;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace GamersGrotto.Unity_Callbacks.CollisionTriggers

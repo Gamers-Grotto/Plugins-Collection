@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GamersGrotto.ScriptablePreferences
+namespace GamersGrotto.Core.ScriptablePreferences
 {
     public abstract class ScriptablePreference : ScriptableObject
     {

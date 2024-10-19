@@ -1,4 +1,7 @@
 using System;
 using UnityEngine;
-[AttributeUsage(AttributeTargets.Method)]
-public class ButtonAttribute : PropertyAttribute{}
+
+namespace GamersGrotto.Core.Extended_Attributes {
+    [AttributeUsage(AttributeTargets.Method)]
+    public class ButtonAttribute : PropertyAttribute{}
+}

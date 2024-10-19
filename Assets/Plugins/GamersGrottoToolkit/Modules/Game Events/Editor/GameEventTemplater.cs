@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 
+using GamersGrotto.Core.Editor;
 using UnityEditor;
 
 namespace GamersGrotto.Game_Events.Editor {
