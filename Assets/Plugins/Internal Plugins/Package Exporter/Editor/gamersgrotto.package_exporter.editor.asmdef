@@ -2,7 +2,7 @@
     "name": "GamersGrotto.Package_Exporter.Editor",
     "rootNamespace": "GamersGrotto.Package_Exporter.Editor",
     "references": [
-        "GUID:7ac65d2cd30c05745930c26fd3ea30d6"
+        "GUID:c1e6df4f4351075408a480ad3811dfb9"
     ],
     "includePlatforms": [
         "Editor"

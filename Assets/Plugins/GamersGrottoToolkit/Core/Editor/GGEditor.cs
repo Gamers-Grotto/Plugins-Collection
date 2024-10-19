@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using GamersGrotto.Custom_Editor_Styles.Editor;
+using UnityEditor;
 using UnityEngine;
 
 namespace GamersGrotto.Core.Editor
@@ -34,7 +35,7 @@ namespace GamersGrotto.Core.Editor
                 using (new GUILayout.VerticalScope())
                 {
                     GUILayout.FlexibleSpace();
-                    GUILayout.Label("Gamers Grotto");
+                    GUILayout.Label("Gamers Grotto",CustomEditorStyles.SubHeaderLabel);
                     GUILayout.FlexibleSpace();
                 }
             }

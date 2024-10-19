@@ -29,7 +29,7 @@ namespace GamersGrotto.Plugin_Creator.Editor.IFiles {
                 path += ".Tests";
             }
 
-            FileName = $"{path}{pathEnding}".ToLower();
+            FileName = $"{path}{pathEnding}";
             name = path;
             rootNamespace = path;
 
