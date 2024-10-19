@@ -1,5 +1,5 @@
 {
-    "name": "gamersgrotto.game_events.editor",
+    "name": "GamersGrotto.Game_Events.Editor",
     "rootNamespace": "GamersGrotto.Game_Events.Editor",
     "references": [
         "GUID:c1e6df4f4351075408a480ad3811dfb9",

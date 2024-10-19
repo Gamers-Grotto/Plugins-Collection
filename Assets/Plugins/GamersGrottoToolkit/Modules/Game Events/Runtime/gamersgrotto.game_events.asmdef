@@ -1,5 +1,5 @@
 {
-    "name": "gamersgrotto.game_events",
+    "name": "GamersGrotto.Game_Events",
     "rootNamespace": "GamersGrotto.Game_Events",
     "references": [
         "GUID:7a2a6876f0a934c4ba904bb34b0ea728"

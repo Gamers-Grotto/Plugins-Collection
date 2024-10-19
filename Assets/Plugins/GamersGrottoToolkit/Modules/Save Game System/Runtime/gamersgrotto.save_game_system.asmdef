@@ -1,5 +1,5 @@
 {
-    "name": "gamersgrotto.save_game_system",
+    "name": "GamersGrotto.Save_Game_System",
     "rootNamespace": "GamersGrotto.Save_Game_System",
     "references": [
         "GUID:7a2a6876f0a934c4ba904bb34b0ea728"

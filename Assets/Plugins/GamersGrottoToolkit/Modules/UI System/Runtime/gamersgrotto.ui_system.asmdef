@@ -1,5 +1,5 @@
 {
-    "name": "gamersgrotto.ui_system",
+    "name": "GamersGrotto.Ui_System",
     "rootNamespace": "GamersGrotto.Ui_System",
     "references": [
         "GUID:7a2a6876f0a934c4ba904bb34b0ea728"
