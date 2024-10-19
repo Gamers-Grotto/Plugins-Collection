@@ -12,12 +12,11 @@ namespace GamersGrotto.Plugin_Creator.Editor.IFiles {
 
         public AssemblyDefinition(string companyName, string packageName, bool testAssembly, bool editorAssembly,
             List<AssemblyDefinitionAsset> references) {
-            
             var path = "";
 
-            path = $"{companyName}.{packageName}".ToLower();
+            path = $"{companyName}.{packageName}";
             path = path.Replace("-", "_").Replace(" ", "_");
-         
+
             var pathEnding = ".asmdef";
 
             if (editorAssembly) {
@@ -30,14 +29,10 @@ namespace GamersGrotto.Plugin_Creator.Editor.IFiles {
                 path += ".Tests";
             }
 
-            if (!testAssembly && !editorAssembly) {
-                path += ".Runtime";
-            }
-
             FileName = $"{path}{pathEnding}".ToLower();
-            name = path.ToLower();
-            rootNamespace = path.ToLower();
-            ;
+            name = path;
+            rootNamespace = path;
+
             this.references = references.ConvertAll(x => x.name).ToArray();
         }
 

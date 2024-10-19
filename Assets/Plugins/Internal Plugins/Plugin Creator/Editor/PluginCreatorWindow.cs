@@ -20,8 +20,9 @@ namespace GamersGrotto.Plugin_Creator.Editor {
         bool includeEditor, includeRuntime, includeTests;
         string version = "0.0.1";
         string outputDirectory = "Assets/Plugins/GamersGrottoToolkit/Modules/";
+        List<string> tags = new List<string>() { "GamersGrotto" };
         string combinedOutputDirectoryAndName => Path.Combine(outputDirectory, pluginName);
-
+        
         ReorderableList reorderablePluginCollection;
         ReorderableList editorReferencesList;
         ReorderableList runtimeReferencesList;
@@ -37,6 +38,8 @@ namespace GamersGrotto.Plugin_Creator.Editor {
         bool includeChangeLog;
         bool includeDocumentation;
         
+        Vector2 scrollPosition;
+
         public List<PluginCollection> pluginCollections;
 
         private ExportPackageOptions exportOptions = ExportPackageOptions.Recurse;
@@ -49,15 +52,18 @@ namespace GamersGrotto.Plugin_Creator.Editor {
         void OnEnable() {
             ResetReferences();
             InitializeReorderableLists();
+            
         }
 
         void OnGUI() {
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
             DrawHeader();
             DrawPluginDetails();
+            DrawTags();
             DrawFileOptions();
-            
+
             EditorGUILayout.Separator();
-            
+
             if (isExportPackage) {
                 DrawExportOptions();
                 DrawAdvancedPackageControl();
@@ -67,12 +73,37 @@ namespace GamersGrotto.Plugin_Creator.Editor {
                     DrawExportButton();
                     DrawMoveBackButton();
                 }
-                
+
                 DrawCreateExportAndMoveButton();
-            } else {
+            }
+            else {
                 DisplayReferences();
                 DrawCreatePluginButton();
             }
+            EditorGUILayout.EndScrollView();
+        }
+
+        void DrawTags() {
+            GUILayout.Label("Tags", CustomEditorStyles.HeaderLabel);
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Add Tag", GUILayout.Width(60));
+            if (GUILayout.Button("+", GUILayout.Width(20))) {
+                tags.Add("");
+            }
+
+            GUILayout.EndHorizontal();
+
+            for (var i = 0; i < tags.Count; i++) {
+                GUILayout.BeginHorizontal();
+                tags[i] = EditorGUILayout.TextField(tags[i]);
+                if (GUILayout.Button("-", GUILayout.Width(20))) {
+                    tags.RemoveAt(i);
+                }
+
+                GUILayout.EndHorizontal();
+            }
+            
+            GUILayout.Space(10);
         }
 
         void DrawFileOptions() {
@@ -93,6 +124,7 @@ namespace GamersGrotto.Plugin_Creator.Editor {
                 MovePluginsBack();
             }
         }
+
         void DrawExportButton() {
             if (GUILayout.Button("Export Package", CustomEditorStyles.LargeButton)) {
                 ExportPackage();
@@ -111,12 +143,16 @@ namespace GamersGrotto.Plugin_Creator.Editor {
         void InitializeReorderableLists() {
             reorderablePluginCollection = CreateReorderableList(pluginCollections, "Plugin Collections");
 
-            editorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Editor/gamersgrotto.core.editor.asmdef"));
-            editorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
-            runtimeReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
-            testsEditorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Editor/gamersgrotto.core.editor.asmdef"));
-            testsEditorReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
-            testsRuntimeReferences.Add(AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>("Assets/Plugins/GamersGrottoToolkit/Core/Runtime/gamersgrotto.core.runtime.asmdef"));
+            var coreEditor = AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>(
+                "Assets/Plugins/GamersGrottoToolkit/Core/Editor/gamersgrotto.core.editor.asmdef");
+            var coreRuntime = AssetDatabase.LoadAssetAtPath<AssemblyDefinitionAsset>(
+                "Assets/Plugins/GamersGrottoToolkit/Core/Runtime/gamersgrotto.core.asmdef");
+            editorReferences.Add(coreEditor);
+            editorReferences.Add(coreRuntime);
+            runtimeReferences.Add(coreRuntime);
+            testsEditorReferences.Add(coreEditor);
+            testsEditorReferences.Add(coreRuntime);
+            testsRuntimeReferences.Add(coreRuntime);
 
             editorReferencesList = CreateReorderableList(editorReferences, "Editor References");
             runtimeReferencesList = CreateReorderableList(runtimeReferences, "Runtime References");
@@ -185,12 +221,16 @@ namespace GamersGrotto.Plugin_Creator.Editor {
                     }
 
                     if (!includeEditor && !includeRuntime) {
-                        EditorGUILayout.HelpBox("Please select at least one of the following: Include Editor, Include Runtime", MessageType.Error);
+                        EditorGUILayout.HelpBox(
+                            "Please select at least one of the following: Include Editor, Include Runtime",
+                            MessageType.Error);
                     }
                 }
 
                 if (!includeEditor && !includeRuntime && !includeTests) {
-                    EditorGUILayout.HelpBox("Please select at least one of the following: Include Editor, Include Runtime", MessageType.Error);
+                    EditorGUILayout.HelpBox(
+                        "Please select at least one of the following: Include Editor, Include Runtime",
+                        MessageType.Error);
                 }
             }
         }
@@ -256,7 +296,8 @@ namespace GamersGrotto.Plugin_Creator.Editor {
                     try {
                         Debug.Log($"Moving folder from {folderPath} to {destinationPath}");
                         Directory.Move(folderPath, destinationPath);
-                    } catch (IOException ex) {
+                    }
+                    catch (IOException ex) {
                         Debug.LogError($"Failed to move folder {folderPath} to {destinationPath}: {ex.Message}");
                     }
                 }
@@ -268,14 +309,16 @@ namespace GamersGrotto.Plugin_Creator.Editor {
             var defaultPackage = new Package(companyName, pluginName, version);
             var defaultReadme = new Readme();
             var defaultChangeLog = new ChangeLog(version, "Initial release");
-            var defaultLicense = new License(new ThirdParty("MIT License", "MIT", "https://opensource.org/licenses/MIT"));
+            var defaultLicense =
+                new License(new ThirdParty("MIT License", "MIT", "https://opensource.org/licenses/MIT"));
             var exampleThirdParty = new ThirdParty();
             var defaultThirdPartyNotices = new ThirdPartyNotices(exampleThirdParty);
 
             var editorAssembly = new AssemblyDefinition(companyName, pluginName, false, true, editorReferences);
             var runtimeAssembly = new AssemblyDefinition(companyName, pluginName, false, false, runtimeReferences);
             var testsAssembly = new AssemblyDefinition(companyName, pluginName, true, false, testsEditorReferences);
-            var testsEditorAssembly = new AssemblyDefinition(companyName, pluginName, true, true, testsRuntimeReferences);
+            var testsEditorAssembly =
+                new AssemblyDefinition(companyName, pluginName, true, true, testsRuntimeReferences);
 
             if (includeEditor && !isExportPackage)
                 CreateFile(editorAssembly, Path.Combine(fullPath, "Editor"));
@@ -289,11 +332,11 @@ namespace GamersGrotto.Plugin_Creator.Editor {
             }
 
             CreateFile(defaultPackage, fullPath);
-            if(includeReadme)CreateFile(defaultReadme, fullPath);
-            if(includeChangeLog)CreateFile(defaultChangeLog, fullPath);
-            if(includeLicense)CreateFile(defaultLicense, fullPath);
-            if(includeThirdPartyNotices)CreateFile(defaultThirdPartyNotices, fullPath);
-            if(includeDocumentation)CreateFile(new Documentation(), fullPath);
+            if (includeReadme) CreateFile(defaultReadme, fullPath);
+            if (includeChangeLog) CreateFile(defaultChangeLog, fullPath);
+            if (includeLicense) CreateFile(defaultLicense, fullPath);
+            if (includeThirdPartyNotices) CreateFile(defaultThirdPartyNotices, fullPath);
+            if (includeDocumentation) CreateFile(new Documentation(), fullPath);
         }
 
         void CreateFile<T>(T file, string path) where T : IFile {
@@ -335,7 +378,8 @@ namespace GamersGrotto.Plugin_Creator.Editor {
                             if (File.Exists(destinationMetaPath)) {
                                 File.Move(destinationMetaPath, metaFilePath);
                             }
-                        } catch (IOException ex) {
+                        }
+                        catch (IOException ex) {
                             Debug.LogError($"Failed to move folder {destinationPath} to {folderPath}: {ex.Message}");
                         }
                     }
@@ -366,8 +410,10 @@ namespace GamersGrotto.Plugin_Creator.Editor {
             if (folder.StartsWith(Application.dataPath)) {
                 folder = "Assets" + folder.Substring(Application.dataPath.Length);
                 outputDirectory = folder;
-            } else {
-                Debug.LogError("Selected folder is outside the project. Please select a folder within the 'Assets' folder.");
+            }
+            else {
+                Debug.LogError(
+                    "Selected folder is outside the project. Please select a folder within the 'Assets' folder.");
             }
         }
 
@@ -394,7 +440,8 @@ namespace GamersGrotto.Plugin_Creator.Editor {
                     var fieldRect = new Rect(rect.x, rect.y, rect.width - 60, EditorGUIUtility.singleLineHeight);
                     var buttonRect = new Rect(rect.x + rect.width - 55, rect.y, 50, EditorGUIUtility.singleLineHeight);
 
-                    list[index] = (PluginCollection)EditorGUI.ObjectField(fieldRect, element, typeof(PluginCollection), false);
+                    list[index] =
+                        (PluginCollection)EditorGUI.ObjectField(fieldRect, element, typeof(PluginCollection), false);
                 },
                 onAddCallback = reorderableList => list.Add(null)
             };
@@ -403,15 +450,18 @@ namespace GamersGrotto.Plugin_Creator.Editor {
         private string GetExportOptionsTooltip(ExportPackageOptions options) {
             switch (options) {
                 case ExportPackageOptions.Default:
-                    return "Will not include dependencies or subdirectories nor include Library assets unless specifically included in the asset list.";
+                    return
+                        "Will not include dependencies or subdirectories nor include Library assets unless specifically included in the asset list.";
                 case ExportPackageOptions.Interactive:
-                    return "The export operation will be run asynchronously and reveal the exported package file in a file browser window after the export is finished.";
+                    return
+                        "The export operation will be run asynchronously and reveal the exported package file in a file browser window after the export is finished.";
                 case ExportPackageOptions.Recurse:
                     return "Will recurse through any subdirectories listed and include all assets inside them.";
                 case ExportPackageOptions.IncludeDependencies:
                     return "In addition to the assets paths listed, all dependent assets will be included as well.";
                 case ExportPackageOptions.IncludeLibraryAssets:
-                    return "The exported package will include all library assets, i.e., the project settings located in the Library folder of the project.";
+                    return
+                        "The exported package will include all library assets, i.e., the project settings located in the Library folder of the project.";
                 default:
                     return "Unknown option.";
             }

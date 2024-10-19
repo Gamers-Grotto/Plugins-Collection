@@ -6,7 +6,6 @@ namespace GamersGrotto.Plugin_Creator.Editor.IFiles {
     public class Package : IFile {
         [JsonIgnore] public string FileName { get; set; } = "package.json";
 
-
         public string name { get; set; }
         public string version { get; set; }
         public string displayName { get; set; }
@@ -19,27 +18,27 @@ namespace GamersGrotto.Plugin_Creator.Editor.IFiles {
         public Dictionary<string, string> dependencies { get; set; }
         public List<string> keywords { get; set; }
         public Author author { get; set; }
+        public Repository repository { get; set; }
 
-        public Package(string companyName, string packageName, string version) {
+        public Package(string companyName, string packageName, string version, List<string> keywords = null) {
             this.version = version;
             this.displayName = packageName;
-            name = $"com.{companyName}.{packageName.ToLower().Replace(" ", "-")}";
+            name = $"{companyName}.{packageName}".ToLower().Replace(" ", "-"); //Important to have the name in lowercase
             description = "Description of the package, what it does and how to use it.";
             unity = "6000.0";
             unityRelease = "20f1";
-            documentationUrl = "https://example.com/";
-            changelogUrl = "https://example.com/changelog.html";
-            licensesUrl = "https://example.com/licensing.html";
-            dependencies = new Dictionary<string, string> {
-                //"com.partisanprogrammer.script-template-creator", "1.0.0"}
-                // { "com.[company-name].some-package", "1.0.0" },
-                // { "com.[company-name].other-package", "2.0.0" }
-            };
-            keywords = new List<string> { "keyword1", "keyword2", "keyword3" };
+            //documentationUrl = "https://example.com/";
+            //changelogUrl = "https://example.com/changelog.html";
+            //licensesUrl = "https://example.com/licensing.html";
+            dependencies = new Dictionary<string, string> {};
+            this.keywords =keywords;
             author = new Author {
                 name = "GamersGrotto",
-                // email = "",
-                //  url = "https://example.com/"
+                email = "gamersgrottodevelopers@gmail.com",
+            };
+            repository = new Repository {
+                type = "git",
+                url = "https://github.com/Gamers-Grotto/GamersGrottoToolkit.git"
             };
         }
 
