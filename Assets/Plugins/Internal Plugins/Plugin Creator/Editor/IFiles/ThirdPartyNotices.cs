@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using GamersGrotto.Plugin_Creator.Editor.IFiles.Extras;
 using Newtonsoft.Json;
 
-namespace Editor.PluginCreator {
+namespace GamersGrotto.Plugin_Creator.Editor.IFiles {
     public class ThirdPartyNotices : IFile {
         [JsonIgnore] public string FileName { get; set; }
         public string HeaderText { get; set; }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace GamersGrotto.Runtime.Modules.UnityCallbacks.MonoBehaviourCallbacks
+namespace GamersGrotto.Unity_Callbacks.MonoBehaviourCallbacks
 {
     public class OnEnableCallback : MonoBehaviour
     {

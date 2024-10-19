@@ -1,4 +1,4 @@
-﻿namespace Editor.PluginCreator {
+﻿namespace GamersGrotto.Plugin_Creator.Editor.IFiles.Extras {
     public class ThirdParty {
         public string Name { get; set; }
         public string LicenseType { get; set; }

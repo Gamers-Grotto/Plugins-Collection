@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Editor.PluginCreator {
+namespace GamersGrotto.Plugin_Creator.Editor.IFiles {
     public class ChangeLog : IFile {
         [JsonIgnore] public string FileName { get; set; }
         public string Version { get; set; }

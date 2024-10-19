@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using GamersGrotto.Runtime.Modules.UISystem.Commands;
-using GamersGrotto.Runtime.Modules.UISystem.Pages;
+using GamersGrotto.Ui_System.Commands;
+using GamersGrotto.Ui_System.Pages;
+using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.UISystem
+namespace GamersGrotto.Ui_System
 {
     public class UIManager : Singleton<UIManager>
     {

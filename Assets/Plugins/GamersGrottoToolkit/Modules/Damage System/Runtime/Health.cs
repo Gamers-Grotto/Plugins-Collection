@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace GamersGrotto.Runtime.Modules.DamageSystem
+namespace GamersGrotto.Damage_System
 {
     public class Health : MonoBehaviour
     {

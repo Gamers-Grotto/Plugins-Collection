@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace GamersGrotto.Runtime.Modules.InGameConsole.Commands
+namespace GamersGrotto.In_Game_Console.Commands
 {
     [Command("UnloadScene")]
     public class UnloadSceneCommand : ConsoleCommand

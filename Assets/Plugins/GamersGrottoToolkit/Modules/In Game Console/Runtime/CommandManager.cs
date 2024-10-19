@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.InGameConsole
+namespace GamersGrotto.In_Game_Console
 {
     public class CommandManager
     {

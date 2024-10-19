@@ -1,4 +1,4 @@
-﻿namespace GamersGrotto.Runtime.Modules.SaveGameSystem.SaveSlots
+﻿namespace GamersGrotto.Save_Game_System.SaveSlots
 {
     public enum SaveSlotId
     {

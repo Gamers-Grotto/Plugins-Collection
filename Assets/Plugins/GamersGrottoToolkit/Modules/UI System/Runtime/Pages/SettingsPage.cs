@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-namespace GamersGrotto.Runtime.Modules.UISystem.Pages
+namespace GamersGrotto.Ui_System.Pages
 {
     public class SettingsPage : Page
     {

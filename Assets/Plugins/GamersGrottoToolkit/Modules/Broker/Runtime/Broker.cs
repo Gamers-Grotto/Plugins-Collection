@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GamersGrotto.Runtime.Modules.Broker
+namespace GamersGrotto.Broker
 {
     public static class Broker
     {

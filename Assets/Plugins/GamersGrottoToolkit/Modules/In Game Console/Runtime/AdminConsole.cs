@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace GamersGrotto.Runtime.Modules.InGameConsole
+namespace GamersGrotto.In_Game_Console
 {
     public class AdminConsole : Singleton<AdminConsole>
     {

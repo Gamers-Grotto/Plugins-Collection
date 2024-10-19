@@ -1,7 +1,7 @@
 ﻿using Attributes;
 using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.DamageSystem {
+namespace GamersGrotto.Damage_System {
     [CreateAssetMenu(fileName = "NewDamage", menuName = "GamersGrotto/Damage System/DamageSO")]
     public class DamageSO : ScriptableObject {
         [SerializeField] float damage;

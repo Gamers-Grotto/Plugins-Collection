@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using GamersGrotto.Runtime.Modules.SaveGameSystem.SaveSlots;
+using GamersGrotto.Save_Game_System.SaveSlots;
 
-namespace GamersGrotto.Runtime.Modules.SaveGameSystem.SaveSystems
+namespace GamersGrotto.Save_Game_System.SaveSystems
 {
     public interface ISaveSystem //I don't like the name of this interface...perhaps, ISaveSource? ISaveResource?
     {

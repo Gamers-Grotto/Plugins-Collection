@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace GamersGrotto.Runtime.Modules.UISystem
+namespace GamersGrotto.Ui_System
 {
     [RequireComponent(typeof(UIDocument))]
     public abstract class Page : MonoBehaviour

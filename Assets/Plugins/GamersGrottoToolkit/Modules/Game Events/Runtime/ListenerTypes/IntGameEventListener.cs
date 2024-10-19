@@ -1,4 +1,4 @@
-﻿namespace GamersGrotto.Runtime.Modules.GameEvents.ListenerTypes
+﻿namespace GamersGrotto.Game_Events.ListenerTypes
 {
     public class IntGameEventListener : GameEventListener<int> {}
 }

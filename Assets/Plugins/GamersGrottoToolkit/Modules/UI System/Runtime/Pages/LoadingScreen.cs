@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace GamersGrotto.Runtime.Modules.UISystem.Pages
+namespace GamersGrotto.Ui_System.Pages
 {
     public class LoadingScreen : Page
     {

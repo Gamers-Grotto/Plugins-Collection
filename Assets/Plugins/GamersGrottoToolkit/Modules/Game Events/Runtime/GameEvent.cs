@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.GameEvents
+namespace GamersGrotto.Game_Events
 {
     [CreateAssetMenu(fileName = "GameEvent", menuName = "GamersGrotto/Game Events/Game Event", order = 0)]
     public class GameEvent : ScriptableObject

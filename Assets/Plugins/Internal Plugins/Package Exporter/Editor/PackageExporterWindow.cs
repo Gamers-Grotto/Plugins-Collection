@@ -1,11 +1,11 @@
 ﻿#if UNITY_EDITOR
 using System.Collections.Generic;
+using GamersGrotto.Custom_Editor_Styles.Editor;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.Windows;
 
-namespace Editor {
+namespace GamersGrotto.Package_Exporter.Editor {
     public class PackageExporterWindow : EditorWindow {
         private string packagePath = "Assets/Builds/";
         private ExportPackageOptions exportOptions = ExportPackageOptions.Recurse;

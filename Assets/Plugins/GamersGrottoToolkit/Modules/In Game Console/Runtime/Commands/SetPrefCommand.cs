@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.InGameConsole.Commands
+namespace GamersGrotto.In_Game_Console.Commands
 {
     [Command("SetPref")]
     public class SetPrefCommand : ConsoleCommand

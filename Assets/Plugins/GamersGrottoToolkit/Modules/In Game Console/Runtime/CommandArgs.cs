@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GamersGrotto.Runtime.Modules.InGameConsole
+namespace GamersGrotto.In_Game_Console
 {
     public class CommandArgs
     {

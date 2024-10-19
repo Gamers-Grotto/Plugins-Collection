@@ -1,6 +1,6 @@
-﻿using GamersGrotto.Runtime.Modules.SaveGameSystem.Profiles;
+﻿using GamersGrotto.Save_Game_System.Profiles;
 
-namespace GamersGrotto.Runtime.Modules.SaveGameSystem
+namespace GamersGrotto.Save_Game_System
 {
     public static class SaveSystemExtensions
     {

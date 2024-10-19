@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using GamersGrotto.Runtime.Modules.SaveGameSystem.Profiles;
-using GamersGrotto.Runtime.Modules.SaveGameSystem.SaveSlots;
-using GamersGrotto.Runtime.Modules.SaveGameSystem.SaveSystems;
+using GamersGrotto.Save_Game_System.Profiles;
+using GamersGrotto.Save_Game_System.SaveSlots;
+using GamersGrotto.Save_Game_System.SaveSystems;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.SaveGameSystem
+namespace GamersGrotto.Save_Game_System
 {
     public class SaveSystem
     {

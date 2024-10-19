@@ -1,4 +1,4 @@
-﻿namespace GamersGrotto.Runtime.Modules.DamageSystem {
+﻿namespace GamersGrotto.Damage_System {
     public enum DamageType {
         None,
         Physical,

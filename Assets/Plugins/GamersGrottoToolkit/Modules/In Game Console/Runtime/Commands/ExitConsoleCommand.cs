@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.InGameConsole.Commands
+namespace GamersGrotto.In_Game_Console.Commands
 {
     [Command("Exit")]
     public class ExitConsoleCommand : ConsoleCommand

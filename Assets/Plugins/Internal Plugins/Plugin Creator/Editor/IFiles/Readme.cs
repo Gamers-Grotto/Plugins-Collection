@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Editor.PluginCreator {
+namespace GamersGrotto.Plugin_Creator.Editor.IFiles {
     internal class Readme : IFile {
         [JsonIgnore] public string FileName { get; set; } = "README.md";
 

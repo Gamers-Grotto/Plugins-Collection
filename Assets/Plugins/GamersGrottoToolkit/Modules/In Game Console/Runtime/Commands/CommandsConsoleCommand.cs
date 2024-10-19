@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace GamersGrotto.Runtime.Modules.InGameConsole.Commands
+namespace GamersGrotto.In_Game_Console.Commands
 {
     [Command("Commands")]
     public class CommandsConsoleCommand : ConsoleCommand

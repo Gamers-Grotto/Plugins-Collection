@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.DamageSystem {
+namespace GamersGrotto.Damage_System.Modifiers {
     [CreateAssetMenu(fileName = "NewAdditiveModifier", menuName = "GamersGrotto/Damage System/AdditiveModifier")]
     public class AdditiveModifier : ValueModifier {
         /// <summary>

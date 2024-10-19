@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using UnityEditorInternal;
 
-namespace Editor.PluginCreator {
+namespace GamersGrotto.Plugin_Creator.Editor.IFiles {
     public class AssemblyDefinition : IFile {
         [JsonIgnore] public string FileName { get; set; }
         public string name { get; set; }

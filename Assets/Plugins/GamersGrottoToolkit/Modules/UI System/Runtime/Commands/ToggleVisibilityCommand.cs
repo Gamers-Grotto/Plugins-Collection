@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UIElements;
 
-namespace GamersGrotto.Runtime.Modules.UISystem.Commands
+namespace GamersGrotto.Ui_System.Commands
 {
     public class ToggleVisibilityCommand : ICommand
     {

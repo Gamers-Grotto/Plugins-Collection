@@ -1,4 +1,4 @@
-﻿namespace GamersGrotto.Runtime.Modules.UISystem.Commands
+﻿namespace GamersGrotto.Ui_System.Commands
 {
     public class OpenPageCommand : ICommand
     {

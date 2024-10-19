@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace GamersGrotto.Runtime.Modules.UnityCallbacks.CollisionTriggers
+namespace GamersGrotto.Unity_Callbacks.CollisionTriggers
 {
     [RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
     public class CollisionEvents2D : MonoBehaviour

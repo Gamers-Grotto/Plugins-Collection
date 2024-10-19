@@ -1,7 +1,8 @@
 ﻿using System.IO;
+using GamersGrotto.Plugin_Creator.Editor.IFiles;
 using UnityEngine;
 
-namespace Editor.PluginCreator {
+namespace GamersGrotto.Plugin_Creator.Editor {
     public class FileCreator<T> where T : IFile {
         public T Data { get; set; }
 

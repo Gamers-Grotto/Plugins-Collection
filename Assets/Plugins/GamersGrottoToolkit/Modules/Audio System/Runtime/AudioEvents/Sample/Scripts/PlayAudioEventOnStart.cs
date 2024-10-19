@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Gamersgrotto.Audio_system.Plugins.AudioEvents;
+using UnityEngine;
 
 namespace GamersGrotto.Runtime.Modules.GameEvents.AudioEvents.Sample.Scripts
 {

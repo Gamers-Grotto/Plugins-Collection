@@ -1,10 +1,14 @@
-﻿namespace Editor.PluginCreator {
-    using System.Collections.Generic;
-    using System.IO;
-    using UnityEditor;
-    using UnityEditorInternal;
-    using UnityEngine;
+﻿using System.Collections.Generic;
+using System.IO;
+using GamersGrotto.Custom_Editor_Styles.Editor;
+using GamersGrotto.Package_Exporter.Editor;
+using GamersGrotto.Plugin_Creator.Editor.IFiles;
+using GamersGrotto.Plugin_Creator.Editor.IFiles.Extras;
+using UnityEditor;
+using UnityEditorInternal;
+using UnityEngine;
 
+namespace GamersGrotto.Plugin_Creator.Editor {
     public class PluginCreatorWindow : EditorWindow {
         string pluginName = "NewPlugin";
         string companyName = "GamersGrotto";

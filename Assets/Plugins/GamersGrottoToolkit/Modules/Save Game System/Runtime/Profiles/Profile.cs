@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GamersGrotto.Runtime.Modules.SaveGameSystem.Profiles
+namespace GamersGrotto.Save_Game_System.Profiles
 {
     public class Profile
     {

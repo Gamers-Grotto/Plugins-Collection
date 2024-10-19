@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.DamageSystem {
+namespace GamersGrotto.Damage_System.Modifiers {
     /// <summary>
     /// Separated to its own abstract class to allow for easier sorting between modifiers.
     /// </summary>

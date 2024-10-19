@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using GamersGrotto.Runtime.Modules.SaveGameSystem.Profiles;
-using GamersGrotto.Runtime.Modules.SaveGameSystem.SaveSlots;
+using GamersGrotto.Save_Game_System.Profiles;
+using GamersGrotto.Save_Game_System.SaveSlots;
 using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.SaveGameSystem.SaveSystems
+namespace GamersGrotto.Save_Game_System.SaveSystems
 {
     public class FileSaveSystem : ISaveSystem
     {

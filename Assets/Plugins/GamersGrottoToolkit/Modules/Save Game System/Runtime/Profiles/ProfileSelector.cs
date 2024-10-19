@@ -4,7 +4,7 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.SaveGameSystem.Profiles
+namespace GamersGrotto.Save_Game_System.Profiles
 {
     public static class ProfileSelector
     {

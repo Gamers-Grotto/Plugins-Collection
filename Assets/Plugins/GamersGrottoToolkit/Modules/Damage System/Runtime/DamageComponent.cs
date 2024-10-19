@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Attributes;
+using GamersGrotto.Damage_System.Modifiers;
 using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.DamageSystem {
+namespace GamersGrotto.Damage_System {
     /// <summary>
     /// The purpose of this component is to allow something to deal damage to an object with a Health component.
     /// </summary>

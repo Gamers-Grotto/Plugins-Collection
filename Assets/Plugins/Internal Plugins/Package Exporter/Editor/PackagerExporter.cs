@@ -6,52 +6,54 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-public static class PackageExporter {
-    public static void ExportPackage(List<string> foldersToInclude, string packagePath = "Assets/Builds/",string packageName = "ExportedPackage", ExportPackageOptions exportOptions = ExportPackageOptions.Default)
-    {
-        if (foldersToInclude == null || foldersToInclude.Count == 0) {
-            Debug.LogError("No folders specified for export.");
-            return;
-        }
-
-        var assetPaths = GetAllAssetPathsFromFolders(foldersToInclude);
-
-        if (assetPaths.Length == 0) {
-            Debug.LogWarning("No assets found in the specified folders.");
-            return;
-        }
-
-        if (packageName == "") {
-            packageName = "ExportedPackage";
-        }
-
-        var fullPackagePath = Path.Combine(packagePath, packageName + ".unitypackage").Replace(" ", "_");
-        if (!Directory.Exists(Path.GetDirectoryName(fullPackagePath))) {
-            Directory.CreateDirectory(Path.GetDirectoryName(fullPackagePath));
-        }
-
-        AssetDatabase.ExportPackage(assetPaths, fullPackagePath, exportOptions);
-        AssetDatabase.Refresh();
-        Debug.Log("Package exported to: " + fullPackagePath);
-    }
-
-    private static string[] GetAllAssetPathsFromFolders(List<string> folders) {
-        var allAssetPaths = new List<string>();
-
-        foreach (var folder in folders) {
-            if (!AssetDatabase.IsValidFolder(folder)) {
-                Debug.LogError($"Invalid folder path: {folder}");
-                continue;
+namespace GamersGrotto.Package_Exporter.Editor {
+    public static class PackageExporter {
+        public static void ExportPackage(List<string> foldersToInclude, string packagePath = "Assets/Builds/",string packageName = "ExportedPackage", ExportPackageOptions exportOptions = ExportPackageOptions.Default)
+        {
+            if (foldersToInclude == null || foldersToInclude.Count == 0) {
+                Debug.LogError("No folders specified for export.");
+                return;
             }
 
-            var fileEntries = Directory.GetFiles(folder, "*.*", SearchOption.AllDirectories);
+            var assetPaths = GetAllAssetPathsFromFolders(foldersToInclude);
 
-            allAssetPaths.AddRange(fileEntries.Select(file => file.Replace('\\', '/')));
+            if (assetPaths.Length == 0) {
+                Debug.LogWarning("No assets found in the specified folders.");
+                return;
+            }
+
+            if (packageName == "") {
+                packageName = "ExportedPackage";
+            }
+
+            var fullPackagePath = Path.Combine(packagePath, packageName + ".unitypackage").Replace(" ", "_");
+            if (!Directory.Exists(Path.GetDirectoryName(fullPackagePath))) {
+                Directory.CreateDirectory(Path.GetDirectoryName(fullPackagePath));
+            }
+
+            AssetDatabase.ExportPackage(assetPaths, fullPackagePath, exportOptions);
+            AssetDatabase.Refresh();
+            Debug.Log("Package exported to: " + fullPackagePath);
         }
 
-        Debug.Log($"Total asset paths found: {allAssetPaths.Count}");
+        private static string[] GetAllAssetPathsFromFolders(List<string> folders) {
+            var allAssetPaths = new List<string>();
 
-        return allAssetPaths.ToArray();
+            foreach (var folder in folders) {
+                if (!AssetDatabase.IsValidFolder(folder)) {
+                    Debug.LogError($"Invalid folder path: {folder}");
+                    continue;
+                }
+
+                var fileEntries = Directory.GetFiles(folder, "*.*", SearchOption.AllDirectories);
+
+                allAssetPaths.AddRange(fileEntries.Select(file => file.Replace('\\', '/')));
+            }
+
+            Debug.Log($"Total asset paths found: {allAssetPaths.Count}");
+
+            return allAssetPaths.ToArray();
+        }
     }
 }
 #endif

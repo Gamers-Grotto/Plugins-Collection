@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.GameEvents.ListenerTypes
+namespace GamersGrotto.Game_Events.ListenerTypes
 {
     public class Vector2GameEventListener : GameEventListener<Vector2> {}
 }

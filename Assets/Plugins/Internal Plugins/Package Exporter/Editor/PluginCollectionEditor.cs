@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Editor
+namespace GamersGrotto.Package_Exporter.Editor
 {
     [CustomEditor(typeof(PluginCollection))]
     public class PluginCollectionEditor : UnityEditor.Editor

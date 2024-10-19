@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace GamersGrotto.Runtime.Modules.GameEvents
+namespace GamersGrotto.Game_Events
 {
     public class GameEventListener : MonoBehaviour
     {

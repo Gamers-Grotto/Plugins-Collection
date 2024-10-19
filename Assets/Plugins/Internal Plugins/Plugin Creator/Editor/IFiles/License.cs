@@ -1,6 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using GamersGrotto.Plugin_Creator.Editor.IFiles.Extras;
+using Newtonsoft.Json;
 
-namespace Editor.PluginCreator {
+namespace GamersGrotto.Plugin_Creator.Editor.IFiles {
     public class License : IFile {
         [JsonIgnore] public string FileName { get; set; }
         public string HeaderText { get; set; }

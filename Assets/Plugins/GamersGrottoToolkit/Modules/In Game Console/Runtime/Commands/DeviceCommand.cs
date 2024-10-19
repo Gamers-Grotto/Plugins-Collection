@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine.Device;
 
-namespace GamersGrotto.Runtime.Modules.InGameConsole.Commands
+namespace GamersGrotto.In_Game_Console.Commands
 {
     [Command("Device")]
     public class DeviceCommand : ConsoleCommand
