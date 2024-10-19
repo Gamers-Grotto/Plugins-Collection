@@ -16,19 +16,31 @@ namespace GamersGrotto.Editor.ExtendedAttributes
             if (property.objectReferenceValue == null)
                 return;
 
-            if (property.isExpanded = EditorGUI.Foldout(position, property.isExpanded, GUIContent.none))
+            var singleLineHeight = EditorGUIUtility.singleLineHeight;
+
+            var foldoutPosition = new Rect(position.x, position.y, position.width, singleLineHeight);
+
+            if (property.isExpanded = EditorGUI.Foldout(foldoutPosition, property.isExpanded, GUIContent.none))
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.BeginVertical(GUI.skin.box);
-                
-                if (!editor)
+
+                if (editor == null)
                     UnityEditor.Editor.CreateCachedEditor(property.objectReferenceValue, null, ref editor);
 
                 editor.OnInspectorGUI();
 
                 EditorGUI.indentLevel--;
-                EditorGUILayout.EndVertical();
             }
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            var height = EditorGUI.GetPropertyHeight(property, label, true);
+
+            if (property.isExpanded && property.objectReferenceValue != null)
+                height += EditorGUIUtility.singleLineHeight;
+
+            return height;
         }
     }
 }
