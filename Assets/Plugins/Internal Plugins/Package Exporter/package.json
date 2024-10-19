@@ -1,22 +1,21 @@
 {
-  "name": "com.GamersGrotto.package-exporter",
+  "name": "gamersgrotto.package-exporter",
   "version": "0.0.1",
   "displayName": "Package Exporter",
   "description": "Description of the package, what it does and how to use it.",
   "unity": "6000.0",
   "unityRelease": "20f1",
-  "documentationUrl": "https://example.com/",
-  "changelogUrl": "https://example.com/changelog.html",
-  "licensesUrl": "https://example.com/licensing.html",
   "dependencies": {},
   "keywords": [
-    "keyword1",
-    "keyword2",
-    "keyword3"
+    "gamersgrotto"
   ],
   "author": {
     "name": "GamersGrotto",
-    "email": null,
+    "email": "gamersgrottodevelopers@gmail.com",
     "url": null
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gamers-Grotto/GamersGrottoToolkit.git"
   }
 }

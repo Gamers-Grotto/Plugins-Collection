@@ -5,18 +5,20 @@
   "description": "A collection of core scripts and utilities for Unity projects.",
   "unity": "6000.0",
   "unityRelease": "20f1",
-  "documentationUrl": "https://example.com/",
-  "changelogUrl": "https://example.com/changelog.html",
-  "licensesUrl": "https://example.com/licensing.html",
   "dependencies": {},
   "keywords": [
     "core",
     "utilities",
-    "scripts"],
-  
+    "scripts",
+    "gamersgrotto"
+  ],
   "author": {
     "name": "GamersGrotto",
-    "email": null,
+    "email": "gamersgrottodevelopers@gmail.com",
     "url": null
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gamers-Grotto/GamersGrottoToolkit.git"
   }
 }

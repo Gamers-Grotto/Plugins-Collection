@@ -1,8 +1,8 @@
 {
-  "name": "com.gamersgrotto.gamersgrottotoolkit",
+  "name": "gamersgrotto.gamersgrottotoolkit",
   "version": "0.1.2",
   "displayName": "Gamers Grotto Toolkit",
-  "description": "Description of the package, what it does and how to use it.",
+  "description": "Gamers Grotto's Official Toolkit allows you to more easily get started with a new project.",
   "unity": "6000.0",
   "unityRelease": "20f1",
   "dependencies": {
