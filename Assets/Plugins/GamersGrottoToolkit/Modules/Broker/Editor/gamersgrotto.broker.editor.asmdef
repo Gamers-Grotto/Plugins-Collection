@@ -1,6 +1,6 @@
 {
     "name": "gamersgrotto.broker.editor",
-    "rootNamespace": "gamersgrotto.broker.editor",
+    "rootNamespace": "GamersGrotto.Broker.Editor",
     "references": [
         "GUID:c1e6df4f4351075408a480ad3811dfb9",
         "GUID:7a2a6876f0a934c4ba904bb34b0ea728"

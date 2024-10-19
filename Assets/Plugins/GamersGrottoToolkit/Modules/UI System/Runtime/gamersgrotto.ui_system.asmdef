@@ -1,7 +1,9 @@
 {
-    "name": "gamersgrotto.core.runtime",
-    "rootNamespace": "gamersgrotto.core.runtime",
-    "references": [],
+    "name": "gamersgrotto.ui_system",
+    "rootNamespace": "GamersGrotto.Ui_System",
+    "references": [
+        "GUID:7a2a6876f0a934c4ba904bb34b0ea728"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

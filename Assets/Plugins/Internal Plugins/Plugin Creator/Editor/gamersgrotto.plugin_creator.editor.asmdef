@@ -1,6 +1,6 @@
 {
     "name": "gamersgrotto.plugin_creator.editor",
-    "rootNamespace": "gamersgrotto.plugin_creator.editor",
+    "rootNamespace": "GamersGrotto.Plugin_Creator.Editor",
     "references": [
         "GUID:7ac65d2cd30c05745930c26fd3ea30d6",
         "GUID:2004501daaf4adc42ae4cbf2d49aaa0a"

@@ -1,6 +1,6 @@
 {
-    "name": "gamersgrotto.broker.runtime",
-    "rootNamespace": "gamersgrotto.broker.runtime",
+    "name": "gamersgrotto.damage_system",
+    "rootNamespace": "GamersGrotto.Damage_System",
     "references": [
         "GUID:7a2a6876f0a934c4ba904bb34b0ea728"
     ],

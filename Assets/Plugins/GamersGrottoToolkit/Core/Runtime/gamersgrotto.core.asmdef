@@ -1,9 +1,7 @@
 {
-    "name": "gamersgrotto.game_events.runtime",
-    "rootNamespace": "gamersgrotto.game_events.runtime",
-    "references": [
-        "GUID:7a2a6876f0a934c4ba904bb34b0ea728"
-    ],
+    "name": "gamersgrotto.core",
+    "rootNamespace": "GamersGrotto.Core",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

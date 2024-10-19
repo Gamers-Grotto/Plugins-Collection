@@ -1,6 +1,6 @@
 {
     "name": "gamersgrotto.custom_editor_styles.editor",
-    "rootNamespace": "gamersgrotto.custom_editor_styles.editor",
+    "rootNamespace": "GamersGrotto.Custom_Editor_Styles.Editor",
     "references": [],
     "includePlatforms": [
         "Editor"

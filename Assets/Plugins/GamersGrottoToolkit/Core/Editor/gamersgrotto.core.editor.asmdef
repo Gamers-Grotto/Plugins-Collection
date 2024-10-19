@@ -1,6 +1,6 @@
 {
     "name": "gamersgrotto.core.editor",
-    "rootNamespace": "gamersgrotto.core.editor",
+    "rootNamespace": "GamersGrotto.Core.Editor",
     "references": [
         "GUID:7a2a6876f0a934c4ba904bb34b0ea728"
     ],

@@ -1,6 +1,6 @@
 {
-    "name": "gamersgrotto.ui_system.runtime",
-    "rootNamespace": "gamersgrotto.ui_system.runtime",
+    "name": "gamersgrotto.save_game_system",
+    "rootNamespace": "GamersGrotto.Save_Game_System",
     "references": [
         "GUID:7a2a6876f0a934c4ba904bb34b0ea728"
     ],
