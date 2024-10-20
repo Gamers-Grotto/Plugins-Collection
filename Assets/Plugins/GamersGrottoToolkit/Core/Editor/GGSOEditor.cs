@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace GamersGrotto.Core.Editor
 {
-    [CustomEditor(typeof(MonoBehaviour), editorForChildClasses: true)]
-    public class GGEditor : UnityEditor.Editor
+    [CustomEditor(typeof(ScriptableObject), editorForChildClasses: true)]
+    public class GGSOEditor : UnityEditor.Editor
     {
         private bool isInGamersGrottoNamespace;
         
