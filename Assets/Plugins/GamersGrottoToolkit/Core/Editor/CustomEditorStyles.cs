@@ -13,9 +13,21 @@ namespace GamersGrotto.Custom_Editor_Styles.Editor {
 
         public static GUIStyle Foldout;
 
-        #region Button Styles
+        private static Texture2D _logo;
+        public static Texture2D Logo
+        {
+            get
+            {
+                if (_logo == null)
+                    _logo = Resources.Load<Texture2D>("GGLogo");
+                    
+                return _logo;
+            }
+        }
 
         static CustomEditorStyles() {
+            #region Button Styles
+            
             LargeButton = new GUIStyle(GUI.skin.button) {
                 fontSize = 16,
                 fontStyle = FontStyle.Bold,
