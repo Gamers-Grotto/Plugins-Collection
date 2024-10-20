@@ -1,4 +1,7 @@
-﻿using GamersGrotto.Custom_Editor_Styles.Editor;
+﻿using System;
+using System.Reflection;
+using GamersGrotto.Core.Extended_Attributes;
+using GamersGrotto.Custom_Editor_Styles.Editor;
 using UnityEditor;
 using UnityEngine;
 
@@ -19,6 +22,24 @@ namespace GamersGrotto.Core.Editor
         {
             base.OnInspectorGUI();
 
+            var mono = target as ScriptableObject;
+            var type = target.GetType();
+            
+            var methods = type.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+
+            foreach (var method in methods)
+            {
+                var buttonAttribute = (ButtonAttribute)Attribute.GetCustomAttribute(method, typeof(ButtonAttribute));
+                
+                if (buttonAttribute == null) 
+                    continue;
+
+                var buttonText = buttonAttribute.ButtonText ?? method.Name;
+
+                if (GUILayout.Button(buttonText))
+                    method.Invoke(mono, null);
+            }
+            
             if (!isInGamersGrottoNamespace) 
                 return;
             
