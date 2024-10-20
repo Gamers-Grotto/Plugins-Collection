@@ -7,8 +7,8 @@ using UnityEngine;
 
 namespace GamersGrotto.Core.Editor
 {
-    [CustomEditor(typeof(MonoBehaviour), editorForChildClasses: true)]
-    public class GGEditor : UnityEditor.Editor
+    [CustomEditor(typeof(ScriptableObject), editorForChildClasses: true)]
+    public class GGSOEditor : UnityEditor.Editor
     {
         private bool isInGamersGrottoNamespace;
         
@@ -22,7 +22,7 @@ namespace GamersGrotto.Core.Editor
         {
             base.OnInspectorGUI();
 
-            var mono = target as MonoBehaviour;
+            var mono = target as ScriptableObject;
             var type = target.GetType();
             
             var methods = type.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
