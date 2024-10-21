@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GamersGrotto.Damage_System {
     [CreateAssetMenu(fileName = "NewDamage", menuName = "GamersGrotto/Damage System/DamageSO")]
     public class DamageSO : ScriptableObject {
-        [SerializeField] float damage;
+        [SerializeField] float baseMin, baseMax;
 
         [SerializeField, Optional, Range(0, 1)]
         float critChance = 0f;
@@ -13,14 +13,9 @@ namespace GamersGrotto.Damage_System {
         float critMultiplier = 1.5f;
 
         [SerializeField, Optional] DamageType damageType = DamageType.None;
-        public float Damage => damage;
+        public float Damage => Random.Range(baseMin, baseMax);
         public float CritChance => critChance;
         public float CritMultiplier => critMultiplier;
         public DamageType DamageType => damageType;
-
-
-        public bool IsCrit() {
-            return Random.value < critChance;
-        }
     }
 }

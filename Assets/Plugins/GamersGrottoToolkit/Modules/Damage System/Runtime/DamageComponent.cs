@@ -8,42 +8,61 @@ namespace GamersGrotto.Damage_System {
     /// The purpose of this component is to allow something to deal damage to an object with a Health component.
     /// </summary>
     public class DamageComponent : MonoBehaviour {
-        public DamageSO damageSO;
+        [ShowInInspector] public DamageSO damageSO;
+        [ShowInInspector] public List<ValueModifier> damageModifiers = new List<ValueModifier>();
+        [ShowInInspector] public List<ValueModifier> critChanceModifiers = new List<ValueModifier>();
 
-        public List<ValueModifier> damageModifiers = new List<ValueModifier>();
 
         public void DealDamage(Health health) {
             var damage = damageSO.Damage;
 
-            //Apply crit if applicable
-            bool isCrit = damageSO.IsCrit();
+            var isCrit = ApplyCriticalHit(ref damage);
+
+            ApplyDamageModifiers(ref damage);
+
+            health.TakeDamage(damage, isCrit, damageSO.DamageType);
+        }
+
+        void ApplyDamageModifiers(ref float damage) {
+            foreach (var modifier in damageModifiers) {
+                damage = modifier.ApplyModifier(damage);
+            }
+        }
+
+        bool ApplyCriticalHit(ref float damage) {
+            var critChance = CalculateCritChance();
+            bool isCrit = RollCrit(critChance);
             if (isCrit) {
                 damage *= damageSO.CritMultiplier;
             }
 
-            //Apply all damage modifiers if any
-            foreach (var modifier in damageModifiers) {
-                damage = modifier.ApplyModifier(damage);
-            }
+            return isCrit;
+        }
 
-            health.TakeDamage(damage, isCrit, damageSO.DamageType);
+        bool RollCrit(float critChance) => Random.value <= critChance;
+
+        float CalculateCritChance() {
+            var critChance = damageSO.CritChance;
+            foreach (var modifier in critChanceModifiers) {
+                critChance = modifier.ApplyModifier(critChance);
+            }
+            critChance = Mathf.Clamp01(critChance);
+            return critChance;
         }
 
         #region Debugging
 
         [Button]
         public void TestAttackDebugTarget() {
-            
-            if(!Application.isPlaying)
-            {
+            if (!Application.isPlaying) {
                 Debug.LogWarning("Enter Play Mode to Test Attacking");
                 return;
             }
-            
+
             var damage = damageSO.Damage;
-            
+
             //Apply crit if applicable
-            bool isCrit = damageSO.IsCrit();
+            bool isCrit = RollCrit(CalculateCritChance());
             if (isCrit) {
                 damage *= damageSO.CritMultiplier;
             }
@@ -58,7 +77,9 @@ namespace GamersGrotto.Damage_System {
             objectToAdd.name = $"Debug Target of [{gameObject.name}]";
             objectToAdd.GetComponent<Health>().TakeDamage(damage, isCrit, damageSO.DamageType);
             Destroy(objectToAdd, 5f);
-            Debug.Log($"[{gameObject.name}] Modified damage: {damage}. Crit? ({isCrit}). Damage Type ({damageSO.DamageType})", this);
+            Debug.Log(
+                $"[{gameObject.name}] Modified damage: {damage}. Crit? ({isCrit}). Damage Type ({damageSO.DamageType})",
+                this);
         }
 
         #endregion
