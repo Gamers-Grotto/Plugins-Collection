@@ -22,6 +22,7 @@ namespace GamersGrotto.Core.Editor
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
+            
             DrawButtons();
 
             if (isInGamersGrottoNamespace)

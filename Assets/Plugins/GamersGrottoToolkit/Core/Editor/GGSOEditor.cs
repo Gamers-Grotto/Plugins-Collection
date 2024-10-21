@@ -22,7 +22,17 @@ namespace GamersGrotto.Core.Editor
         {
             base.OnInspectorGUI();
 
-            var mono = target as ScriptableObject;
+            DrawButtons();
+
+            if (!isInGamersGrottoNamespace) 
+                return;
+            
+            DrawLogo();
+        }
+
+        private void DrawButtons()
+        {
+            var so = target as ScriptableObject;
             var type = target.GetType();
             
             var methods = type.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
@@ -37,12 +47,12 @@ namespace GamersGrotto.Core.Editor
                 var buttonText = buttonAttribute.ButtonText ?? method.Name;
 
                 if (GUILayout.Button(buttonText))
-                    method.Invoke(mono, null);
+                    method.Invoke(so, null);
             }
-            
-            if (!isInGamersGrottoNamespace) 
-                return;
-            
+        }
+
+        private static void DrawLogo()
+        {
             using (new GUILayout.HorizontalScope())
             {
                 if (CustomEditorStyles.Logo != null)
