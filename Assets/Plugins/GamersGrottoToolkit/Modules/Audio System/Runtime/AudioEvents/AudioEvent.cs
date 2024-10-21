@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using GamersGrotto.Core;
+using UnityEngine;
 
-namespace Gamersgrotto.Audio_system.Plugins.AudioEvents
+namespace GamersGrotto.Audio_System.AudioEvents
 {
-    [CreateAssetMenu(fileName = "New Audio Event", menuName = "GamersGrotto/Audio System/Audio Event")]
+    [CreateAssetMenu(fileName = "New Audio Event", menuName = Constants.AudioSystemPath + "Audio Event")]
     public class AudioEvent : ScriptableObject
     {
         public AudioClip clip;
@@ -21,7 +22,5 @@ namespace Gamersgrotto.Audio_system.Plugins.AudioEvents
             audioSource.loop =  loop;
             audioSource.Play();
         }
-        
-        
     }
 }

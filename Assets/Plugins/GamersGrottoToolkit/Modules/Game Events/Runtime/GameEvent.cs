@@ -1,9 +1,11 @@
 ﻿using System;
+using Codice.CM.Common;
 using UnityEngine;
+using Constants = GamersGrotto.Core.Constants;
 
 namespace GamersGrotto.Game_Events
 {
-    [CreateAssetMenu(fileName = "GameEvent", menuName = "GamersGrotto/Game Events/Game Event", order = 0)]
+    [CreateAssetMenu(fileName = "GameEvent", menuName = Constants.GameEventPath + "Game Event", order = 0)]
     public class GameEvent : ScriptableObject
     {
         private event Action Listeners = delegate { };

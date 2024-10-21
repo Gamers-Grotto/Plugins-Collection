@@ -1,9 +1,10 @@
+using GamersGrotto.Core;
 using GamersGrotto.Core.Extended_Attributes;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Gamersgrotto.Audio_system.Plugins {
-    [CreateAssetMenu(fileName = "NewAudioSettings", menuName = "GamersGrotto/Audio System/AudioSettings")]
+namespace GamersGrotto.Audio_System {
+    [CreateAssetMenu(fileName = "NewAudioSettings", menuName = Constants.AudioSystemPath + "AudioSettings")]
     public class AudioSettings : ScriptableObject
     {	
         public AudioMixer mainMixer;

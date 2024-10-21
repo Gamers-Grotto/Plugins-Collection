@@ -1,7 +1,6 @@
-﻿using Gamersgrotto.Audio_system.Plugins.AudioEvents;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace GamersGrotto.Runtime.Modules.GameEvents.AudioEvents.Sample.Scripts
+namespace GamersGrotto.Audio_System.AudioEvents.Sample.Scripts
 {
     public class PlayAudioEventOnStart : MonoBehaviour
     {

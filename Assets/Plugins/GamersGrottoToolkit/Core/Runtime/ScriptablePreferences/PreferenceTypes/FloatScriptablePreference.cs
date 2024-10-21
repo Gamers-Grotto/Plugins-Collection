@@ -2,7 +2,7 @@
 
 namespace GamersGrotto.Core.ScriptablePreferences.PreferenceTypes
 {
-    [CreateAssetMenu(menuName = "GamersGrotto/Scriptable Preferences/Float ScriptablePreference", fileName = "FloatScriptablePreference")]
+    [CreateAssetMenu(menuName = Constants.ScriptablePreferencesPath + "Float ScriptablePreference", fileName = "FloatScriptablePreference")]
     public class FloatScriptablePreference : ScriptablePreference
     {
         [SerializeField] private float defaultValue;

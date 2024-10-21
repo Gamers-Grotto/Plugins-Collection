@@ -2,7 +2,7 @@
 
 namespace GamersGrotto.Core.ScriptablePreferences.PreferenceTypes
 {
-    [CreateAssetMenu(menuName = "GamersGrotto/Scriptable Preferences/Boolean ScriptablePreference", fileName = "BoolScriptablePreference")]
+    [CreateAssetMenu(menuName = Constants.ScriptablePreferencesPath + "Boolean ScriptablePreference", fileName = "BoolScriptablePreference")]
     public class BoolScriptablePreference : ScriptablePreference
     {
         [SerializeField] private bool defaultValue;

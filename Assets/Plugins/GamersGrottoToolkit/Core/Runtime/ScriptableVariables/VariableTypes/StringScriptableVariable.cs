@@ -2,7 +2,7 @@
 
 namespace GamersGrotto.Core.ScriptableVariables.VariableTypes
 {
-    [CreateAssetMenu(fileName = "NewStringVariable", menuName = ScriptableVariablePath + "String Variable")]
+    [CreateAssetMenu(fileName = "NewStringVariable", menuName = Constants.ScriptableVariablePath + "String Variable")]
     public class StringScriptableVariable : ScriptableVariable<string>
     {
         /// <summary>

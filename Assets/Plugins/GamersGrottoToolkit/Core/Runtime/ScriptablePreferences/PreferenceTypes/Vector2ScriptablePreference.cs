@@ -2,7 +2,7 @@
 
 namespace GamersGrotto.Core.ScriptablePreferences.PreferenceTypes
 {
-    [CreateAssetMenu(menuName = "GamersGrotto/Scriptable Preferences/Vector2 ScriptablePreference", fileName = "Vector2ScriptablePreference")]
+    [CreateAssetMenu(menuName = Constants.ScriptablePreferencesPath + "Vector2 ScriptablePreference", fileName = "Vector2ScriptablePreference")]
     public class Vector2ScriptablePreference : ScriptablePreference
     {
         [SerializeField] private Vector2 defaultValue;

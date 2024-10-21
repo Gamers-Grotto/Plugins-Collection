@@ -1,10 +1,11 @@
 using System.Collections.Generic;
-using Gamersgrotto.Audio_system.Plugins.AudioEvents;
-using GamersGrotto.Runtime.Modules.GameEvents.AudioEvents;
+using Gamersgrotto.Audio_System;
+using GamersGrotto.Audio_System.AudioEvents;
+using GamersGrotto.Core;
 using UnityEngine;
 
-namespace Gamersgrotto.Audio_system.Plugins {
-    [CreateAssetMenu(fileName = "AudioLibrary", menuName = "GamersGrotto/Audio System/AudioLibrarySO")]
+namespace GamersGrotto.Audio_System {
+    [CreateAssetMenu(fileName = "AudioLibrary", menuName = Constants.AudioSystemPath + "AudioLibrarySO")]
     public class AudioLibrary : ScriptableObject
     {	
         [SerializeField] private List<AudioCollectionSO> audioCollections;
