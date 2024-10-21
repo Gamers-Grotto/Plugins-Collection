@@ -22,6 +22,8 @@ namespace GamersGrotto.Core.Editor
 
         public static void OnInspectorGUI(this UnityEditor.Editor editor, Rect position)
         {
+            editor.serializedObject.Update();
+
             position.y += EditorGUIUtility.standardVerticalSpacing;
             
             var property = editor.serializedObject.GetIterator();
@@ -35,6 +37,8 @@ namespace GamersGrotto.Core.Editor
             }
             
             position.y += EditorGUIUtility.standardVerticalSpacing;
+
+            editor.serializedObject.ApplyModifiedProperties();
         }
     }
 }
