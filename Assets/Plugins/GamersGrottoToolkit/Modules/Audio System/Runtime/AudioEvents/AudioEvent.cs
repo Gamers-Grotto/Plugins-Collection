@@ -8,10 +8,11 @@ namespace GamersGrotto.Audio_System.AudioEvents
     public class AudioEvent : ScriptableObject
     {
         public AudioClip clip;
+        public bool loop = false;
         [MinMaxRange(0.5f, 2f)] public RangedFloat volume;
         [MinMaxRange(0.1f, 2f)] public RangedFloat pitch;
 
-        public void Play(AudioSource audioSource, bool loop = false)
+        public void Play(AudioSource audioSource)
         {
             if (clip == null || audioSource == null)
                 return;

@@ -59,7 +59,7 @@ namespace GamersGrotto.Audio_System
             }
         }
         
-        public void Initialize() 
+        public void Initialize()
         {
             LoadVolumes();
             SetMixerVolumes();

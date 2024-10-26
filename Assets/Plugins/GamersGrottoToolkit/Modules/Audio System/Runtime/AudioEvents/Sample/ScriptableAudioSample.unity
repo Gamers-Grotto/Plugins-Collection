@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -420,7 +421,8 @@ GameObject:
   m_Component:
   - component: {fileID: 216718686}
   - component: {fileID: 216718685}
-  - component: {fileID: 216718684}
+  - component: {fileID: 216718688}
+  - component: {fileID: 216718687}
   m_Layer: 0
   m_Name: GameMusic
   m_TagString: Untagged
@@ -428,20 +430,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &216718684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 216718683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 522b652701bd45b9a65827160a6b5636, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 216718685}
-  audioEvent: {fileID: 11400000, guid: c06f1aa4f05892e4b902e006845e35bc, type: 2}
 --- !u!82 &216718685
 AudioSource:
   m_ObjectHideFlags: 0
@@ -554,6 +542,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &216718687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216718683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10168b2aea3b439cb1eb9b3f8cd6c0ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 216718688}
+        m_TargetAssemblyTypeName: GamersGrotto.Audio_System.SoundPlayer, GamersGrotto.Audio_System
+        m_MethodName: PlayAudioEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: c06f1aa4f05892e4b902e006845e35bc, type: 2}
+          m_ObjectArgumentAssemblyTypeName: GamersGrotto.Audio_System.AudioEvents.AudioEvent,
+            GamersGrotto.Audio_System
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &216718688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216718683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c300489f6d44eca548ad73fdc4d509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 216718685}
 --- !u!1 &567583900
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GameMusic
   m_EditorClassIdentifier: 
   audioClips:
-  - {fileID: 11400000, guid: c06f1aa4f05892e4b902e006845e35bc, type: 2}
   - {fileID: 11400000, guid: 01915f8adcaab8a47a58e3900839f4a1, type: 2}
+  - {fileID: 11400000, guid: c06f1aa4f05892e4b902e006845e35bc, type: 2}
