@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5259922632294510164}
   - component: {fileID: 1107605784316770125}
   m_Layer: 0
-  m_Name: LocalCacheManager
+  m_Name: ScriptablePreferencesManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
