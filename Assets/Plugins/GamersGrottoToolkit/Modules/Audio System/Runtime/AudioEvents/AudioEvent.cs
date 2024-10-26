@@ -1,4 +1,5 @@
 ﻿using GamersGrotto.Core;
+using GamersGrotto.Core.Extended_Attributes;
 using UnityEngine;
 
 namespace GamersGrotto.Audio_System.AudioEvents
@@ -7,19 +8,19 @@ namespace GamersGrotto.Audio_System.AudioEvents
     public class AudioEvent : ScriptableObject
     {
         public AudioClip clip;
-        [Range(0,1)]public float volume = 1.0f;
-        [Range(-3,3)]public float pitch = 1.0f;
+        [MinMaxRange(0.5f, 2f)] public RangedFloat volume;
+        [MinMaxRange(0.1f, 2f)] public RangedFloat pitch;
 
-        public void Play(AudioSource audioSource, bool loop)
+        public void Play(AudioSource audioSource, bool loop = false)
         {
             if (clip == null || audioSource == null)
                 return;
 
             audioSource.clip = clip;
             audioSource.time = 0;
-            audioSource.volume = volume;
-            audioSource.pitch = pitch;
-            audioSource.loop =  loop;
+            audioSource.volume = volume.Value;
+            audioSource.pitch = pitch.Value;
+            audioSource.loop = loop;
             audioSource.Play();
         }
     }

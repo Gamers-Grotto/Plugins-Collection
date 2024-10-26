@@ -1,14 +1,14 @@
 using System.Collections.Generic;
-using Gamersgrotto.Audio_System;
 using GamersGrotto.Audio_System.AudioEvents;
 using GamersGrotto.Core;
+using GamersGrotto.Core.Extended_Attributes;
 using UnityEngine;
 
 namespace GamersGrotto.Audio_System {
     [CreateAssetMenu(fileName = "AudioLibrary", menuName = Constants.AudioSystemPath + "AudioLibrarySO")]
     public class AudioLibrary : ScriptableObject
     {	
-        [SerializeField] private List<AudioCollectionSO> audioCollections;
+        [SerializeField, ShowInInspector] private List<AudioCollectionSO> audioCollections;
         public AudioCollectionSO GetRandomCollection()
         {
             return audioCollections[Random.Range(0, audioCollections.Count)];

@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: AudioSettings
   m_EditorClassIdentifier: 
   mainMixer: {fileID: 24100000, guid: 8491483f198c2ef4cb218dcb94bf0fcf, type: 2}
-  masterVolume: 1
-  musicVolume: 1
-  sfxVolume: 1
-  uiVolume: 1
-  inGameEffectsVolume: 1
+  masterVolume: {fileID: 11400000, guid: 62ae596a360ef254e91d2fb8e0718067, type: 2}
+  musicVolume: {fileID: 11400000, guid: 8d398a21e18317c40a95777a14f0857e, type: 2}
+  sfxVolume: {fileID: 11400000, guid: 1a840e8f86e8f1346bbd0914e60d9962, type: 2}
+  uiVolume: {fileID: 11400000, guid: 2010a6992f306434d92f6689636683e3, type: 2}
   lowPassCutoffFrequency: 5000
   maxLowPassCutoffFrequency: 22000

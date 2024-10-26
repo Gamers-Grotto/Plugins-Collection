@@ -4,6 +4,8 @@ using GamersGrotto.Core.Extended_Attributes;
 
 namespace GamersGrotto.Core.Editor.ExtendedAttributes
 {
+    // This is from Unite 2016
+    // https://github.com/richard-fine/scriptable-object-demo/tree/main/Assets/ScriptableObject/Audio
     [CustomPropertyDrawer(typeof(RangedFloat), true)]
     public class RangedFloatDrawer : PropertyDrawer 
     {

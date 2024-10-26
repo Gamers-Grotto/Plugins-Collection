@@ -1,23 +1,22 @@
-using System.Collections;
-using Gamersgrotto.Audio_System;
-using GamersGrotto.Audio_System.AudioEvents;
-using GamersGrotto.Core;
 using UnityEngine;
+using System.Collections;
+using GamersGrotto.Core;
+using GamersGrotto.Audio_System.AudioEvents;
+using GamersGrotto.Core.Extended_Attributes;
 
 namespace GamersGrotto.Audio_System {
     public class AudioManager : Singleton<AudioManager> {
         public AudioSource uiSoundPlayer;
         public AudioSource musicPlayer;
-        [SerializeField] AudioSettings audioSettings;
+        [SerializeField, ShowInInspector] AudioSettings audioSettings;
+        
         private short uiSoundIndex;
 
-        public static void PlayAudioEvent(AudioEvent audioEvent, AudioSource audioSource, bool loop = false) =>
-            audioEvent?.Play(audioSource, loop);
+        public static void PlayAudioEvent(AudioEvent audioEvent, AudioSource audioSource, bool loop = false) 
+            => audioEvent?.Play(audioSource, loop);
 
 
-        public void Start() {
-            audioSettings.Initialize();
-        }
+        public void Start() => audioSettings?.Initialize();
 
         #region UI
 

@@ -1,28 +1,78 @@
 using GamersGrotto.Core;
 using GamersGrotto.Core.Extended_Attributes;
+using GamersGrotto.Core.ScriptablePreferences.PreferenceTypes;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace GamersGrotto.Audio_System {
+namespace GamersGrotto.Audio_System 
+{
     [CreateAssetMenu(fileName = "NewAudioSettings", menuName = Constants.AudioSystemPath + "AudioSettings")]
     public class AudioSettings : ScriptableObject
     {	
         public AudioMixer mainMixer;
-    
-        [Tooltip("In Percentage"), Range(0.0001f, 1), SerializeField]
-        float masterVolume = 0.5f, musicVolume = 1, sfxVolume = 1, uiVolume = 1, inGameEffectsVolume = 1;
+
+        [SerializeField, ShowInInspector] private FloatScriptablePreference masterVolume;
+        [SerializeField, ShowInInspector] private FloatScriptablePreference musicVolume;
+        [SerializeField, ShowInInspector] private FloatScriptablePreference sfxVolume;
+        [SerializeField, ShowInInspector] private FloatScriptablePreference uiVolume;
     
         public float lowPassCutoffFrequency = 5000f;
         public float maxLowPassCutoffFrequency = 22000f;
-        public float MasterVolume{  get { return masterVolume; }  set { masterVolume = value; SetMixerVolume("masterVolume",masterVolume); } }
-        public float MusicVolume{  get { return musicVolume; }  set { musicVolume = value; SetMixerVolume("musicVolume",musicVolume); } }
-        public float SFXVolume{  get { return sfxVolume; }  set { sfxVolume = value; SetMixerVolume("sfxVolume",sfxVolume); } }
-        public float UIVolume{  get { return uiVolume; }  set { uiVolume = value; SetMixerVolume("uiVolume",uiVolume); } }
-        public float InGameEffectsVolume{  get { return inGameEffectsVolume; }  set { inGameEffectsVolume = value; SetMixerVolume("inGameEffectsVolume",inGameEffectsVolume); } }
-        public void Initialize() {
+        
+        public float MasterVolume
+        {  
+            get => masterVolume.value;
+            set
+            {
+                masterVolume.value = value; 
+                SetMixerVolume(masterVolume.Key, value);
+            } 
+        }
+        
+        public float MusicVolume
+        {  
+            get => musicVolume.value;
+            set
+            {
+                musicVolume.value = value; 
+                SetMixerVolume(musicVolume.Key, musicVolume.value);
+            } 
+        }
+        
+        public float SfxVolume
+        {
+            get => sfxVolume.value;
+            set
+            {
+                sfxVolume.value = value; 
+                SetMixerVolume("sfxVolume", sfxVolume.value);
+            } 
+        }
+
+        public float UIVolume
+        {
+            get => uiVolume.value;
+            set
+            {
+                uiVolume.value = value; 
+                SetMixerVolume("uiVolume",uiVolume.value);
+            }
+        }
+        
+        public void Initialize() 
+        {
             LoadVolumes();
             SetMixerVolumes();
         }
+    
+        private void LoadVolumes()
+        {
+            masterVolume.Load();
+            musicVolume.Load();
+            sfxVolume.Load();
+            uiVolume.Load();
+        }
+        
         /// <summary>
         /// This method converts the volume from a linear scale to a logarithmic scale, which is what the AudioMixer uses.
         /// </summary>
@@ -31,15 +81,15 @@ namespace GamersGrotto.Audio_System {
         private void SetMixerVolume(string floatName, float volume)
         {
             mainMixer.SetFloat(floatName, Mathf.Log10(volume) * 20);
-            SaveVolume(floatName, volume);
         }
-        void SetMixerVolumes() {
+
+        private void SetMixerVolumes() 
+        {
             //These variables are found in the Audio mixer, then Exposed Parameters
-            SetMixerVolume("masterVolume",masterVolume);
-            SetMixerVolume("musicVolume",musicVolume);
-            SetMixerVolume("sfxVolume",sfxVolume);
-            SetMixerVolume("uiVolume",uiVolume);
-            SetMixerVolume("inGameEffectsVolume",inGameEffectsVolume);
+            SetMixerVolume(masterVolume.Key, masterVolume.value);
+            SetMixerVolume(musicVolume.Key, musicVolume.value);
+            SetMixerVolume(sfxVolume.Key, sfxVolume.value);
+            SetMixerVolume(uiVolume.Key, uiVolume.value);
         }
     
         [Button]
@@ -51,23 +101,6 @@ namespace GamersGrotto.Audio_System {
         public void DeactivateLowPassFilter()
         {
             mainMixer.SetFloat("masterCutoffFrequency", maxLowPassCutoffFrequency);
-        }
-    
-    
-        private void SaveVolume(string key, float volume)
-        {
-            PlayerPrefs.SetFloat(key, volume);
-            PlayerPrefs.Save();
-        
-        }
-    
-        private void LoadVolumes()
-        {
-            masterVolume = PlayerPrefs.GetFloat("masterVolume", masterVolume);
-            musicVolume = PlayerPrefs.GetFloat("musicVolume", musicVolume);
-            sfxVolume = PlayerPrefs.GetFloat("sfxVolume", sfxVolume);
-            uiVolume = PlayerPrefs.GetFloat("uiVolume", uiVolume);
-            inGameEffectsVolume = PlayerPrefs.GetFloat("inGameEffectsVolume", inGameEffectsVolume);
         }
     }
 }
