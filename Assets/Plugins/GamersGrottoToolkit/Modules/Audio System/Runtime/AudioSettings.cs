@@ -18,6 +18,9 @@ namespace GamersGrotto.Audio_System
     
         public float lowPassCutoffFrequency = 5000f;
         public float maxLowPassCutoffFrequency = 22000f;
+        private float unmutedMasterVolume;
+        
+        public bool IsMuted { get; private set; }
         
         public float MasterVolume
         {  
@@ -45,7 +48,7 @@ namespace GamersGrotto.Audio_System
             set
             {
                 sfxVolume.value = value; 
-                SetMixerVolume("sfxVolume", sfxVolume.value);
+                SetMixerVolume(sfxVolume.Key, sfxVolume.value);
             } 
         }
 
@@ -55,7 +58,7 @@ namespace GamersGrotto.Audio_System
             set
             {
                 uiVolume.value = value; 
-                SetMixerVolume("uiVolume",uiVolume.value);
+                SetMixerVolume(uiVolume.Key, uiVolume.value);
             }
         }
         
@@ -91,6 +94,25 @@ namespace GamersGrotto.Audio_System
             SetMixerVolume(sfxVolume.Key, sfxVolume.value);
             SetMixerVolume(uiVolume.Key, uiVolume.value);
         }
+        
+        public void Mute(bool mute)
+        {
+            if(mute == IsMuted)
+                return;
+
+            switch (mute)
+            {
+                case true:
+                    unmutedMasterVolume = masterVolume.value;
+                    SetMixerVolume(masterVolume.Key, 0.0001f);
+                    IsMuted = true;
+                    break;
+                case false:
+                    SetMixerVolume(masterVolume.Key, unmutedMasterVolume);
+                    IsMuted = false;
+                    break;
+            }
+        }
     
         [Button]
         public void ActivateLowPassFilter()
@@ -102,5 +124,8 @@ namespace GamersGrotto.Audio_System
         {
             mainMixer.SetFloat("masterCutoffFrequency", maxLowPassCutoffFrequency);
         }
+        
+        [Button]
+        public void ToggleMute() => Mute(!IsMuted);
     }
 }
