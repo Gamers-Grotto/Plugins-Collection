@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf48bc71f2c242b990efafe1957e55cc, type: 3}
-  m_Name: ItemsCollectedVariable
+  m_Script: {fileID: 11500000, guid: beb363bb3762442fac632151ae865b66, type: 3}
+  m_Name: SpikeDamageFloatVariable
   m_EditorClassIdentifier: 
-  <Value>k__BackingField: 0
+  <Value>k__BackingField: 10

@@ -86,7 +86,7 @@ namespace GamersGrotto.Audio_System
             mainMixer.SetFloat(floatName, Mathf.Log10(volume) * 20);
         }
 
-        private void SetMixerVolumes() 
+        private void SetMixerVolumes()
         {
             //These variables are found in the Audio mixer, then Exposed Parameters
             SetMixerVolume(masterVolume.Key, masterVolume.value);

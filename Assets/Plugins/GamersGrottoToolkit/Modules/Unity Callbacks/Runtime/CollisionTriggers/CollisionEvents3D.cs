@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace GamersGrotto.Unity_Callbacks.CollisionTriggers
 {
-    [RequireComponent(typeof(Collider), typeof(Rigidbody))]
+    [RequireComponent(typeof(Collider))]
     public class CollisionEvents3D : MonoBehaviour
     {
         [SerializeField] private LayerMask layerMask;

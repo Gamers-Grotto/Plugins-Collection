@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using GamersGrotto.Core.Extended_Attributes;
+using GamersGrotto.Core.ScriptableVariables.VariableTypes;
 using GamersGrotto.Damage_System.Modifiers;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace GamersGrotto.Damage_System {
     public class Health : MonoBehaviour {
-        [field: SerializeField] public HealthSO healthSO;
+        [field: SerializeField, ShowInInspector] public HealthSO healthSO;
         float max;
         [field: SerializeField] public bool Invulnerable { get; private set; }
 
@@ -41,8 +43,7 @@ namespace GamersGrotto.Damage_System {
                 Current = Mathf.Clamp(Current, 0, Max);
             }
         }
-
-
+        
         public bool IsFull => Current >= Max;
         public bool IsDead => Current <= 0;
         public float LastDamaged { get; private set; }
@@ -76,6 +77,10 @@ namespace GamersGrotto.Damage_System {
 
             Current += healing;
         }
+
+        public void TakeDamage(float damage) => TakeDamage(damage, false, null);
+
+        public void TakeDamage(FloatScriptableVariable floatVariable) => TakeDamage(floatVariable.Value);
 
         public void TakeDamage(float damage, bool isCrit, DamageType? damageType = null) {
             if (Invulnerable)

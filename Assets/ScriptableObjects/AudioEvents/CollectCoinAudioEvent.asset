@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8f01593fb354daaa9f29ebf75d83515, type: 3}
-  m_Name: SchoolBellAudioEvent
+  m_Name: CollectCoinAudioEvent
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: dc721eb6e65dd624e91e82e71b6dafe7, type: 3}
+  clip: {fileID: 8300000, guid: 4e633f682d38d8344bd600bccc3da10c, type: 3}
   loop: 0
   volume:
-    minValue: 0.5030108
-    maxValue: 0.5992715
+    minValue: 0.9037123
+    maxValue: 1.0997679
   pitch:
-    minValue: 0.8388638
-    maxValue: 1.1477304
+    minValue: 0.899304
+    maxValue: 1.1020881
