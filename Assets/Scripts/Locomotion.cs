@@ -1,24 +1,24 @@
 ﻿using System.Collections;
 using GamersGrotto.Core;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class Locomotion : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float sprintSpeed = 9f;
+    public float moveSpeed = 6f;
+    public float sprintSpeed = 9f;
     [Space]
     [Header("Jumping")]
-    [SerializeField] private float jumpForce = 6f;
-    [SerializeField] private float coyoteTime = 0.2f;
-    [SerializeField] private bool doubleJumpUnlocked;
+    public bool doubleJump;
+    public float jumpForce = 9f;
+    [SerializeField] private float coyoteTime = 0.15f;
     [Space]
     [Header("Dash")] 
-    [SerializeField] private bool dashUnlocked;
-    [SerializeField] private float dashDuration = 0.5f;
-    [SerializeField] private float dashSpeed = 15f;
+    public bool dash;
+    public float dashDuration = 0.25f;
+    public float dashSpeed = 20f;
     [Space]
     [Header("Squash and Stretch")]
     [SerializeField] private float squashScaleY = 0.8f;
@@ -33,6 +33,11 @@ public class Locomotion : MonoBehaviour
     [Space]
     [Header("Debug")]
     [SerializeField] private bool showDebugInfo;
+    [Space]
+    [Header("Events")]
+    [SerializeField] private UnityEvent onJump;
+    [SerializeField] private UnityEvent onAirJump;
+    [SerializeField] private UnityEvent onDash;
     
     private bool CanJump => (groundCheck.IsGrounded || CanUseCoyote) && !hasJumped;
 
@@ -102,11 +107,10 @@ public class Locomotion : MonoBehaviour
     {
         if(isDashing)
             return;
-        
-        var horizontalMoveSpeed = moveInput.x * (isSprintPressed ? sprintSpeed : moveSpeed); 
-        rb.linearVelocity = new Vector3(horizontalMoveSpeed, rb.linearVelocity.y, 0f);
+
+        HandleMovement();
     }
-    
+
     private void OnDisable()
     {
         sprintInputAction.action.started -= OnSprintStarted;
@@ -125,8 +129,23 @@ public class Locomotion : MonoBehaviour
             InterruptDash();
     }
     #endregion
+    
+    #region Movement
+    
+    private void HandleMovement()
+    {
+        var horizontalMoveSpeed = moveInput.x * (isSprintPressed ? sprintSpeed : moveSpeed);
+        rb.linearVelocity = new Vector3(horizontalMoveSpeed, rb.linearVelocity.y, 0f);
+    }
+    
+    private void OnSprintStarted(InputAction.CallbackContext obj) => isSprintPressed = true;
 
+    private void OnSprintCanceled(InputAction.CallbackContext obj) => isSprintPressed = false;
+    #endregion
+    
     #region Jumping
+
+    public void UnlockDoubleJump(bool unlocked) => doubleJump = unlocked;
     
     private void OnJumpPerformed(InputAction.CallbackContext context)
     {
@@ -138,26 +157,23 @@ public class Locomotion : MonoBehaviour
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
             hasJumped = true;
             coyoteTimeCounter = 0f;
+            onJump?.Invoke();
             return;
         }
 
-        if (!groundCheck.IsGrounded && doubleJumpUnlocked && !hasAirJumped)
+        if (!groundCheck.IsGrounded && doubleJump && !hasAirJumped)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
             hasAirJumped = true;
+            onAirJump?.Invoke();
         }
     }
-    #endregion
-
-    #region Sprinting
-    
-    private void OnSprintStarted(InputAction.CallbackContext obj) => isSprintPressed = true;
-
-    private void OnSprintCanceled(InputAction.CallbackContext obj) => isSprintPressed = false;
     #endregion
     
     #region Dashing
 
+    public void UnlockDash(bool unlocked) => dash = unlocked;
+    
     public void InterruptDash()
     {
         if(dashRoutine != null)
@@ -171,7 +187,7 @@ public class Locomotion : MonoBehaviour
     
     private void OnDashPerformed(InputAction.CallbackContext obj)
     {
-        if(!dashUnlocked)
+        if(!dash)
             return;
         
         if(isDashing)
@@ -194,10 +210,12 @@ public class Locomotion : MonoBehaviour
             : lastKnownDirection)
             .normalized;
         
+        onDash?.Invoke();
+        
         var elapsed = 0f;
         while (elapsed < dashDuration)
         {
-            rb.linearVelocity = dashDirection * (dashSpeed/* * Time.deltaTime*/); 
+            rb.linearVelocity = dashDirection * dashSpeed;
             yield return null;
             elapsed += Time.deltaTime;
         }

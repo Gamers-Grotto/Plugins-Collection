@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Door
   - 
   - Player
   - Enemy
@@ -25,7 +25,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Unsafe
   - 
   - 
   - 

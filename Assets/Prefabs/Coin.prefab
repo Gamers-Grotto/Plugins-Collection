@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4982181228187432571}
   - component: {fileID: 5040246312193255463}
   - component: {fileID: 7897173145921097220}
+  - component: {fileID: 6388834484004882405}
   m_Layer: 13
   m_Name: Cylinder
   m_TagString: Untagged
@@ -86,6 +87,48 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6388834484004882405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6931500142696550488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 903940e3f8614266b85fd2a9abd9c464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onVisible:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 44497953742356286}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  onInvisible:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 44497953742356286}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8579365912864246341
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +273,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8814356836866181696}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3bed6da107343a59c9b2908d3806c27, type: 3}
   m_Name: 

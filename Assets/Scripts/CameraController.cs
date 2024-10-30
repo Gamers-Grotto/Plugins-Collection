@@ -16,6 +16,11 @@ public class CameraController : MonoBehaviour
     
     private Vector3 currentVelocity;
 
+    private void Start()
+    {
+        transform.position = target.position + offset;
+    }
+
     private void FixedUpdate()
     {
         if(updateType != UpdateType.FixedUpdate)

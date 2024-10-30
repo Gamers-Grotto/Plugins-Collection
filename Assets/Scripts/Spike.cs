@@ -13,7 +13,7 @@ public class Spike : MonoBehaviour
     
     private void OnCollisionEnter(Collision other)
     {
-        if (!other.gameObject.IsInLayerMask(enemyLayer)) 
+        if (!other.gameObject.IsInLayerMask(enemyLayer))
             return;
         
         collisionWithSpike?.Invoke(spikeDamage.Value);
