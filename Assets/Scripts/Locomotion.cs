@@ -7,8 +7,7 @@ using UnityEngine.InputSystem;
 public class Locomotion : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed = 6f;
-    public float sprintSpeed = 9f;
+    public float moveSpeed = 9f;
     [Space]
     [Header("Jumping")]
     public bool doubleJump;
@@ -20,16 +19,10 @@ public class Locomotion : MonoBehaviour
     public float dashDuration = 0.25f;
     public float dashSpeed = 20f;
     [Space]
-    [Header("Squash and Stretch")]
-    [SerializeField] private float squashScaleY = 0.8f;
-    [SerializeField] private float stretchScaleY = 1.2f;
-    [SerializeField] private float scaleInterpolationSpeed = 15f;
-    [Space]
     [Header("Input")]
     [SerializeField] private InputActionReference moveInputAction;
     [SerializeField] private InputActionReference jumpInputAction;
     [SerializeField] private InputActionReference sprintInputAction;
-    [SerializeField] private InputActionReference dashInputAction;
     [Space]
     [Header("Debug")]
     [SerializeField] private bool showDebugInfo;
@@ -49,8 +42,6 @@ public class Locomotion : MonoBehaviour
     private bool hasJumped;
     private bool hasAirJumped;
     private float coyoteTimeCounter;
-    private bool isSprintPressed;
-    private Vector3 originalScale;
     private bool isDashing;
     private bool canDash;
     private Vector3 lastKnownDirection;
@@ -62,7 +53,6 @@ public class Locomotion : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         groundCheck = GetComponent<GroundCheck>();
-        originalScale = transform.localScale;
         lastKnownDirection = transform.right;
     }
 
@@ -74,11 +64,7 @@ public class Locomotion : MonoBehaviour
         jumpInputAction.action.performed += OnJumpPerformed;
         
         sprintInputAction.action.Enable();
-        sprintInputAction.action.canceled += OnSprintCanceled;
-        sprintInputAction.action.started += OnSprintStarted;
-        
-        dashInputAction.action.Enable();
-        dashInputAction.action.performed += OnDashPerformed;
+        sprintInputAction.action.performed += OnDashPerformed;
     }
 
     private void Update()
@@ -99,8 +85,6 @@ public class Locomotion : MonoBehaviour
         {
             coyoteTimeCounter -= Time.deltaTime;
         }
-        
-        SquashAndStretch();
     }
 
     private void FixedUpdate()
@@ -108,39 +92,23 @@ public class Locomotion : MonoBehaviour
         if(isDashing)
             return;
 
-        HandleMovement();
+        var horizontalMoveSpeed = moveInput.x * moveSpeed;
+        rb.linearVelocity = new Vector3(horizontalMoveSpeed, rb.linearVelocity.y, 0f);
     }
 
     private void OnDisable()
     {
-        sprintInputAction.action.started -= OnSprintStarted;
-        sprintInputAction.action.canceled -= OnSprintCanceled;
+        sprintInputAction.action.performed -= OnDashPerformed;
         sprintInputAction.action.Disable();
         
         jumpInputAction.action.performed -= OnJumpPerformed;
         jumpInputAction.action.Disable();
-
-        dashInputAction.action.performed -= OnDashPerformed;
-        dashInputAction.action.Disable();
         
         moveInputAction.action.Disable();
         
         if(isDashing)
             InterruptDash();
     }
-    #endregion
-    
-    #region Movement
-    
-    private void HandleMovement()
-    {
-        var horizontalMoveSpeed = moveInput.x * (isSprintPressed ? sprintSpeed : moveSpeed);
-        rb.linearVelocity = new Vector3(horizontalMoveSpeed, rb.linearVelocity.y, 0f);
-    }
-    
-    private void OnSprintStarted(InputAction.CallbackContext obj) => isSprintPressed = true;
-
-    private void OnSprintCanceled(InputAction.CallbackContext obj) => isSprintPressed = false;
     #endregion
     
     #region Jumping
@@ -226,26 +194,6 @@ public class Locomotion : MonoBehaviour
     }
     
     #endregion
-    
-    private void SquashAndStretch()
-    {
-        if (groundCheck.IsGrounded || isDashing)
-        {
-            transform.localScale = Vector3.Lerp(transform.localScale, originalScale, scaleInterpolationSpeed * Time.deltaTime);
-        } 
-        else if (rb.linearVelocity.y > 0)
-        {
-            transform.localScale = Vector3.Lerp(transform.localScale, 
-                new Vector3(originalScale.x, stretchScaleY, originalScale.z), 
-                scaleInterpolationSpeed * Time.deltaTime);
-        }
-        else if (rb.linearVelocity.y < 0)
-        {
-            transform.localScale = Vector3.Lerp(transform.localScale, 
-                new Vector3(originalScale.x, squashScaleY, originalScale.z), 
-                scaleInterpolationSpeed * Time.deltaTime);
-        }
-    }
 
     private void OnGUI()
     {
@@ -253,8 +201,6 @@ public class Locomotion : MonoBehaviour
             return;
         
         GUILayout.Label("IsGrounded: " + $"{groundCheck.IsGrounded}".Colorize(groundCheck.IsGrounded ? "green" : "red"));
-        
-        GUILayout.Label($"Sprint : {isSprintPressed}");
         
         GUILayout.Label($"CoyoteTime: {coyoteTimeCounter}");
         GUILayout.Label($"CanUseCoyote: {CanUseCoyote}");

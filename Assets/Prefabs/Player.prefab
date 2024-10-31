@@ -126,21 +126,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d97ed8774914e8cbf7e75dba7c75144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
-  sprintSpeed: 9
+  moveSpeed: 9
   doubleJump: 0
-  jumpForce: 9
+  jumpForce: 15
   coyoteTime: 0.15
   dash: 0
   dashDuration: 0.2
   dashSpeed: 20
-  squashScaleY: 0.8
-  stretchScaleY: 1.2
-  scaleInterpolationSpeed: 15
   moveInputAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   jumpInputAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   sprintInputAction: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  dashInputAction: {fileID: -8164426933608037631, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   showDebugInfo: 0
   onJump:
     m_PersistentCalls:
