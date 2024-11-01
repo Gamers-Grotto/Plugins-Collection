@@ -5154,7 +5154,7 @@ MonoBehaviour:
   target: {fileID: 1786171923}
   offset: {x: 0, y: 4, z: -15}
   smoothTime: 0.15
-  maxSpeed: 15
+  maxSpeed: 25
   cameraMovementType: 2
   updateType: 2
 --- !u!114 &780464864
@@ -10767,10 +10767,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -14103,10 +14103,6 @@ PrefabInstance:
       propertyPath: response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 4005057}
-    - target: {fileID: 1258303577209010121, guid: f375cbdfd0e6e6f4894542d10f437f94, type: 3}
-      propertyPath: dashInputAction
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2090082063198849234, guid: f375cbdfd0e6e6f4894542d10f437f94, type: 3}
       propertyPath: m_Name
       value: Player
@@ -14115,14 +14111,6 @@ PrefabInstance:
       propertyPath: response.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 4005057}
-    - target: {fileID: 7216705871695937559, guid: f375cbdfd0e6e6f4894542d10f437f94, type: 3}
-      propertyPath: halfExtents.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7216705871695937559, guid: f375cbdfd0e6e6f4894542d10f437f94, type: 3}
-      propertyPath: halfExtents.z
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 8996639300871976312, guid: f375cbdfd0e6e6f4894542d10f437f94, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.45
@@ -14290,13 +14278,13 @@ SceneRoots:
   - {fileID: 780464862}
   - {fileID: 325000435}
   - {fileID: 1731311422}
-  - {fileID: 4005058}
+  - {fileID: 1796190389}
   - {fileID: 1527787720}
+  - {fileID: 4005058}
   - {fileID: 1521104912}
   - {fileID: 2808352518097576429}
   - {fileID: 2065296240}
   - {fileID: 41303471}
-  - {fileID: 1796190389}
   - {fileID: 1484796695}
   - {fileID: 516618029}
   - {fileID: 283464494}
