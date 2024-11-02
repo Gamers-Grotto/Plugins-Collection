@@ -13,6 +13,7 @@ namespace GamersGrotto
         [SerializeField] private float interval = 3f;
         [SerializeField] private LayerMask laserMask;
         [SerializeField] private Animator animator;
+        [SerializeField] private float telegraphWarningTime = 0.5f;
         
         public LineRenderer lineRenderer;
 
@@ -30,6 +31,8 @@ namespace GamersGrotto
             while (true)
             {
                 yield return new WaitForSeconds(interval);
+                animator.SetTrigger("TelegraphAttack");
+                yield return new WaitForSeconds(telegraphWarningTime);
                 yield return FireLaserBeam();
             }
         }
@@ -37,9 +40,6 @@ namespace GamersGrotto
         private IEnumerator FireLaserBeam()
         {
             lineRenderer.enabled = true;
-            
-            animator.SetTrigger("TelegraphAttack");
-            yield return new WaitForSeconds(1f);
             
             var hasHitPlayer = false;
             
