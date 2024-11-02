@@ -32,7 +32,7 @@ MonoBehaviour:
   - rid: 1211910357275377970
   - rid: 1211910357275377991
   - rid: 1211910357275377993
-  m_VersionTimestamp: 638661673366074459
+  m_VersionTimestamp: 638661680222965034
   m_CommandBuffer:
     m_Commands: []
   m_RuntimeBlackboardAsset: {fileID: 3834740990059255220}
@@ -82,11 +82,12 @@ MonoBehaviour:
   m_Name: EnemyBehavior
   m_EditorClassIdentifier: 
   Blackboard: {fileID: -832812598630314245}
-  m_Description: 
+  m_Description: Has the enemy patrol between waypoints
   m_Nodes:
   - rid: 1211910357275377971
   - rid: 1211910357275377973
-  m_VersionTimestamp: 638661673365729609
+  - rid: 1211910357275378073
+  m_VersionTimestamp: 638661680222965034
   m_DebugInfo: {fileID: -8873027391571426652}
   AssetID:
     m_Value0: 4936488326275177689
@@ -390,6 +391,16 @@ MonoBehaviour:
         IsExposed: 1
         m_IsShared: 0
         m_Value: 5
+    - rid: 1211910357275378073
+      type: {class: StickyNoteModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        Position: {x: -31.64349, y: -141.71333}
+        ID:
+          m_Value0: 721344617675195433
+          m_Value1: 5348463045225862485
+        Parents: []
+        PortModels: []
+        Text: This is a sticky note! Cool
 --- !u!114 &3355026070464463840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,102 +414,15 @@ MonoBehaviour:
   m_Name: EnemyBehavior
   m_EditorClassIdentifier: 
   Graphs:
-  - rid: 1211910357275378061
+  - rid: 1211910357275378085
   RootGraph:
-    rid: 1211910357275378061
+    rid: 1211910357275378085
   m_DebugInfo: {fileID: -8873027391571426652}
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1211910357275378061
-      type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        AuthoringAssetID:
-          m_Value0: 4936488326275177689
-          m_Value1: 2673061551461961354
-        m_DebugInfo: {fileID: 0}
-        Root:
-          rid: 1211910357275378062
-        BlackboardReference:
-          rid: 1211910357275378063
-        BlackboardGroupReferences: []
-        m_VersionTimestamp: 638661673365729609
-    - rid: 1211910357275378062
-      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 5271783790571116028
-          m_Value1: 12096745915786980180
-        Graph:
-          rid: 1211910357275378061
-        m_Parent:
-          rid: -2
-        m_Child:
-          rid: 1211910357275378064
-        Repeat: 1
-    - rid: 1211910357275378063
-      type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        m_Blackboard:
-          rid: 1211910357275378065
-        m_Source: {fileID: 3834740990059255220}
-    - rid: 1211910357275378064
-      type: {class: PatrolAction, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 10948332863271782626
-          m_Value1: 8423942433141542135
-        Graph:
-          rid: 1211910357275378061
-        m_Parent:
-          rid: 1211910357275378062
-        Agent:
-          rid: 1211910357275378066
-        Waypoints:
-          rid: 1211910357275378067
-        Speed:
-          rid: 1211910357275378068
-        WaypointWaitTime:
-          rid: 1211910357275378069
-        DistanceThreshold:
-          rid: 1211910357275378070
-        AnimatorSpeedParam:
-          rid: 1211910357275378071
-        PreserveLatestPatrolPoint:
-          rid: 1211910357275378072
-    - rid: 1211910357275378065
-      type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        m_Variables:
-        - rid: 1211910357275378066
-        - rid: 1211910357275378067
-        - rid: 1211910357275378068
-    - rid: 1211910357275378066
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        m_Value: {fileID: 0}
-    - rid: 1211910357275378067
-      type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 5744018104406627700
-          m_Value1: 17026657975432261571
-        Name: Waypoints
-        m_Value: []
-    - rid: 1211910357275378068
-      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 3001490734485697521
-          m_Value1: 11671228958201635402
-        Name: Speed
-        m_Value: 5
     - rid: 1211910357275378069
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -531,6 +455,93 @@ MonoBehaviour:
           m_Value1: 0
         Name: 
         m_Value: 0
+    - rid: 1211910357275378085
+      type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        AuthoringAssetID:
+          m_Value0: 4936488326275177689
+          m_Value1: 2673061551461961354
+        m_DebugInfo: {fileID: 0}
+        Root:
+          rid: 1211910357275378086
+        BlackboardReference:
+          rid: 1211910357275378087
+        BlackboardGroupReferences: []
+        m_VersionTimestamp: 638661680222965034
+    - rid: 1211910357275378086
+      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 5271783790571116028
+          m_Value1: 12096745915786980180
+        Graph:
+          rid: 1211910357275378085
+        m_Parent:
+          rid: -2
+        m_Child:
+          rid: 1211910357275378088
+        Repeat: 1
+    - rid: 1211910357275378087
+      type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        m_Blackboard:
+          rid: 1211910357275378089
+        m_Source: {fileID: 3834740990059255220}
+    - rid: 1211910357275378088
+      type: {class: PatrolAction, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 10948332863271782626
+          m_Value1: 8423942433141542135
+        Graph:
+          rid: 1211910357275378085
+        m_Parent:
+          rid: 1211910357275378086
+        Agent:
+          rid: 1211910357275378090
+        Waypoints:
+          rid: 1211910357275378091
+        Speed:
+          rid: 1211910357275378092
+        WaypointWaitTime:
+          rid: 1211910357275378069
+        DistanceThreshold:
+          rid: 1211910357275378070
+        AnimatorSpeedParam:
+          rid: 1211910357275378071
+        PreserveLatestPatrolPoint:
+          rid: 1211910357275378072
+    - rid: 1211910357275378089
+      type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        m_Variables:
+        - rid: 1211910357275378090
+        - rid: 1211910357275378091
+        - rid: 1211910357275378092
+    - rid: 1211910357275378090
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 0}
+    - rid: 1211910357275378091
+      type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 5744018104406627700
+          m_Value1: 17026657975432261571
+        Name: Waypoints
+        m_Value: []
+    - rid: 1211910357275378092
+      type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 3001490734485697521
+          m_Value1: 11671228958201635402
+        Name: Speed
+        m_Value: 5
 --- !u!114 &3834740990059255220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,20 +554,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
   m_Name: EnemyBehavior Blackboard Editor
   m_EditorClassIdentifier: 
-  VersionTimestamp: 638661673366074459
+  VersionTimestamp: 638661680222965034
   AssetID:
     m_Value0: 0
     m_Value1: 0
   m_Blackboard:
     m_Variables:
-    - rid: 1211910357275378007
-    - rid: 1211910357275378008
-    - rid: 1211910357275378009
+    - rid: 1211910357275378082
+    - rid: 1211910357275378083
+    - rid: 1211910357275378084
   m_SharedBlackboardVariableGuids: []
   references:
     version: 2
     RefIds:
-    - rid: 1211910357275378007
+    - rid: 1211910357275378082
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -564,7 +575,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 0}
-    - rid: 1211910357275378008
+    - rid: 1211910357275378083
       type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -572,7 +583,7 @@ MonoBehaviour:
           m_Value1: 17026657975432261571
         Name: Waypoints
         m_Value: []
-    - rid: 1211910357275378009
+    - rid: 1211910357275378084
       type: {class: 'BlackboardVariable`1[[System.Single, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
