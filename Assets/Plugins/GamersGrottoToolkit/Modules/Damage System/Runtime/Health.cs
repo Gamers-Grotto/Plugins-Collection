@@ -14,6 +14,7 @@ namespace GamersGrotto.Damage_System {
 
         public List<ValueModifier> maxHealthModifiers = new List<ValueModifier>();
         public UnityEvent<float, float> healthChanged;
+        public UnityEvent<float> healthChangedNormalized;
         public UnityEvent death;
 
         private float _current;
@@ -30,6 +31,7 @@ namespace GamersGrotto.Damage_System {
 
                 _current = Mathf.Clamp(value, 0, Max);
                 healthChanged?.Invoke(_current, Max);
+                healthChangedNormalized?.Invoke(_current / Max);
             }
         }
 

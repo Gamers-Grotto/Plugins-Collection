@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 namespace GamersGrotto
 {
+    [RequireComponent(typeof(Renderer))]
     public class VisibilityTriggered : MonoBehaviour
     {
         public UnityEvent onVisible;
