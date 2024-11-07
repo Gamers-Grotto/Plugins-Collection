@@ -17,6 +17,7 @@ namespace GamersGrotto
 
             if (other.gameObject.TryGetComponent<Rigidbody>(out var rb))
                 rb.AddForce(Vector3.up * bounceForce, forceMode);
+            
         }
     }
 }
