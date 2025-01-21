@@ -50,54 +50,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2842373103533661220, guid: a2e1bd73e1980cd499e84a0c81263426, type: 3}
       propertyPath: m_Name
-      value: Spike Variant
+      value: Spike Variant 2 (Dmg Component)
       objectReference: {fileID: 0}
     - target: {fileID: 3798406217587402404, guid: a2e1bd73e1980cd499e84a0c81263426, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: dbcd6dcf03e3de04e9424b445ed78806, type: 2}
-    m_RemovedComponents:
-    - {fileID: 4220748026404295047, guid: a2e1bd73e1980cd499e84a0c81263426, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2842373103533661220, guid: a2e1bd73e1980cd499e84a0c81263426, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6854911663218457101}
-    - targetCorrespondingSourceObject: {fileID: 2842373103533661220, guid: a2e1bd73e1980cd499e84a0c81263426, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6707836922612267223}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2e1bd73e1980cd499e84a0c81263426, type: 3}
---- !u!1 &4882970233368243044 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2842373103533661220, guid: a2e1bd73e1980cd499e84a0c81263426, type: 3}
-  m_PrefabInstance: {fileID: 7255836426058069824}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6854911663218457101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4882970233368243044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98ad457851d557446ae5c156a36f481f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageSO: {fileID: 11400000, guid: 51a6be4e47ebd6246b91e17aca223cc1, type: 2}
-  damageModifiers: []
-  critChanceModifiers: []
---- !u!114 &6707836922612267223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4882970233368243044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8671e555a9359ae489f88bd875d2757e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageComponent: {fileID: 6854911663218457101}
