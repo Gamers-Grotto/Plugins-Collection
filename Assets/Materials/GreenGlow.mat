@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RedGlow
+  m_Name: GreenGlow
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -129,9 +129,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.89433956, g: 0.30880022, b: 0.33668295, a: 1}
-    - _Color: {r: 0.89433956, g: 0.3088002, b: 0.33668292, a: 1}
-    - _EmissionColor: {r: 3.7321322, g: 0.17585953, b: 0.2441089, a: 1}
+    - _BaseColor: {r: 0.16043432, g: 0.7660377, b: 0.16311227, a: 1}
+    - _Color: {r: 0.16043428, g: 0.7660377, b: 0.16311222, a: 1}
+    - _EmissionColor: {r: 0.17739107, g: 4.3657975, b: 0.18522692, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

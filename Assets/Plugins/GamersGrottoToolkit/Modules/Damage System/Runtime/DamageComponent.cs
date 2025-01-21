@@ -6,6 +6,7 @@ using UnityEngine;
 namespace GamersGrotto.Damage_System {
     /// <summary>
     /// The purpose of this component is to allow something to deal damage to an object with a Health component.
+    /// It does not handle when the damage should be dealth or to whom, that has to be handled by another script.
     /// </summary>
     public class DamageComponent : MonoBehaviour {
         [ShowInInspector] public DamageSO damageSO;
@@ -21,6 +22,8 @@ namespace GamersGrotto.Damage_System {
             ApplyDamageModifiers(ref damage);
 
             health.TakeDamage(damage, isCrit, damageSO.DamageType);
+            
+            Debug.Log($"[{gameObject.name}] Dealt {damage} damage to [{health.gameObject.name}]. Crit? ({isCrit}). Damage Type ({damageSO.DamageType})", this);
         }
 
         void ApplyDamageModifiers(ref float damage) {
@@ -84,4 +87,5 @@ namespace GamersGrotto.Damage_System {
 
         #endregion
     }
+    
 }

@@ -17,6 +17,19 @@ namespace GamersGrotto.Damage_System {
         public UnityEvent<float> healthChangedNormalized;
         public UnityEvent death;
 
+        List<DamageType> addedResistances = new List<DamageType>();
+        List<DamageType> addedWeaknesses = new List<DamageType>();
+        List<DamageType> addedImmunities = new List<DamageType>();
+
+        public bool HasImmunity(DamageType damageType) =>
+            healthSO.BaseImmunities.Contains(damageType) || addedImmunities.Contains(damageType);
+
+        public bool HasWeakness(DamageType damageType) =>
+            healthSO.BaseWeaknesses.Contains(damageType) || addedWeaknesses.Contains(damageType);
+
+        public bool HasResistance(DamageType damageType) =>
+            healthSO.BaseResistances.Contains(damageType) || addedResistances.Contains(damageType);
+
         private float _current;
 
         private const float MIN_MODIFIER_THRESHHOLD = 1f;
@@ -101,6 +114,7 @@ namespace GamersGrotto.Damage_System {
 
             if (IsDead)
                 death?.Invoke();
+            Debug.Log($"[{gameObject.name}] Took {damage} damage. Crit? ({damageTypeResult.IsCrit}). Damage Type ({damageType})", this);
         }
 
         DamageTakenTypeResult ModifyDamageByType(ref float damage, bool isCrit, DamageType? damageType) {
@@ -111,9 +125,12 @@ namespace GamersGrotto.Damage_System {
             if (damageType == null)
                 return result;
 
-            result.HasImmunity = healthSO.BaseImmunities.Contains(damageType.Value);
-            result.HasWeakness = healthSO.BaseWeaknesses.Contains(damageType.Value);
-            result.HasResistance = healthSO.BaseResistances.Contains(damageType.Value);
+            if (damageType != DamageType.None) {
+                result.HasImmunity = HasImmunity((DamageType)damageType);
+                result.HasWeakness = HasWeakness((DamageType)damageType);
+                result.HasResistance = HasResistance((DamageType)damageType);
+            }
+
 
             if (result.HasImmunity) {
                 damage = 0;
@@ -127,6 +144,7 @@ namespace GamersGrotto.Damage_System {
 
             return result;
         }
+
 
         public void AddMaxHealthModifier(ValueModifier modifier) {
             maxHealthModifiers.Add(modifier);
