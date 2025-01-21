@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3798406217587402404}
   - component: {fileID: 8158444955624709847}
   - component: {fileID: 4220748026404295047}
+  - component: {fileID: 9215091432174897961}
   m_Layer: 12
   m_Name: Spike
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2842373103533661220}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 77.13, y: 4.1, z: 0}
   m_LocalScale: {x: 0.3, y: 0.6, z: 0.3}
   m_ConstrainProportionsScale: 0
@@ -66,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f40ee3278bdc844095c173ba03d6152, type: 2}
+  - {fileID: 2100000, guid: ed047bddfe6f20e4397ef3ec401f30c4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,23 +123,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abec2f2fe4a54b6d8109ff97cf5ec435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spikeDamage: {fileID: 11400000, guid: 9de6f3abe18b48e4a83d72d4a5014e6f, type: 2}
-  enemyLayer:
-    serializedVersion: 2
+  damageComponent: {fileID: 9215091432174897961}
+  enemyLayers:
+  - serializedVersion: 2
     m_Bits: 1024
-  collisionWithSpike:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: de4f2527550cd2842938143f9b52a2d7, type: 2}
-        m_TargetAssemblyTypeName: GamersGrotto.Game_Events.GameEvent`1[[System.Single,
-          mscorlib
-        m_MethodName: Raise
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+--- !u!114 &9215091432174897961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2842373103533661220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ad457851d557446ae5c156a36f481f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageSO: {fileID: 11400000, guid: 51a6be4e47ebd6246b91e17aca223cc1, type: 2}
+  damageModifiers: []
+  critChanceModifiers: []
