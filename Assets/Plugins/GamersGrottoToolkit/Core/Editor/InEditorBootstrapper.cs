@@ -102,7 +102,9 @@ namespace GamersGrotto.Core.Editor
                         if(loggingEnabled)
                             Debug.Log($"{TAG} Core Scene ({coreSceneName}) not loaded, Loading {coreSceneName} Scene");
 
-                        SceneManager.LoadScene(coreSceneName, LoadSceneMode.Additive);
+                        if(IsInBuildList(coreSceneName))
+                            SceneManager.LoadScene(coreSceneName, LoadSceneMode.Additive);
+                        else Debug.LogWarning($"{TAG} Core Scene ({coreSceneName}) not in build list");
                     }
                     break;
                 case PlayModeStateChange.ExitingPlayMode:
@@ -111,6 +113,17 @@ namespace GamersGrotto.Core.Editor
                 default:
                     throw new ArgumentOutOfRangeException(nameof(playModeState), playModeState, null);
             }
+        }
+
+        private static bool IsInBuildList(string sceneName)
+        {
+            for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+            {
+                if (sceneName == SceneUtility.GetScenePathByBuildIndex(i))
+                    return true;
+            }
+
+            return false;
         }
 #endif
     }
