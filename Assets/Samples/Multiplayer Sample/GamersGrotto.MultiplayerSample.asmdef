@@ -1,0 +1,17 @@
+{
+    "name": "GamersGrotto.MultiplayerSample",
+    "rootNamespace": "GamersGrotto.MultiplayerSample",
+    "references": [
+        "GUID:7a2a6876f0a934c4ba904bb34b0ea728",
+        "GUID:1491147abca9d7d4bb7105af628b223e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
