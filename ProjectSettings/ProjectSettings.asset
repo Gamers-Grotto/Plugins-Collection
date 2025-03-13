@@ -931,11 +931,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: b3a30e9c-c8c4-416f-aa0b-13530175072b
+  cloudProjectId: aaba6855-43bd-432b-b198-b3c94d355d5d
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Plugins-Collection
-  organizationId: michaelvdp
+  projectName: Game Jam Toolkit
+  organizationId: gamersgrotto
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
