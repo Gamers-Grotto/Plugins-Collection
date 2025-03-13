@@ -8,5 +8,10 @@ namespace GamersGrotto.MultiplayerSample {
         public void StartNetworkAsHost() {
             NetworkManager.Singleton.StartHost();
         }
+
+        [Button]
+        public void StartNewGame() {
+            StartCoroutine(WorldSaveGameManager.Instance.LoadNewGame());
+        }
     }
 }

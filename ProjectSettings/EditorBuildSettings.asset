@@ -8,9 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Core.unity
     guid: 3aaa083414920dd458beb22d86e4809e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Platformer.unity
     guid: e57adc97ee7660c4995254357de49d92
+  - enabled: 1
+    path: Assets/Samples/Multiplayer Sample/Scenes/MP_TitleScreen.unity
+    guid: dc05c99d6de23874b993b489e57ee602
+  - enabled: 1
+    path: Assets/Samples/Multiplayer Sample/Scenes/MP_World.unity
+    guid: caf80c6c98f84124e8788c01fba4463a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
