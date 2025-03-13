@@ -3,7 +3,8 @@
     "rootNamespace": "GamersGrotto.MultiplayerSample",
     "references": [
         "GUID:7a2a6876f0a934c4ba904bb34b0ea728",
-        "GUID:1491147abca9d7d4bb7105af628b223e"
+        "GUID:1491147abca9d7d4bb7105af628b223e",
+        "GUID:586bacebd2e376741a00b55c9b809cf1"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
