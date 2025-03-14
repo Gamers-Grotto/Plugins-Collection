@@ -861,7 +861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4722282047965496356, guid: b870c2934a0bd344bae66b1d0aa70980, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6932372351622395710, guid: b870c2934a0bd344bae66b1d0aa70980, type: 3}
       propertyPath: m_Pivot.x
@@ -1518,7 +1518,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1113985556}
   m_HandleRect: {fileID: 1113985555}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
