@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,9 +19,8 @@ namespace GamersGrotto.Multiplayer_Sample {
             DontDestroyOnLoad(gameObject);
         }
 
-        public IEnumerator LoadNewGame() {
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
-            yield return loadOperation;
+        public async Task LoadNewGame() {
+            await SceneManager.LoadSceneAsync(worldSceneIndex);
         }
     }
 }

@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Platformer.unity
     guid: e57adc97ee7660c4995254357de49d92
   - enabled: 1
-    path: Assets/Samples/Multiplayer Sample/Scenes/MP_Lobby.unity
+    path: Assets/Samples/Multiplayer Sample/Scenes/MP_MainMenu.unity
     guid: dc05c99d6de23874b993b489e57ee602
   - enabled: 1
     path: Assets/Samples/Multiplayer Sample/Scenes/MP_World.unity

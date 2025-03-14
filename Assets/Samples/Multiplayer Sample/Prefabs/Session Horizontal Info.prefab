@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 1383612054904938269}
   - component: {fileID: 557658121960500896}
   m_Layer: 5
-  m_Name: Lobby Horizontal Info
+  m_Name: Session Horizontal Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 4054071069382996808}
   - component: {fileID: 613384383595220774}
   m_Layer: 5
-  m_Name: Lobby Name
+  m_Name: Session Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lobby Name
+  m_text: 'Session Name
 
 '
   m_isRightToLeft: 0
