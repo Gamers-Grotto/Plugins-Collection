@@ -14,7 +14,6 @@ namespace GamersGrotto.In_Game_Console.ConsoleCommands.NetcodeCommands
             if(NetworkManager.Singleton.IsServer || NetworkManager.Singleton.IsConnectedClient)
             {
                 AdminConsole.Instance.Add("You are already hosting");
-                NetworkManager.Singleton.Shutdown();
                 return;
             }
             
