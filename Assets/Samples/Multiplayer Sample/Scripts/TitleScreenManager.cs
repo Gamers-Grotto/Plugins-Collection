@@ -2,7 +2,7 @@ using GamersGrotto.Core.Extended_Attributes;
 using Unity.Netcode;
 using UnityEngine;
 
-namespace GamersGrotto.MultiplayerSample {
+namespace GamersGrotto.Multiplayer_Sample {
     public class TitleScreenManager : MonoBehaviour {
         [Button]
         public void StartNetworkAsHost() {

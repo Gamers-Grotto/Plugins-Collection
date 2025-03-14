@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace GamersGrotto.MultiplayerSample {
+namespace GamersGrotto.Multiplayer_Sample {
     public class WorldSaveGameManager : MonoBehaviour {
         public static WorldSaveGameManager Instance { get; private set; }
         [SerializeField] int worldSceneIndex = 1;

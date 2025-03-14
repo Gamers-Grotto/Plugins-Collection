@@ -1,10 +1,11 @@
 {
-    "name": "GamersGrotto.MultiplayerSample",
-    "rootNamespace": "GamersGrotto.MultiplayerSample",
+    "name": "GamersGrotto.Multiplayer_Sample",
+    "rootNamespace": "GamersGrotto.Multiplayer_Sample",
     "references": [
         "GUID:7a2a6876f0a934c4ba904bb34b0ea728",
         "GUID:1491147abca9d7d4bb7105af628b223e",
-        "GUID:586bacebd2e376741a00b55c9b809cf1"
+        "GUID:586bacebd2e376741a00b55c9b809cf1",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
