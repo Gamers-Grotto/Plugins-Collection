@@ -9,9 +9,10 @@ using UnityEngine;
 
 namespace GamersGrotto.Multiplayer_Sample {
     public class SessionManager : MonoBehaviour {
-        [SerializeField] short maxPlayers = 8;
-        [SerializeField] string sessionName = "Default Session";
-        [SerializeField] string sessionPassword = null;
+        public short maxPlayers = 8;
+        public string sessionName = "Default Session";
+        public string sessionPassword = null;
+        string playerName;
         public static SessionManager Instance { get; private set; }
 
         const string PLAYER_NAME_PROPERTY_KEY = "playerName";
@@ -59,16 +60,18 @@ namespace GamersGrotto.Multiplayer_Sample {
             ActiveSession.Changed += OnSessionChanged;
             ActiveSession.PlayerJoined += OnPlayerJoined;
             ActiveSession.PlayerLeaving += OnPlayerLeaving;
-            
         }
+
         void UnregisterSessionEvents() {
             ActiveSession.Changed -= OnSessionChanged;
             ActiveSession.PlayerJoined -= OnPlayerJoined;
             ActiveSession.PlayerLeaving -= OnPlayerLeaving;
         }
+
         void OnSessionChanged() {
             Debug.Log("Session changed. New session Id: " + ActiveSession.Id);
         }
+
         void OnPlayerJoined(string obj) {
             Debug.Log("Player joined: " + obj);
         }
@@ -76,15 +79,16 @@ namespace GamersGrotto.Multiplayer_Sample {
         void OnPlayerLeaving(string obj) {
             Debug.Log("Player left: " + obj);
         }
+
         #endregion
-        
+
 
         /// <summary>
         /// Custom game-specific properties that apply to an individual player.
         /// Examples, name, id, level, role etc.
         /// </summary>
         /// <returns></returns>
-        async Task<Dictionary<string, PlayerProperty>> GetPlayerProperties() {
+        public async Task<Dictionary<string, PlayerProperty>> GetPlayerProperties() {
             var playerName = await AuthenticationService.Instance.GetPlayerNameAsync();
             var playerId = AuthenticationService.Instance.PlayerId;
 
@@ -99,8 +103,9 @@ namespace GamersGrotto.Multiplayer_Sample {
             return playerProperties;
         }
 
+
         [Button]
-        async void StartSessionAsHost() {
+        public async void StartSessionAsHost() {
             var playerProperties = await GetPlayerProperties();
             var options = new SessionOptions {
                 Name = sessionName,
@@ -109,45 +114,46 @@ namespace GamersGrotto.Multiplayer_Sample {
                 IsLocked = false,
                 PlayerProperties = playerProperties
             };
-            if(sessionPassword is { Length: >= 8 }) {
+            if (sessionPassword is { Length: >= 8 }) {
                 //Idk, arbitrary password requirement when set in body.
                 options.Password = sessionPassword;
             }
+
             options.WithRelayNetwork();
-            
-            
+
+
             ActiveSession = await MultiplayerService.Instance.CreateSessionAsync(options);
-            Debug.Log($"Session {ActiveSession.Id} created successfully! Join code: {ActiveSession.Code}");
+            Debug.Log($"Session {ActiveSession.Name}({ActiveSession.Id}) created successfully! Join code: {ActiveSession.Code}");
             RegisterSessionEvents();
-            
-             await WorldSaveGameManager.Instance.LoadNewGame();
+
+            await WorldSaveGameManager.Instance.LoadNewGame();
         }
 
-        async Task JoinSessionById(string sessionId) {
+        public async Task JoinSessionById(string sessionId) {
             ActiveSession = await MultiplayerService.Instance.JoinSessionByIdAsync(sessionId);
             Debug.Log($"Session {ActiveSession.Id} joined successfully!");
-            
+
             await WorldSaveGameManager.Instance.LoadNewGame();
         }
 
-        async Task JoinSessionByCode(string sessionCode) {
+        public async Task JoinSessionByCode(string sessionCode) {
             ActiveSession = await MultiplayerService.Instance.JoinSessionByCodeAsync(sessionCode);
             Debug.Log($"Session {ActiveSession.Id} joined successfully!");
-            
+
             await WorldSaveGameManager.Instance.LoadNewGame();
         }
 
-        async Task KickPlayer(string playerId) {
+        public async Task KickPlayer(string playerId) {
             if (!ActiveSession.IsHost) return;
 
             await ActiveSession.AsHost().RemovePlayerAsync(playerId);
             Debug.Log($"Player {playerId} kicked successfully!");
         }
 
-        async Task LeaveSession() {
+        public async Task LeaveSession() {
             if (ActiveSession == null) return;
             UnregisterSessionEvents();
-            
+
             try {
                 await ActiveSession.LeaveAsync();
                 Debug.Log($"Session {ActiveSession.Id} left successfully!");
@@ -161,10 +167,25 @@ namespace GamersGrotto.Multiplayer_Sample {
             }
         }
 
-        async Task<IList<ISessionInfo>> QuerySessions() {
+        public async Task<IList<ISessionInfo>> QuerySessions() {
             var sessionQueryOptions = new QuerySessionsOptions();
             var results = await MultiplayerService.Instance.QuerySessionsAsync(sessionQueryOptions);
             return results.Sessions;
+        }
+
+        public async Task SetPlayerName(string name) {
+            if (string.IsNullOrEmpty(name)) {
+                Debug.LogError("Player name cannot be empty");
+                return;
+            }
+
+            if (playerName == name) {
+                Debug.Log("Player name is already set to " + playerName);
+                return;
+            }
+
+            playerName = name;
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
         }
     }
 }
