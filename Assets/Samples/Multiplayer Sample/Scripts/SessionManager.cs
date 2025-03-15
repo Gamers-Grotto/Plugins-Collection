@@ -138,8 +138,15 @@ namespace GamersGrotto.Multiplayer_Sample {
            
         }
 
-        public async Task JoinSessionById(string sessionId) {
-            ActiveSession = await MultiplayerService.Instance.JoinSessionByIdAsync(sessionId);
+        public async Task JoinSessionById(string sessionId)
+        {
+            var options = new JoinSessionOptions()
+            {
+                PlayerProperties = await GetPlayerProperties(),
+                Password = sessionPassword
+            };
+            
+            ActiveSession = await MultiplayerService.Instance.JoinSessionByIdAsync(sessionId, options);
             Debug.Log($"Session {ActiveSession.Id} joined successfully!");
 
             await WorldSaveGameManager.Instance.LoadNewGame();
