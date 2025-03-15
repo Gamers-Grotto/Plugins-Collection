@@ -34,7 +34,7 @@ namespace GamersGrotto.Multiplayer_Sample
         public override void OnNetworkSpawn()
         {
             Debug.Log(gameObject.name + " spawned");
-            if(gameObject.GetComponent<NetworkObject>().HasAuthority)
+            if(gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
                 playerCamera.gameObject.SetActive(true);
         }
 
