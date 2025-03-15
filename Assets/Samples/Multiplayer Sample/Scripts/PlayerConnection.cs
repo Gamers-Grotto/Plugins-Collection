@@ -1,3 +1,4 @@
+using System;
 using GamersGrotto.Multiplayer_Sample;
 using Unity.Netcode;
 using UnityEngine;
@@ -56,7 +57,11 @@ public class PlayerConnection : NetworkBehaviour
 
             NetworkObject netObj = playerObjectInstance.GetComponent<NetworkObject>();
             netObj.SpawnWithOwnership(clientId);
-            playerObjectInstance.TrySetParent(this.gameObject, true);
+            try {playerObjectInstance.TrySetParent(this.gameObject); }
+            catch (Exception e) {
+                Debug.LogError($"Error setting parent: {e.Message}");
+            }
+            
             
             //RPC to the client to enable camera
             
