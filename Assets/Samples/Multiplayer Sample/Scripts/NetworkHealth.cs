@@ -13,16 +13,25 @@ namespace GamersGrotto.Multiplayer_Sample
         
         public UnityEvent<float> onHealthChanged = new ();
 
+        private void OnEnable()
+        {
+            health.OnValueChanged += OnNetworkHealthChanged;
+        }
+
+        private void OnDisable()
+        {
+            health.OnValueChanged -= OnNetworkHealthChanged;
+        }
+
+        private void OnNetworkHealthChanged(float previousvalue, float newvalue)
+        {
+            Debug.Log($"Network Health changed on {OwnerClientId} : from {previousvalue} to {newvalue}");
+            onHealthChanged.Invoke(newvalue / maxHealth);
+        }
+
         public void TakeDamage(float damage)
         {
             health.Value = Mathf.Clamp(health.Value - damage, 0, maxHealth);
-            onHealthChanged.Invoke(health.Value / maxHealth);
-        }
-
-        public void Heal(float heal)
-        {
-            health.Value = Mathf.Clamp(health.Value + heal, 0, maxHealth);
-            onHealthChanged.Invoke(health.Value / maxHealth);
         }
         
         #region Testing
