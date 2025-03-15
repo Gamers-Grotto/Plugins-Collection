@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Threading.Tasks;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace GamersGrotto.Multiplayer_Sample {
     public class WorldSaveGameManager : MonoBehaviour {
+        
         public static WorldSaveGameManager Instance { get; private set; }
         [SerializeField] int worldSceneIndex = 1;
 
@@ -17,6 +19,7 @@ namespace GamersGrotto.Multiplayer_Sample {
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            
         }
 
         public async Task LoadNewGame() {
