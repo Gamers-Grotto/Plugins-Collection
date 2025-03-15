@@ -143,7 +143,6 @@ namespace GamersGrotto.Multiplayer_Sample {
             var options = new JoinSessionOptions()
             {
                 PlayerProperties = await GetPlayerProperties(),
-                Password = sessionPassword
             };
             
             ActiveSession = await MultiplayerService.Instance.JoinSessionByIdAsync(sessionId, options);
