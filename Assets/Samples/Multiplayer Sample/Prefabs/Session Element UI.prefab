@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 557658121960500896}
   - component: {fileID: 93366244988360287}
   m_Layer: 5
-  m_Name: Session Horizontal Info
+  m_Name: Session Element UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -571,7 +571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9189801007245694395
 RectTransform:
   m_ObjectHideFlags: 0
@@ -586,10 +586,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6187179994471196481}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -75}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3630971744986688658
 CanvasRenderer:
