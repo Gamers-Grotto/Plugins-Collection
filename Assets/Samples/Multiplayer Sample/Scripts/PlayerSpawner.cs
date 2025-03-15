@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GamersGrotto.Multiplayer_Sample
 {
-    public class PlayerSpawner : MonoBehaviour
+    public class PlayerSpawner : NetworkBehaviour
     {
         [SerializeField] private NetworkObject playerPrefab;
         [SerializeField] private Transform spawnPoint;
