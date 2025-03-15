@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GamersGrotto.Core.Extended_Attributes;
+using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Multiplayer;
@@ -14,6 +16,7 @@ namespace GamersGrotto.Multiplayer_Sample {
         public string sessionPassword = null;
         string playerName;
         public static SessionManager Instance { get; private set; }
+        NetworkManager networkManager;
 
         const string PLAYER_NAME_PROPERTY_KEY = "playerName";
         const string PLAYER_ID_PROPERTY_KEY = "playerId";
@@ -61,6 +64,7 @@ namespace GamersGrotto.Multiplayer_Sample {
             ActiveSession.Changed += OnSessionChanged;
             ActiveSession.PlayerJoined += OnPlayerJoined;
             ActiveSession.PlayerLeaving += OnPlayerLeaving;
+          
         }
 
         void UnregisterSessionEvents() {

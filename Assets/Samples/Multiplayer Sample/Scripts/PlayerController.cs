@@ -7,6 +7,7 @@ namespace GamersGrotto.Multiplayer_Sample
     public class PlayerController : NetworkBehaviour
     {
         [SerializeField] private float moveSpeed = 4f;
+        [SerializeField] Camera playerCamera;
         
         private Vector2 input;
         
@@ -33,6 +34,8 @@ namespace GamersGrotto.Multiplayer_Sample
         public override void OnNetworkSpawn()
         {
             Debug.Log(gameObject.name + " spawned");
+            if(gameObject.GetComponent<NetworkObject>().HasAuthority)
+                playerCamera.gameObject.SetActive(true);
         }
 
         public override void OnNetworkDespawn()

@@ -38,7 +38,6 @@ namespace GamersGrotto.Multiplayer_Sample
 
         void Start() {
             CheckRequirementsSet(string.Empty);
-            RefreshSessionList();
         }
 
         void CheckRequirementsSet(string _) {
