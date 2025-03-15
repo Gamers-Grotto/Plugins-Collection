@@ -26,7 +26,7 @@ namespace GamersGrotto.Multiplayer_Sample
         
         #region Testing
 
-        [Button]
+        [ContextMenu("Test")]
         public void TestDamage()
         {
             TakeDamage(Random.Range(1, 15));
