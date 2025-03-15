@@ -18,7 +18,6 @@ public class PlayerConnection : NetworkBehaviour
         }
         else if(IsOwner){
             RequestSpawnPlayerServerRpc();
-            GetComponentInChildren<PlayerController>().EnableCamera();
         }
         
     }
@@ -38,6 +37,10 @@ public class PlayerConnection : NetworkBehaviour
             {
                 Debug.Log("Server spawning player...");
                 SpawnPlayer();
+            }
+
+            if (IsOwner) {
+                GetComponentInChildren<PlayerController>().EnableCamera();
             }
            
         }
