@@ -140,8 +140,7 @@ namespace GamersGrotto.Multiplayer_Sample {
 
         public async Task JoinSessionById(string sessionId)
         {
-            var options = new JoinSessionOptions()
-            {
+            var options = new JoinSessionOptions() {
                 PlayerProperties = await GetPlayerProperties(),
             };
             

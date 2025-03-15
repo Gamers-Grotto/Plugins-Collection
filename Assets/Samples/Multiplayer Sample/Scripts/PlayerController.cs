@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Linq;
 using Unity.Netcode;
-using Unity.Services.Authentication;
 using UnityEngine;
 
 namespace GamersGrotto.Multiplayer_Sample
@@ -51,10 +51,16 @@ namespace GamersGrotto.Multiplayer_Sample
         [ClientRpc]
         public void SetPlayerNameClientRpc()
         {
-            if(!IsOwner)
-                return;
-            var playerName = SessionManager.Instance.ActiveSession.Properties[SessionManager.PLAYER_NAME_PROPERTY_KEY];
-            GetComponentInChildren<PlayerWorldSpaceUI>().SetPlayerName(playerName.Value);
+            var players = SessionManager.Instance.ActiveSession.Players;
+
+            foreach (var player in players)
+            {
+                player.Properties.TryGetValue(SessionManager.PLAYER_NAME_PROPERTY_KEY, out var playerName);
+                Debug.Log($"Player : {player.Id} name : {playerName}");
+                
+                if(player.Id == OwnerClientId.ToString())
+                    GetComponentInChildren<PlayerWorldSpaceUI>().SetPlayerName(player.Properties[SessionManager.PLAYER_NAME_PROPERTY_KEY].Value);
+            }
         }
     }
 }
