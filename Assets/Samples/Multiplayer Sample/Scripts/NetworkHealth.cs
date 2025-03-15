@@ -1,6 +1,8 @@
-﻿using Unity.Netcode;
+﻿using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace GamersGrotto.Multiplayer_Sample
 {
@@ -10,24 +12,16 @@ namespace GamersGrotto.Multiplayer_Sample
         [SerializeField] private float maxHealth;
         
         public UnityEvent<float> onHealthChanged = new ();
-        
-        [ServerRpc]
-        public void TakeDamageServerRpc(float damage)
+
+        public void TakeDamage(float damage)
         {
-            if(!IsServer)
-                return;
-            
-            health.Value -= Mathf.Clamp(damage, 0, maxHealth);
+            health.Value = Mathf.Clamp(health.Value - damage, 0, maxHealth);
             onHealthChanged.Invoke(health.Value / maxHealth);
         }
 
-        [ServerRpc]
-        public void HealServerRpc(float heal)
+        public void Heal(float heal)
         {
-            if(!IsServer) 
-                return;
-            
-            health.Value += Mathf.Clamp(heal, 0, maxHealth);
+            health.Value = Mathf.Clamp(health.Value + heal, 0, maxHealth);
             onHealthChanged.Invoke(health.Value / maxHealth);
         }
         
@@ -36,10 +30,7 @@ namespace GamersGrotto.Multiplayer_Sample
         [ContextMenu("Test")]
         public void TestDamage()
         {
-            if(!IsServer) 
-                return;
-            
-            TakeDamageServerRpc(Random.Range(1, 15));
+            TakeDamage(Random.Range(1, 15));
         }
 
         #endregion
