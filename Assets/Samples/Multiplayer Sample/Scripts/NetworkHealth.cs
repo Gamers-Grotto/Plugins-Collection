@@ -1,5 +1,4 @@
-﻿using GamersGrotto.Core.Extended_Attributes;
-using Unity.Netcode;
+﻿using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,20 +6,28 @@ namespace GamersGrotto.Multiplayer_Sample
 {
     public class NetworkHealth : NetworkBehaviour
     {
-        [SerializeField] private NetworkVariable<float> health;
+        [SerializeField] private NetworkVariable<float> health = new (100f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         [SerializeField] private float maxHealth;
         
         public UnityEvent<float> onHealthChanged = new ();
         
-        public void TakeDamage(float damage)
+        [ServerRpc]
+        public void TakeDamageServerRpc(float damage)
         {
-            health.Value -= damage;
+            if(!IsServer)
+                return;
+            
+            health.Value -= Mathf.Clamp(damage, 0, maxHealth);
             onHealthChanged.Invoke(health.Value / maxHealth);
         }
 
-        public void Heal(float heal)
+        [ServerRpc]
+        public void HealServerRpc(float heal)
         {
-            health.Value += heal;
+            if(!IsServer) 
+                return;
+            
+            health.Value += Mathf.Clamp(heal, 0, maxHealth);
             onHealthChanged.Invoke(health.Value / maxHealth);
         }
         
@@ -29,7 +36,10 @@ namespace GamersGrotto.Multiplayer_Sample
         [ContextMenu("Test")]
         public void TestDamage()
         {
-            TakeDamage(Random.Range(1, 15));
+            if(!IsServer) 
+                return;
+            
+            TakeDamageServerRpc(Random.Range(1, 15));
         }
 
         #endregion
