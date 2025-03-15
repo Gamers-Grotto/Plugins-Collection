@@ -15,9 +15,8 @@ namespace GamersGrotto.Multiplayer_Sample
             SpawnPlayer();
         }
 
+        [ServerRpc]
         void SpawnPlayer() {
-            //client id
-            
             NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(playerPrefab,NetworkManager.Singleton.LocalClientId,
                 true,true, false, spawnPoint.position, Quaternion.identity);
         }
