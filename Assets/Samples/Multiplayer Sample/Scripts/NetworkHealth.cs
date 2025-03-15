@@ -8,7 +8,7 @@ namespace GamersGrotto.Multiplayer_Sample
 {
     public class NetworkHealth : NetworkBehaviour
     {
-        [SerializeField] private NetworkVariable<float> health = new (100f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        [SerializeField] private NetworkVariable<float> health = new (100f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         [SerializeField] private float maxHealth;
         
         public UnityEvent<float> onHealthChanged = new ();
