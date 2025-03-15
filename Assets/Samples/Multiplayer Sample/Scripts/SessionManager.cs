@@ -135,7 +135,6 @@ namespace GamersGrotto.Multiplayer_Sample {
             RegisterSessionEvents();
 
             await WorldSaveGameManager.Instance.LoadNewGame();
-           
         }
 
         public async Task JoinSessionById(string sessionId) {

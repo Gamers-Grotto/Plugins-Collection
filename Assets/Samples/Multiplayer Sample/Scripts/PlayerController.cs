@@ -36,16 +36,14 @@ namespace GamersGrotto.Multiplayer_Sample
             gameObject.name = $"Player {OwnerClientId}";
             
             Debug.Log(gameObject.name + " spawned");
-            
+            if(gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+                playerCamera.gameObject.SetActive(true);
         }
 
         public override void OnNetworkDespawn()
         {
             Debug.Log(gameObject.name + " despawned");
         }
-
-        public void EnableCamera() {
-            playerCamera.gameObject.SetActive(true);
-        }
+        
     }
 }
