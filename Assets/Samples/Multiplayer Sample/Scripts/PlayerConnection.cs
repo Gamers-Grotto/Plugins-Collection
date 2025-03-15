@@ -14,12 +14,14 @@ public class PlayerConnection : NetworkBehaviour
         if (IsServer)
         {
             LocalInstance = this;
-           SceneManager.sceneLoaded += OnSceneLoaded; // Register scene loaded event
+            SceneManager.sceneLoaded += OnSceneLoaded; // Register scene loaded event
         }
-        else if(IsOwner){
+
+        else if (IsOwner)
+        {
+            Debug.Log("Client requesting player spawn...");
             RequestSpawnPlayerServerRpc();
         }
-        
     }
 
     public override void OnNetworkDespawn()
@@ -29,43 +31,60 @@ public class PlayerConnection : NetworkBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log($"Scene {scene.name} loaded for {NetworkManager.Singleton.LocalClientId} (Owner: {IsOwner})");
+        Debug.Log($"[PlayerConnection] Scene {scene.name} loaded for {NetworkManager.Singleton.LocalClientId}, IsOwner: {IsOwner}, IsServer: {IsServer}");
 
-        if (scene.buildIndex == 1)
+        if (scene.buildIndex == 1) // Only spawn players in the game scene
         {
             if (IsServer)
             {
                 Debug.Log("Server spawning player...");
-                SpawnPlayer();
+                SpawnPlayer(NetworkManager.Singleton.LocalClientId);
             }
-
-            if (IsOwner) {
-                GetComponentInChildren<PlayerController>().EnableCamera();
-            }
-           
         }
     }
 
-    private void SpawnPlayer()
+    private void SpawnPlayer(ulong clientId)
     {
+        Debug.Log($"Spawning player for Client {clientId}");
+
         if (IsServer)
         {
             playerObjectInstance = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-            playerObjectInstance.GetComponent<NetworkObject>().SpawnWithOwnership(NetworkManager.Singleton.LocalClientId);
-            playerObjectInstance.GetComponent<PlayerController>().EnableCamera();
 
+            // Parent to this PlayerConnection object
+            playerObjectInstance.transform.SetParent(transform);
+
+            NetworkObject netObj = playerObjectInstance.GetComponent<NetworkObject>();
+            netObj.SpawnWithOwnership(clientId);
+            playerObjectInstance.TrySetParent(gameObject, true);
+            
+            //RPC to the client to enable camera
+            
+            EnableCameraClientRpc(clientId);
+            Debug.Log($"Player spawned and parented to {gameObject.name}");
         }
     }
+    
+    [ClientRpc]
+    void EnableCameraClientRpc(ulong clientId)
+    {
+        if (clientId == NetworkManager.Singleton.LocalClientId)
+        {
+            GetComponentInChildren<PlayerController>()?.EnableCamera();
+        }
+    }
+
 
     [ServerRpc(RequireOwnership = false)]
     private void RequestSpawnPlayerServerRpc(ServerRpcParams rpcParams = default)
     {
+        ulong clientId = rpcParams.Receive.SenderClientId;
+
+        Debug.Log($"[Server] Received spawn request from Client {clientId}");
 
         if (IsServer)
         {
-            NetworkObject playerObject = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-            playerObject.GetComponent<NetworkObject>().SpawnWithOwnership(rpcParams.Receive.SenderClientId);
-
+            SpawnPlayer(clientId);
         }
     }
 }
