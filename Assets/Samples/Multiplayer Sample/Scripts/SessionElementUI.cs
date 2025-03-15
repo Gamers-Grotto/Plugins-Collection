@@ -2,14 +2,21 @@ using System;
 using TMPro;
 using Unity.Services.Multiplayer;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GamersGrotto.Multiplayer_Sample {
     public class SessionElementUI : MonoBehaviour {
         [SerializeField] TextMeshProUGUI sessionName;
         [SerializeField] TextMeshProUGUI sessionHostId;
         [SerializeField] TextMeshProUGUI sessionPlayerCount;
+        [SerializeField] Button joinButton;
         
         public ISessionInfo Session { get; private set; }
+
+        private void Update()
+        {
+            joinButton.interactable = Session != null && SessionManager.PlayerNameRequirementsMet(SessionManager.Instance.PlayerName);
+        }
 
         public void SetSession(ISessionInfo session) {
             Session = session;

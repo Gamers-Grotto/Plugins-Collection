@@ -18,6 +18,8 @@ namespace GamersGrotto.Multiplayer_Sample {
         const string PLAYER_NAME_PROPERTY_KEY = "playerName";
         const string PLAYER_ID_PROPERTY_KEY = "playerId";
         ISession activeSession;
+        
+        public string PlayerName => playerName;
 
         ISession ActiveSession {
             get => activeSession;
@@ -49,8 +51,7 @@ namespace GamersGrotto.Multiplayer_Sample {
                 Debug.Log("Signed in anonymously. PlayerID: " + AuthenticationService.Instance.PlayerId);
             }
             catch (Exception e) {
-                Console.WriteLine(e);
-                throw;
+                Debug.LogException(e);
             }
         }
 
@@ -63,6 +64,9 @@ namespace GamersGrotto.Multiplayer_Sample {
         }
 
         void UnregisterSessionEvents() {
+            if(ActiveSession == null)
+                return;
+            
             ActiveSession.Changed -= OnSessionChanged;
             ActiveSession.PlayerJoined -= OnPlayerJoined;
             ActiveSession.PlayerLeaving -= OnPlayerLeaving;
@@ -174,8 +178,8 @@ namespace GamersGrotto.Multiplayer_Sample {
         }
 
         public async Task SetPlayerName(string name) {
-            if (string.IsNullOrEmpty(name)) {
-                Debug.LogError("Player name cannot be empty");
+            if (!PlayerNameRequirementsMet(name)) {
+                Debug.LogError("Player name needs to be min 2 characters");
                 return;
             }
 
@@ -186,6 +190,14 @@ namespace GamersGrotto.Multiplayer_Sample {
 
             playerName = name;
             await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
+        }
+        
+        public static bool PlayerNameRequirementsMet(string playerName) {
+            return !string.IsNullOrEmpty(playerName) && !string.IsNullOrWhiteSpace(playerName) && playerName.Length >= 2;
+        }
+        
+        public static bool SessionsNameRequirementsMet(string sessionsName) {
+            return !string.IsNullOrEmpty(sessionsName) && !string.IsNullOrWhiteSpace(sessionsName) && sessionsName.Length >= 2;
         }
     }
 }

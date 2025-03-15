@@ -277,6 +277,7 @@ MonoBehaviour:
   sessionName: {fileID: 613384383595220774}
   sessionHostId: {fileID: 4864189753116132041}
   sessionPlayerCount: {fileID: 6435971520986452599}
+  joinButton: {fileID: 4761046423267370011}
 --- !u!1 &4518872144738366718
 GameObject:
   m_ObjectHideFlags: 0
