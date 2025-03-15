@@ -52,9 +52,6 @@ public class PlayerConnection : NetworkBehaviour
         {
             playerObjectInstance = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
 
-            // Parent to this PlayerConnection object
-            playerObjectInstance.transform.SetParent(transform);
-
             NetworkObject netObj = playerObjectInstance.GetComponent<NetworkObject>();
             netObj.SpawnWithOwnership(clientId);
             try {playerObjectInstance.TrySetParent(this.gameObject); }
