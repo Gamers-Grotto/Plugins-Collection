@@ -29,12 +29,6 @@ namespace GamersGrotto.Multiplayer_Sample
             onHealthChanged.Invoke(newvalue / maxHealth);
         }
         
-        [ClientRpc]
-        public void TakeDamageClientRpc(float damage)
-        {
-            health.Value = Mathf.Clamp(health.Value - damage, 0, maxHealth);
-        }
-        
         [ServerRpc]
         public void TakeDamageServerRpc(float damage)
         {
@@ -42,12 +36,6 @@ namespace GamersGrotto.Multiplayer_Sample
         }
         
         #region Testing
-
-        [ContextMenu("Test ClientRPC Damage")]
-        public void TestDamageClient()
-        {
-            TakeDamageClientRpc(Random.Range(1, 15));
-        }
         
         [ContextMenu("Test ServerRPC Damage")]
         public void TestDamageServer()
