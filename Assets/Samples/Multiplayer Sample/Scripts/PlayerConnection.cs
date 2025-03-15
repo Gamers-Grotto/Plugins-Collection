@@ -56,7 +56,7 @@ public class PlayerConnection : NetworkBehaviour
 
             NetworkObject netObj = playerObjectInstance.GetComponent<NetworkObject>();
             netObj.SpawnWithOwnership(clientId);
-            playerObjectInstance.TrySetParent(gameObject, true);
+            playerObjectInstance.TrySetParent(this.gameObject, true);
             
             //RPC to the client to enable camera
             
