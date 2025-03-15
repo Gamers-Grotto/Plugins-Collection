@@ -18,8 +18,10 @@ namespace GamersGrotto.Multiplayer_Sample
             refreshButton.onClick.AddListener(RefreshSessionList);
             createSessionButton.onClick.AddListener(CreateSession);
             playerNameInput.onSubmit.AddListener(SetPlayerName);
+            playerNameInput.onDeselect.AddListener(SetPlayerName);
             playerNameInput.onValueChanged.AddListener(CheckRequirementsSet);
             sessionNameInput.onSubmit.AddListener(SetSessionName);
+            sessionNameInput.onDeselect.AddListener(SetSessionName);
             sessionNameInput.onValueChanged.AddListener(CheckRequirementsSet);
         }
 
@@ -27,8 +29,10 @@ namespace GamersGrotto.Multiplayer_Sample
             refreshButton.onClick.RemoveListener(RefreshSessionList);
             createSessionButton.onClick.RemoveListener(CreateSession);
             playerNameInput.onSubmit.RemoveListener(SetPlayerName);
+            playerNameInput.onDeselect.RemoveListener(SetPlayerName);
             playerNameInput.onValueChanged.RemoveListener(CheckRequirementsSet);
             sessionNameInput.onSubmit.RemoveListener(SetSessionName);
+            sessionNameInput.onDeselect.RemoveListener(SetSessionName);
             sessionNameInput.onValueChanged.RemoveListener(CheckRequirementsSet);
         }
 
