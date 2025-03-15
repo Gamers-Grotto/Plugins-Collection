@@ -8,7 +8,7 @@ namespace GamersGrotto.Multiplayer_Sample
 {
     public class NetworkHealth : NetworkBehaviour
     {
-        [SerializeField] private NetworkVariable<float> health = new (100f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        [SerializeField] private NetworkVariable<float> health = new (100f, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         [SerializeField] private float maxHealth;
         
         public UnityEvent<float> onHealthChanged = new ();
@@ -28,21 +28,31 @@ namespace GamersGrotto.Multiplayer_Sample
             Debug.Log($"Network Health changed on {OwnerClientId} : from {previousvalue} to {newvalue}");
             onHealthChanged.Invoke(newvalue / maxHealth);
         }
-
+        
+        [ClientRpc]
+        public void TakeDamageClientRpc(float damage)
+        {
+            health.Value = Mathf.Clamp(health.Value - damage, 0, maxHealth);
+        }
+        
         [ServerRpc]
-        public void TakeDamage(float damage)
+        public void TakeDamageServerRpc(float damage)
         {
             health.Value = Mathf.Clamp(health.Value - damage, 0, maxHealth);
         }
         
         #region Testing
 
-        [ContextMenu("Test")]
-        public void TestDamage()
+        [ContextMenu("Test ClientRPC Damage")]
+        public void TestDamageClientRpc()
         {
-            if(!IsOwner)
-                return;
-            TakeDamage(Random.Range(1, 15));
+            TakeDamageClientRpc(Random.Range(1, 15));
+        }
+        
+        [ContextMenu("Test ServerRPC Damage")]
+        public void TestDamageServerRpc()
+        {
+            TakeDamageServerRpc(Random.Range(1, 15));
         }
 
         #endregion
