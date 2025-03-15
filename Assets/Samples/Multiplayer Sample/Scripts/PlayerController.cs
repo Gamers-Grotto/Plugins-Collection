@@ -53,8 +53,8 @@ namespace GamersGrotto.Multiplayer_Sample
         {
             if(!IsOwner)
                 return;
-            
-            GetComponentInChildren<PlayerWorldSpaceUI>().SetPlayerName(AuthenticationService.Instance.PlayerName);
+            var playerName = SessionManager.Instance.ActiveSession.Properties[SessionManager.PLAYER_NAME_PROPERTY_KEY];
+            GetComponentInChildren<PlayerWorldSpaceUI>().SetPlayerName(playerName.Value);
         }
     }
 }
