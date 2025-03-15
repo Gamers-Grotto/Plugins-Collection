@@ -11,12 +11,12 @@ namespace GamersGrotto.Multiplayer_Sample
         [SerializeField] private Transform spawnPoint;
 
 
-        void Awake() {
-            SpawnPlayer();
+        void Start() {
+            SpawnPlayerServerRpc();
         }
 
         [ServerRpc]
-        void SpawnPlayer() {
+        void SpawnPlayerServerRpc() {
             NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(playerPrefab,NetworkManager.Singleton.LocalClientId,
                 true,true, false, spawnPoint.position, Quaternion.identity);
         }
