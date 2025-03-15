@@ -1,5 +1,9 @@
-﻿using GamersGrotto.Core;
+﻿using System;
+using System.Linq;
+using GamersGrotto.Core;
 using TMPro;
+using Unity.Netcode;
+using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +24,12 @@ namespace GamersGrotto.Multiplayer_Sample
         private void OnDisable()
         {
             networkHealth.onHealthChanged.RemoveListener(OnHealthChanged);
+        }
+
+        private void Start()
+        {
+            var playerName = AuthenticationService.Instance.PlayerName;
+            SetPlayerName(playerName);
         }
 
         private void OnHealthChanged(float healthNormalized)
