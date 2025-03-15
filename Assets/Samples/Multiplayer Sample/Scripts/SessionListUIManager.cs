@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace GamersGrotto.Multiplayer_Sample
 {
-    public class SessionUIManager : MonoBehaviour {
+    public class SessionListUIManager : MonoBehaviour {
         [SerializeField] SessionElementUI sessionPrefab;
         [SerializeField] GameObject sessionListContent;
         [SerializeField] TMP_InputField sessionNameInput;
@@ -81,6 +81,12 @@ namespace GamersGrotto.Multiplayer_Sample
         void SetSessionName(string text) {
             if(!string.IsNullOrEmpty(text))
                 SessionManager.Instance.sessionName = text;
+        }
+        
+        public async void QuickHost() {
+            SessionManager.Instance.sessionName = "Quick Hosted Session";
+            await SessionManager.Instance.SetPlayerName("QuickHost");
+            SessionManager.Instance.StartSessionAsHost();
         }
     }
 }
