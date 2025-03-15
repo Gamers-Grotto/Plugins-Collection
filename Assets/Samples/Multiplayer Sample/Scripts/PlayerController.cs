@@ -1,5 +1,6 @@
 ﻿using System;
 using Unity.Netcode;
+using Unity.Services.Authentication;
 using UnityEngine;
 
 namespace GamersGrotto.Multiplayer_Sample
@@ -34,9 +35,8 @@ namespace GamersGrotto.Multiplayer_Sample
         public override void OnNetworkSpawn()
         {
             gameObject.name = $"Player {OwnerClientId}";
-            
+            SetPlayerNameClientRpc();
             Debug.Log(gameObject.name + " spawned");
-            
         }
 
         public override void OnNetworkDespawn()
@@ -46,6 +46,15 @@ namespace GamersGrotto.Multiplayer_Sample
 
         public void EnableCamera() {
             playerCamera.gameObject.SetActive(true);
+        }
+
+        [ClientRpc]
+        public void SetPlayerNameClientRpc()
+        {
+            if(!IsOwner)
+                return;
+            
+            GetComponentInChildren<PlayerWorldSpaceUI>().SetPlayerName(AuthenticationService.Instance.PlayerName);
         }
     }
 }
