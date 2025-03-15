@@ -29,6 +29,7 @@ namespace GamersGrotto.Multiplayer_Sample
             onHealthChanged.Invoke(newvalue / maxHealth);
         }
 
+        [ServerRpc]
         public void TakeDamage(float damage)
         {
             health.Value = Mathf.Clamp(health.Value - damage, 0, maxHealth);
@@ -39,6 +40,8 @@ namespace GamersGrotto.Multiplayer_Sample
         [ContextMenu("Test")]
         public void TestDamage()
         {
+            if(!IsOwner)
+                return;
             TakeDamage(Random.Range(1, 15));
         }
 
