@@ -7,20 +7,30 @@ namespace GamersGrotto.Multiplayer_Sample
 {
     public class PlayerController : NetworkBehaviour
     {
-        [SerializeField] private float moveSpeed = 4f;
+        public float sprintSpeed = 10f;  // Sprint speed
+        public float walkSpeed = 5f;    // Normal walking speed
         [SerializeField] Camera playerCamera;
         
         private Vector2 input;
         
-        private void Update()
+        private void FixedUpdate()
         {
-            if(!IsOwner)
+            if (!IsOwner)
                 return;
-            
+
+            // Get input for movement
             input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            var movement = new Vector3(input.x, 0f, input.y) * moveSpeed;
-            transform.position = Vector3.Lerp(transform.position, transform.position + movement, Time.deltaTime);
+
+            // Determine if sprinting
+            float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
+
+            // Calculate movement direction and speed
+            var movement = new Vector3(input.x, 0f, input.y).normalized * currentSpeed;
+
+            // Apply movement smoothly
+            transform.position = Vector3.Lerp(transform.position, transform.position + movement, Time.fixedDeltaTime);
         }
+
 
         private void OnServerInitialized()
         {
