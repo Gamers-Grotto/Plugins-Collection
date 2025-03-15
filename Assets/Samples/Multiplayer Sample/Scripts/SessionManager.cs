@@ -18,13 +18,13 @@ namespace GamersGrotto.Multiplayer_Sample {
         public static SessionManager Instance { get; private set; }
         NetworkManager networkManager;
 
-        const string PLAYER_NAME_PROPERTY_KEY = "playerName";
-        const string PLAYER_ID_PROPERTY_KEY = "playerId";
+        public const string PLAYER_NAME_PROPERTY_KEY = "playerName";
+        public const string PLAYER_ID_PROPERTY_KEY = "playerId";
         ISession activeSession;
         
         public string PlayerName => playerName;
 
-        ISession ActiveSession {
+        public ISession ActiveSession {
             get => activeSession;
             set {
                 activeSession = value;
