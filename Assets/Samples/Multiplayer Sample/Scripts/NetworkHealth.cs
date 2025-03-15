@@ -44,13 +44,13 @@ namespace GamersGrotto.Multiplayer_Sample
         #region Testing
 
         [ContextMenu("Test ClientRPC Damage")]
-        public void TestDamageClientRpc()
+        public void TestDamageClient()
         {
             TakeDamageClientRpc(Random.Range(1, 15));
         }
         
         [ContextMenu("Test ServerRPC Damage")]
-        public void TestDamageServerRpc()
+        public void TestDamageServer()
         {
             TakeDamageServerRpc(Random.Range(1, 15));
         }
