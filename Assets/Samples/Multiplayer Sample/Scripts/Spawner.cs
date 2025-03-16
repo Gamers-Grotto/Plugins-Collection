@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
+using GamersGrotto.Core.Extended_Attributes;
 using Unity.Netcode;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace GamersGrotto.Multiplayer_Sample
 {
-    public class Spawner : MonoBehaviour
+    public class Spawner : NetworkBehaviour
     {
         [SerializeField] NetworkObject prefab;
         [SerializeField] int amount = 10;
@@ -18,17 +21,22 @@ namespace GamersGrotto.Multiplayer_Sample
         [SerializeField] bool drawGizmos;
         
         List<NetworkObject> spawnedObjects = new List<NetworkObject>();
-        
-        void Start()
-        {
+
+        void Awake() {
+            if (NetworkManager.Singleton.IsServer) {
+                GetComponent<NetworkObject>().Spawn();
+            }
+        }
+
+        public override void OnNetworkSpawn() {
+            base.OnNetworkSpawn();
             if (spawnOnStart && NetworkManager.Singleton.IsServer)
             {
                 SpawnAllPrefabs();
             }
         }
 
-         void SpawnAllPrefabs() {
-            
+        void SpawnAllPrefabs() {
             for (int i = 0; i < amount; i++)
             {
                 var spawnPosition = Vector3.zero;
@@ -45,14 +53,17 @@ namespace GamersGrotto.Multiplayer_Sample
                 {
                     spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position;
                 }
-                
                 var spawnedObject = Instantiate(prefab, spawnPosition, Quaternion.identity);
-                spawnedObject.Spawn(); //Synchronizing the object with the network
+                spawnedObject.Spawn(true); //Synchronizing the object with the network
                 spawnedObjects.Add(spawnedObject);
-                spawnedObject.TrySetParent(this.gameObject);
+                spawnedObject.TrySetParent(this.gameObject.GetComponent<NetworkObject>());
             }
         }
-        
+
+        [ServerRpc(RequireOwnership = false),ContextMenu("Request Spawn All Prefabs")]
+        public void RequestSpawnAllPrefabsServerRpc() {
+            SpawnAllPrefabs();
+        }
         private void OnDrawGizmos()
         {
             if(!drawGizmos) return;
