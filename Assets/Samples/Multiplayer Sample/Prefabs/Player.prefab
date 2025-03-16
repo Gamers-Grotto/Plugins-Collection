@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2218123465748658667}
+  - component: {fileID: 2012716035399108865}
   - component: {fileID: 1439817552770818315}
   - component: {fileID: 5948955225234842521}
   - component: {fileID: 7021803235128479562}
@@ -42,6 +43,18 @@ Transform:
   - {fileID: 4616393179843773176}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2012716035399108865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107906551147675914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656b51f9aa76cff4593e78feefa3984d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &1439817552770818315
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -255,7 +268,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  moveSpeed: 4
+  sprintSpeed: 10
+  walkSpeed: 5
   playerCamera: {fileID: 4580547474290238254}
 --- !u!1 &7977504319582733625
 GameObject:

@@ -44,6 +44,9 @@ namespace GamersGrotto.Multiplayer_Sample
 
         public override void OnNetworkSpawn()
         {
+            if (IsOwner) {
+                EnableCamera();
+            }
             gameObject.name = $"Player {OwnerClientId}";
             SetPlayerNameClientRpc();
             Debug.Log(gameObject.name + " spawned");
