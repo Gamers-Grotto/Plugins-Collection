@@ -9,7 +9,7 @@ namespace GamersGrotto.Multiplayer_Sample
 {
     public class Spawner : NetworkBehaviour
     {
-        [SerializeField] NetworkObject prefab;
+        [SerializeField] GameObject prefab;
         [SerializeField] int amount = 10;
         [SerializeField] bool spawnOnStart = true;
         [SerializeField] bool spawnOnPoints = false;
@@ -20,7 +20,7 @@ namespace GamersGrotto.Multiplayer_Sample
         
         [SerializeField] bool drawGizmos;
         
-        List<NetworkObject> spawnedObjects = new List<NetworkObject>();
+        List<GameObject> spawnedObjects = new List<GameObject>();
 
         void Awake() {
             if (NetworkManager.Singleton.IsServer) {
@@ -54,13 +54,18 @@ namespace GamersGrotto.Multiplayer_Sample
                     spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Count)].transform.position;
                 }
                 var spawnedObject = Instantiate(prefab, spawnPosition, Quaternion.identity);
-                spawnedObject.Spawn(true); //Synchronizing the object with the network
+                spawnedObject.GetComponent<NetworkObject>().Spawn(true); //Synchronizing the object with the network
                 spawnedObjects.Add(spawnedObject);
-                spawnedObject.TrySetParent(this.gameObject.GetComponent<NetworkObject>());
+                //spawnedObject.transform.SetParent(transform);
             }
         }
 
-        [ServerRpc(RequireOwnership = false),ContextMenu("Request Spawn All Prefabs")]
+        [ContextMenu("Request Spawn All Prefabs")]
+        public void Testtetst() {
+            RequestSpawnAllPrefabsServerRpc();
+        }
+
+        [ServerRpc(RequireOwnership = false)]
         public void RequestSpawnAllPrefabsServerRpc() {
             SpawnAllPrefabs();
         }
