@@ -112,7 +112,7 @@ namespace GamersGrotto.Multiplayer_Sample {
             return player.playerName.ToString();
         }
 
-        [ServerRpc]
+        [ServerRpc(RequireOwnership = false)]
         public void AddPlayerSessionDataServerRpc(PlayerSessionData playerSessionData) {
             if (playerData.AsList().Any(p => p.clientId == playerSessionData.clientId)) return;
 
