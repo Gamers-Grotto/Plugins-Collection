@@ -10,6 +10,7 @@ using Unity.Services.Core;
 using Unity.Services.Multiplayer;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace GamersGrotto.Multiplayer_Sample {
     [GenerateSerializationForType(typeof(PlayerSessionData))]
@@ -76,12 +77,22 @@ namespace GamersGrotto.Multiplayer_Sample {
             playerData.OnListChanged += OnPlayerDataChanged;
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+            SceneManager.activeSceneChanged += OnSceneChanged;
+        }
+
+        private void OnSceneChanged(Scene arg0, Scene arg1)
+        {
+            if(!IsHost)
+                return;
+            
+            OnPlayerDataChangedEvent?.Invoke(playerData.AsList());
         }
 
         void OnDisable() {
             playerData.OnListChanged -= OnPlayerDataChanged;
             NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
+            SceneManager.activeSceneChanged -= OnSceneChanged;
             UnregisterSessionEvents();
         }
 
