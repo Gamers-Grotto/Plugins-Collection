@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1399705676276406346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2851109200006361840}
+  m_Layer: 0
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2851109200006361840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399705676276406346}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.942}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2218123465748658667}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2338564441032278942
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +158,7 @@ GameObject:
   - component: {fileID: -5872313942702658629}
   - component: {fileID: 8828712980293831180}
   - component: {fileID: -5126715405198710494}
+  - component: {fileID: 3135193081558239942}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -149,6 +181,7 @@ Transform:
   m_Children:
   - {fileID: 4616393179843773176}
   - {fileID: 3038089743847429591}
+  - {fileID: 2851109200006361840}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2012716035399108865
@@ -383,6 +416,22 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &3135193081558239942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107906551147675914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef41fa4cbb0b40a0a1b10dd44ec8cb4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  fireballPrefab: {fileID: 8120023945705080889, guid: 7891b446489c94642a8e995d1791c048, type: 3}
+  fireballSpawnPoint: {fileID: 2851109200006361840}
+  fireballSpeed: 10
 --- !u!1001 &7721034808637700509
 PrefabInstance:
   m_ObjectHideFlags: 0
