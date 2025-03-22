@@ -16,7 +16,7 @@ namespace GamersGrotto.Multiplayer_Sample
             
             if (other.gameObject.TryGetComponent<NetworkHealth>(out var health))
             {
-                health.TakeDamageServerRpc(damage,OwnerClientId);
+                health.TakeDamageServerRpc(damage, OwnerClientId);
             }
             
             GetComponent<NetworkObject>().Despawn(true);

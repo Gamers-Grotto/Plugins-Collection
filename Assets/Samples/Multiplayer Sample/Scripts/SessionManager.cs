@@ -3,14 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GamersGrotto.Core.Extended_Attributes;
+using Unity.Collections;
 using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Multiplayer;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GamersGrotto.Multiplayer_Sample {
-    public class SessionManager : MonoBehaviour {
+    [GenerateSerializationForType(typeof(PlayerSessionData))]
+    public struct PlayerSessionData : IEquatable<PlayerSessionData>, INetworkSerializeByMemcpy {
+        public ulong clientId;
+        public FixedString32Bytes playerName;
+
+        public bool Equals(PlayerSessionData other) => clientId == other.clientId && playerName.Equals(other.playerName);
+
+        public override bool Equals(object obj) => obj is PlayerSessionData other && Equals(other);
+
+        public override int GetHashCode() => HashCode.Combine(clientId, playerName);
+    }
+
+    public class SessionManager : NetworkBehaviour {
         public short maxPlayers = 8;
         public string sessionName = "Default Session";
         public string sessionPassword = null;
@@ -20,8 +34,13 @@ namespace GamersGrotto.Multiplayer_Sample {
 
         public const string PLAYER_NAME_PROPERTY_KEY = "playerName";
         public const string PLAYER_ID_PROPERTY_KEY = "playerId";
+
+        public NetworkList<PlayerSessionData> playerData = new();
+        public UnityEvent<List<PlayerSessionData>> OnPlayerDataChangedEvent;
+
+
         ISession activeSession;
-        
+
         public string PlayerName => playerName;
 
         public ISession ActiveSession {
@@ -42,9 +61,54 @@ namespace GamersGrotto.Multiplayer_Sample {
             DontDestroyOnLoad(gameObject);
         }
 
+        private void OnEnable() {
+            playerData.OnListChanged += OnPlayerDataChanged;
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+        }
+
         void OnDisable() {
+            playerData.OnListChanged -= OnPlayerDataChanged;
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
             UnregisterSessionEvents();
         }
+
+        void OnClientConnected(ulong clientId) {
+            Debug.Log("Client Started + " + clientId);
+            if (clientId != NetworkManager.LocalClientId) return;
+            
+            var playerSessionData = new PlayerSessionData {
+                clientId = clientId,
+                playerName = playerName
+            };
+            AddPlayerSessionDataServerRpc(playerSessionData);
+        }
+        void OnClientDisconnected(ulong obj) {
+            Debug.Log("Client Disconnected + " + obj);
+            if(!IsHost) return;
+            playerData.Remove(playerData.AsList().FirstOrDefault(p => p.clientId == obj));
+        }
+
+        void OnPlayerDataChanged(NetworkListEvent<PlayerSessionData> changeevent) {
+            Debug.Log("PlayerData list changed");
+            OnPlayerDataChangedEvent?.Invoke(playerData.AsList());
+        }
+
+        public string GetPlayerName(ulong clientId) {
+            var player = playerData.AsList().FirstOrDefault(p => p.clientId == clientId);
+            return player.playerName.ToString();
+        }
+
+        [ServerRpc]
+        public void AddPlayerSessionDataServerRpc(PlayerSessionData playerSessionData) {
+            if (playerData.AsList().Any(p => p.clientId == playerSessionData.clientId)) return;
+
+            if (!PlayerNameRequirementsMet(playerSessionData.playerName.ToString())) return;
+
+            playerData.Add(playerSessionData);
+        }
+
 
         async void Start() {
             try {
@@ -64,13 +128,12 @@ namespace GamersGrotto.Multiplayer_Sample {
             ActiveSession.Changed += OnSessionChanged;
             ActiveSession.PlayerJoined += OnPlayerJoined;
             ActiveSession.PlayerLeaving += OnPlayerLeaving;
-          
         }
 
         void UnregisterSessionEvents() {
-            if(ActiveSession == null)
+            if (ActiveSession == null)
                 return;
-            
+
             ActiveSession.Changed -= OnSessionChanged;
             ActiveSession.PlayerJoined -= OnPlayerJoined;
             ActiveSession.PlayerLeaving -= OnPlayerLeaving;
@@ -131,19 +194,18 @@ namespace GamersGrotto.Multiplayer_Sample {
 
 
             ActiveSession = await MultiplayerService.Instance.CreateSessionAsync(options);
-            Debug.Log($"Session {ActiveSession.Name}({ActiveSession.Id}) created successfully! Join code: {ActiveSession.Code}");
+            Debug.Log(
+                $"Session {ActiveSession.Name}({ActiveSession.Id}) created successfully! Join code: {ActiveSession.Code}");
             RegisterSessionEvents();
 
             await WorldSaveGameManager.Instance.LoadNewGame();
-           
         }
 
-        public async Task JoinSessionById(string sessionId)
-        {
+        public async Task JoinSessionById(string sessionId) {
             var options = new JoinSessionOptions() {
                 PlayerProperties = await GetPlayerProperties(),
             };
-            
+
             ActiveSession = await MultiplayerService.Instance.JoinSessionByIdAsync(sessionId, options);
             Debug.Log($"Session {ActiveSession.Id} joined successfully!");
 
@@ -201,13 +263,15 @@ namespace GamersGrotto.Multiplayer_Sample {
             playerName = name;
             await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
         }
-        
+
         public static bool PlayerNameRequirementsMet(string playerName) {
-            return !string.IsNullOrEmpty(playerName) && !string.IsNullOrWhiteSpace(playerName) && playerName.Length >= 2;
+            return !string.IsNullOrEmpty(playerName) && !string.IsNullOrWhiteSpace(playerName) &&
+                   playerName.Length >= 2;
         }
-        
+
         public static bool SessionsNameRequirementsMet(string sessionsName) {
-            return !string.IsNullOrEmpty(sessionsName) && !string.IsNullOrWhiteSpace(sessionsName) && sessionsName.Length >= 2;
+            return !string.IsNullOrEmpty(sessionsName) && !string.IsNullOrWhiteSpace(sessionsName) &&
+                   sessionsName.Length >= 2;
         }
     }
 }
