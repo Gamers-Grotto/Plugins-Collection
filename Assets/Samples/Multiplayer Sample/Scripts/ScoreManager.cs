@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using GamersGrotto.Core;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,6 +11,8 @@ namespace GamersGrotto.Multiplayer_Sample
     {
         private NetworkList<ScoreData> Scores = new ();
         public UnityEvent<List<ScoreData>> OnScoresUpdated;
+
+        public List<ScoreData> ScoreList => Scores.AsList();
 
         public static ScoreManager Instance;
         private void Awake()
