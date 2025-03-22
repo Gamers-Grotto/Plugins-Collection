@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2851109200006361840}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1399705676276406346}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.942}
+  m_LocalPosition: {x: 0, y: 0.278, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 595302985206519884}
   - component: {fileID: 6307860078269650009}
   - component: {fileID: 394955898328430103}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 2338564441032278942}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.479, z: 0.446}
+  m_LocalPosition: {x: 0, y: 0.479, z: 0.345}
   m_LocalScale: {x: 0.54942, y: 0.23294, z: 0.35352}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 8828712980293831180}
   - component: {fileID: -5126715405198710494}
   - component: {fileID: 3135193081558239942}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -440,9 +440,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2218123465748658667}
     m_Modifications:
+    - target: {fileID: 1134387952706214333, guid: 7d6cc708d55189446b60d5328ecede7c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208808752512093254, guid: 7d6cc708d55189446b60d5328ecede7c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2373253268106364971, guid: 7d6cc708d55189446b60d5328ecede7c, type: 3}
       propertyPath: m_Name
       value: PlayerWorldUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373253268106364971, guid: 7d6cc708d55189446b60d5328ecede7c, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3113704106562780005, guid: 7d6cc708d55189446b60d5328ecede7c, type: 3}
       propertyPath: m_Pivot.x
