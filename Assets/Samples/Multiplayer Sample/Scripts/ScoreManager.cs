@@ -92,6 +92,7 @@ namespace GamersGrotto.Multiplayer_Sample
         public void Test()
         {
             var scores = Scores.AsList();
+            Debug.Log("NetworkScores length : " +Scores.Count);
             Debug.Log($"Scores Length = {scores.Count}");
 
             var sb = new StringBuilder();
