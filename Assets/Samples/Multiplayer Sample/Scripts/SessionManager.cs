@@ -17,7 +17,8 @@ namespace GamersGrotto.Multiplayer_Sample {
         public ulong clientId;
         public FixedString32Bytes playerName;
 
-        public bool Equals(PlayerSessionData other) => clientId == other.clientId && playerName.Equals(other.playerName);
+        public bool Equals(PlayerSessionData other) =>
+            clientId == other.clientId && playerName.Equals(other.playerName);
 
         public override bool Equals(object obj) => obj is PlayerSessionData other && Equals(other);
 
@@ -61,7 +62,17 @@ namespace GamersGrotto.Multiplayer_Sample {
             DontDestroyOnLoad(gameObject);
         }
 
-        private void OnEnable() {
+        async void Start() {
+            try {
+                await UnityServices.InitializeAsync(); // Initialize Unity Gaming Services SDKs
+                await AuthenticationService.Instance
+                    .SignInAnonymouslyAsync(); // Can be replaced with any other sign-in method
+                Debug.Log("Signed in anonymously. PlayerID: " + AuthenticationService.Instance.PlayerId);
+            }
+            catch (Exception e) {
+                Debug.LogException(e);
+            }
+
             playerData.OnListChanged += OnPlayerDataChanged;
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
             NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
@@ -77,16 +88,17 @@ namespace GamersGrotto.Multiplayer_Sample {
         void OnClientConnected(ulong clientId) {
             Debug.Log("Client Started + " + clientId);
             if (clientId != NetworkManager.LocalClientId) return;
-            
+
             var playerSessionData = new PlayerSessionData {
                 clientId = clientId,
                 playerName = playerName
             };
             AddPlayerSessionDataServerRpc(playerSessionData);
         }
+
         void OnClientDisconnected(ulong obj) {
             Debug.Log("Client Disconnected + " + obj);
-            if(!IsHost) return;
+            if (!IsHost) return;
             playerData.Remove(playerData.AsList().FirstOrDefault(p => p.clientId == obj));
         }
 
@@ -109,18 +121,6 @@ namespace GamersGrotto.Multiplayer_Sample {
             playerData.Add(playerSessionData);
         }
 
-
-        async void Start() {
-            try {
-                await UnityServices.InitializeAsync(); // Initialize Unity Gaming Services SDKs
-                await AuthenticationService.Instance
-                    .SignInAnonymouslyAsync(); // Can be replaced with any other sign-in method
-                Debug.Log("Signed in anonymously. PlayerID: " + AuthenticationService.Instance.PlayerId);
-            }
-            catch (Exception e) {
-                Debug.LogException(e);
-            }
-        }
 
         #region Event Registration
 
