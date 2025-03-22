@@ -43,12 +43,17 @@ namespace GamersGrotto.Multiplayer_Sample
         
         #region Testing
         
-       // [ContextMenu("Test ServerRPC Damage")]
-       // public void TestDamageServer()
-       // {
-       //     TakeDamageServerRpc(Random.Range(1, 15));
-       // }
-//
+            [ContextMenu("Test ServerRPC Damage")]
+            public void TestDamageServer()
+            {
+                TakeDamageServerRpc(Random.Range(1, 15), OwnerClientId);
+            }
+            [ContextMenu("Suicide")]
+            public void Suicide()
+            {
+                TakeDamageServerRpc(100, OwnerClientId);
+            }
+            
         #endregion
     }
 }
