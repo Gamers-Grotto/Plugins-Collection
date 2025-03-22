@@ -1166,7 +1166,7 @@ MonoBehaviour:
   GlobalObjectIdHash: 571512892
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
-  Ownership: 1
+  Ownership: 2
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -1445,8 +1445,41 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8006471398879820036, guid: b5f784a6a6eaa9645b6d18ed075f0ceb, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1529431984}
   m_SourcePrefab: {fileID: 100100000, guid: b5f784a6a6eaa9645b6d18ed075f0ceb, type: 3}
+--- !u!1 &1529431983 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8006471398879820036, guid: b5f784a6a6eaa9645b6d18ed075f0ceb, type: 3}
+  m_PrefabInstance: {fileID: 1529431982}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1529431984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529431983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 723786407
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &1573154310
 GameObject:
   m_ObjectHideFlags: 0
@@ -1845,13 +1878,14 @@ GameObject:
   - component: {fileID: 1761313766}
   - component: {fileID: 1761313765}
   - component: {fileID: 1761313768}
+  - component: {fileID: 1761313769}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &1761313765
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1970,6 +2004,23 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1761313769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761313764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a24cb70ca33745fcbe474ec0dbf448a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  offset: {x: 0, y: 10, z: -10}
+  rotation: {x: 45, y: 0, z: 0}
+  movementSmoothSpeed: 0.5
+  rotationSlerpSpeed: 1
 --- !u!1 &1776479424
 GameObject:
   m_ObjectHideFlags: 0

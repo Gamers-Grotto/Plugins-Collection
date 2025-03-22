@@ -38,6 +38,9 @@ namespace GamersGrotto.Multiplayer_Sample
 
         void Start() {
             CheckRequirementsSet(string.Empty);
+
+            if (PlayerPrefs.HasKey(SessionManager.PLAYER_NAME_PROPERTY_KEY))
+                playerNameInput.text = PlayerPrefs.GetString(SessionManager.PLAYER_NAME_PROPERTY_KEY);
         }
 
         void CheckRequirementsSet(string _) {
@@ -75,7 +78,10 @@ namespace GamersGrotto.Multiplayer_Sample
         
         public async void SetPlayerName(string playerName) {
             if(!string.IsNullOrEmpty(playerName))
+            {
                 await SessionManager.Instance.SetPlayerName(playerName);
+                PlayerPrefs.SetString(SessionManager.PLAYER_NAME_PROPERTY_KEY, playerName);
+            }
         }
         
         void SetSessionName(string text) {

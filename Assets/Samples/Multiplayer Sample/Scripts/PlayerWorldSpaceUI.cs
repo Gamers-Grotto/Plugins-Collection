@@ -1,6 +1,5 @@
 ﻿using GamersGrotto.Core;
 using TMPro;
-using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +10,13 @@ namespace GamersGrotto.Multiplayer_Sample
         [SerializeField] private Image healthFill;
         [SerializeField] private TMP_Text playerNameText;
         [SerializeField] private NetworkHealth networkHealth;
-        [SerializeField] private Camera playerCamera;
-
+        
+        private Camera mainCam;
+        
         private void OnEnable()
         {
             networkHealth.onHealthChanged.AddListener(OnHealthChanged);
+            mainCam = Camera.main;
         }
 
         private void OnDisable()
@@ -40,8 +41,14 @@ namespace GamersGrotto.Multiplayer_Sample
 
         private void Update()
         {
-            var desired = playerCamera.transform.position.To(transform.position);
-            transform.rotation = Quaternion.LookRotation(desired);
+            if (mainCam == null)
+                mainCam = Camera.main;
+
+            if (mainCam != null)
+            {
+                var desired = mainCam.transform.position.To(transform.position);
+                transform.rotation = Quaternion.LookRotation(desired);
+            }
         }
     }
 }
