@@ -7,8 +7,8 @@ namespace GamersGrotto.Multiplayer_Sample
     public class Fireball : NetworkBehaviour
     {
         public float damage = 10f;
-        
-        private void OnCollisionEnter(Collision other)
+
+        private void OnTriggerEnter(Collider other)
         {
             if(!IsServer)
                 return;
