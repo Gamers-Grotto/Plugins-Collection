@@ -35,9 +35,16 @@ namespace GamersGrotto.Multiplayer_Sample
         }
 
         public static void AddScore(ulong clientId, int points) {
-            Instance.AddScoreInternal(clientId, points);
+            Instance.AddScoreServerRpc(clientId, points);
         }
-         void AddScoreInternal(ulong clientId, int points)
+        
+        [ServerRpc]
+        private void AddScoreServerRpc(ulong clientId, int points)
+        {
+            AddScoreInternal(clientId, points);
+        }
+        
+        void AddScoreInternal(ulong clientId, int points)
         {
             if(!IsHost)
                 return;
@@ -65,11 +72,6 @@ namespace GamersGrotto.Multiplayer_Sample
             Scores.Clear();
         }
 
-        [ServerRpc]
-        public void AddScoreServerRpc(ulong clientId, int points)
-        {
-            AddScore(clientId, points);
-        }
 
         private void OnEnable()
         {
@@ -90,6 +92,7 @@ namespace GamersGrotto.Multiplayer_Sample
         public void Test()
         {
             var scores = Scores.AsList();
+            Debug.Log($"Scores Length = {scores.Count}");
 
             var sb = new StringBuilder();
             foreach (var score in scores)
