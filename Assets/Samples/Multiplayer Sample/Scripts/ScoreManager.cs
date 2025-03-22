@@ -14,14 +14,6 @@ namespace GamersGrotto.Multiplayer_Sample
         public UnityEvent<List<ScoreData>> OnScoresUpdated;
 
         public static ScoreManager Instance;
-        
-        [RuntimeInitializeOnLoadMethod]
-        private static void SelfInstantiate()
-        {
-            var go = new GameObject("ScoreManager");
-            go.GetOrAddComponent<ScoreManager>();
-        }
-        
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -109,8 +101,8 @@ namespace GamersGrotto.Multiplayer_Sample
             Debug.Log(sb);
         }
     }
-
-    public struct ScoreData : IEquatable<ScoreData>
+    [GenerateSerializationForType(typeof(ScoreData))]
+    public struct ScoreData : IEquatable<ScoreData>, INetworkSerializeByMemcpy
     {
         public ulong PlayerId;
         public int Score;
