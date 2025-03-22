@@ -89,7 +89,7 @@ namespace GamersGrotto.Multiplayer_Sample
         public override void OnNetworkSpawn()
         {
             Debug.Log($"IsLocalPlayer ({GetType().Name}): {IsLocalPlayer}");
-            enabled = !IsOwner;
+            enabled = IsOwner;
             
             if (IsHost)
             {
