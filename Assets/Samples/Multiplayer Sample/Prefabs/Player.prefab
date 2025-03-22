@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 8828712980293831180}
   - component: {fileID: -5126715405198710494}
   - component: {fileID: 3135193081558239942}
+  - component: {fileID: 4425679247142947533}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -432,6 +433,19 @@ MonoBehaviour:
   fireballPrefab: {fileID: 8120023945705080889, guid: 7891b446489c94642a8e995d1791c048, type: 3}
   fireballSpawnPoint: {fileID: 2851109200006361840}
   fireballSpeed: 10
+--- !u!114 &4425679247142947533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107906551147675914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b9384125ab1fa64c9338cd1cf7bedef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerWorldSpaceUI: {fileID: 6460451318808500136}
 --- !u!1001 &7721034808637700509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -554,3 +568,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3113704106562780005, guid: 7d6cc708d55189446b60d5328ecede7c, type: 3}
   m_PrefabInstance: {fileID: 7721034808637700509}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6460451318808500136 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3642992630311054901, guid: 7d6cc708d55189446b60d5328ecede7c, type: 3}
+  m_PrefabInstance: {fileID: 7721034808637700509}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72bab782593a48e7982cbe0148c2c11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

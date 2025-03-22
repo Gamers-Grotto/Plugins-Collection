@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GamersGrotto.Multiplayer_Sample
 {
-    public class PlayeDataController : MonoBehaviour
+    public class PlayerDataController : MonoBehaviour
     {
         [SerializeField] private PlayerWorldSpaceUI playerWorldSpaceUI;
         
