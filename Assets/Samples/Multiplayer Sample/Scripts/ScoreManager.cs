@@ -53,7 +53,7 @@ namespace GamersGrotto.Multiplayer_Sample
                     var newValue = Scores[i];
                     newValue.Score += points;
                     Scores[i] = newValue;
-                    break;
+                    return;
                 }
             }
             
