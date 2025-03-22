@@ -30,19 +30,25 @@ namespace GamersGrotto.Multiplayer_Sample
         }
         
         [ServerRpc(RequireOwnership = false)]
-        public void TakeDamageServerRpc(float damage)
+        public void TakeDamageServerRpc(float damage, ulong attackerClientId)
         {
             health.Value = Mathf.Clamp(health.Value - damage, 0, maxHealth);
+            
+            if(health.Value <= 0)
+            {
+                Debug.Log($"Player {OwnerClientId} has died");
+                ScoreManager.AddScore(attackerClientId, 1);
+            }
         }
         
         #region Testing
         
-        [ContextMenu("Test ServerRPC Damage")]
-        public void TestDamageServer()
-        {
-            TakeDamageServerRpc(Random.Range(1, 15));
-        }
-
+       // [ContextMenu("Test ServerRPC Damage")]
+       // public void TestDamageServer()
+       // {
+       //     TakeDamageServerRpc(Random.Range(1, 15));
+       // }
+//
         #endregion
     }
 }

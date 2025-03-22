@@ -27,14 +27,14 @@ namespace GamersGrotto.Multiplayer_Sample
         }
         
         [ServerRpc]
-        private void RequestFireballServerRpc()
+        private void RequestFireballServerRpc(ServerRpcParams serverRpcParams = default)
         {
             var fireballInstance = Instantiate(fireballPrefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
             var networkObject = fireballInstance.GetComponent<NetworkObject>();
 
             if (networkObject != null)
             {
-                networkObject.Spawn(true);
+                networkObject.SpawnWithOwnership(serverRpcParams.Receive.SenderClientId,true);
                 fireballInstance.GetComponent<Rigidbody>().linearVelocity = fireballSpawnPoint.forward * fireballSpeed;
             }
         }

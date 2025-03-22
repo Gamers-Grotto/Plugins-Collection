@@ -34,7 +34,10 @@ namespace GamersGrotto.Multiplayer_Sample
             DontDestroyOnLoad(gameObject);
         }
 
-        public void AddScore(ulong clientId, int points)
+        public static void AddScore(ulong clientId, int points) {
+            Instance.AddScoreInternal(clientId, points);
+        }
+         void AddScoreInternal(ulong clientId, int points)
         {
             if(!IsHost)
                 return;
