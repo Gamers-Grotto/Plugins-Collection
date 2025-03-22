@@ -29,7 +29,7 @@ namespace GamersGrotto.Multiplayer_Sample
             onHealthChanged.Invoke(newvalue / maxHealth);
         }
         
-        [ServerRpc]
+        [ServerRpc(RequireOwnership = false)]
         public void TakeDamageServerRpc(float damage)
         {
             health.Value = Mathf.Clamp(health.Value - damage, 0, maxHealth);
