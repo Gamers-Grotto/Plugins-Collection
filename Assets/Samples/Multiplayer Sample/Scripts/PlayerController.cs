@@ -88,8 +88,19 @@ namespace GamersGrotto.Multiplayer_Sample
 
         public override void OnNetworkSpawn()
         {
+            if (IsHost)
+            {
+                Debug.Log($"OnNetworkSpawn player {OwnerClientId}, Active Scene : {SceneManager.GetActiveScene().name}");
+            }
+
+            if (IsClient)
+            {
+                Debug.Log($"OnNetworkSpawn player {OwnerClientId}, Active Scene : {SceneManager.GetActiveScene().name}");
+            }
+            
             if (IsOwner && !IsHost) {
                 EnableCamera();
+                GetComponent<Rigidbody>().useGravity = true;
             }
             Debug.Log("Player Position on Spawn = "+transform.position);
             gameObject.name = $"Player {OwnerClientId}";
