@@ -34,25 +34,30 @@ namespace GamersGrotto.Multiplayer_Sample
             DontDestroyOnLoad(gameObject);
         }
 
-        public static void AddScore(ulong clientId, int points) {
-            Instance.AddScoreServerRpc(clientId, points);
+        public static void AddScore(ulong attackerClientId, int points) {
+            Debug.Log("Static Add Score called on ScoreManager");
+            Instance.AddScoreServerRpc(attackerClientId, points);
         }
         
         [ServerRpc]
-        private void AddScoreServerRpc(ulong clientId, int points)
+        private void AddScoreServerRpc(ulong attackerClientId, int points)
         {
-            AddScoreInternal(clientId, points);
+            Debug.Log("AddScoreServerRpc Called");
+            AddScoreInternal(attackerClientId, points);
         }
         
-        void AddScoreInternal(ulong clientId, int points)
+        void AddScoreInternal(ulong attackerClientId, int points)
         {
             if(!IsHost)
                 return;
             
+            Debug.Log($"AddScore Internal called from {attackerClientId}");
+            
             for (var i = 0; i < Scores.Count; i++)
             {
-                if (Scores[i].PlayerId == clientId)
+                if (Scores[i].PlayerId == attackerClientId)
                 {
+                    Debug.Log($"Player given a {points} points : {attackerClientId}");
                     var newValue = Scores[i];
                     newValue.Score += points;
                     Scores[i] = newValue;
@@ -60,9 +65,10 @@ namespace GamersGrotto.Multiplayer_Sample
                 }
             }
             
+            Debug.Log($"Player given a {points} points : {attackerClientId}");
             Scores.Add(new ScoreData()
             {
-                PlayerId = clientId,
+                PlayerId = attackerClientId,
                 Score = points
             });
         }
