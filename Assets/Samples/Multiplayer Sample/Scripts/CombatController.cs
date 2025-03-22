@@ -9,6 +9,12 @@ namespace GamersGrotto.Multiplayer_Sample
         public Transform fireballSpawnPoint;
         public float fireballSpeed = 10f;
 
+        public override void OnNetworkSpawn()
+        {
+            Debug.Log($"IsLocalPlayer ({GetType().Name}): {IsLocalPlayer}");
+            enabled = !IsOwner;
+        }
+
         private void Update()
         {
             if (!IsOwner)

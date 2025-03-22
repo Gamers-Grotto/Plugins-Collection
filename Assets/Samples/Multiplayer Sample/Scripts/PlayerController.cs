@@ -88,6 +88,9 @@ namespace GamersGrotto.Multiplayer_Sample
 
         public override void OnNetworkSpawn()
         {
+            Debug.Log($"IsLocalPlayer ({GetType().Name}): {IsLocalPlayer}");
+            enabled = !IsOwner;
+            
             if (IsHost)
             {
                 Debug.Log($"OnNetworkSpawn player {OwnerClientId}, Active Scene : {SceneManager.GetActiveScene().name}");
