@@ -10,7 +10,6 @@ namespace GamersGrotto.Multiplayer_Sample
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log($"IsLocalPlayer ({GetType().Name}): {IsLocalPlayer}");
             if(!IsServer)
                 return;
             

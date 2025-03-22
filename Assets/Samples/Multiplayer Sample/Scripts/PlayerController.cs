@@ -31,7 +31,6 @@ namespace GamersGrotto.Multiplayer_Sample
 
         private void OnSceneChanged(Scene previousScene, Scene newScene)
         {
-            Debug.Log($"On Scene Loaded : Player position = {transform.position}");
             GetComponent<Rigidbody>().useGravity = true;
             EnableCamera();
         }
@@ -76,44 +75,23 @@ namespace GamersGrotto.Multiplayer_Sample
             }
         }
 
-        private void OnServerInitialized()
-        {
-            Debug.Log("OnServerInitialized");
-        }
+        private void OnServerInitialized() { }
 
-        protected override void OnNetworkPreSpawn(ref NetworkManager networkManager)
-        {
-            Debug.Log("OnNetworkPreSpawn");
-        }
+        protected override void OnNetworkPreSpawn(ref NetworkManager networkManager) { }
 
         public override void OnNetworkSpawn()
         {
-            Debug.Log($"IsLocalPlayer ({GetType().Name}): {IsLocalPlayer}");
             enabled = IsOwner;
-            
-            if (IsHost)
-            {
-                Debug.Log($"OnNetworkSpawn player {OwnerClientId}, Active Scene : {SceneManager.GetActiveScene().name}");
-            }
-
-            if (IsClient)
-            {
-                Debug.Log($"OnNetworkSpawn player {OwnerClientId}, Active Scene : {SceneManager.GetActiveScene().name}");
-            }
-            
+           
             if (IsOwner && !IsHost) {
                 EnableCamera();
                 GetComponent<Rigidbody>().useGravity = true;
             }
-            Debug.Log("Player Position on Spawn = "+transform.position);
             gameObject.name = $"Player {OwnerClientId}";
             Debug.Log(gameObject.name + " spawned");
         }
 
-        public override void OnNetworkDespawn()
-        {
-            Debug.Log(gameObject.name + " despawned");
-        }
+        public override void OnNetworkDespawn() { }
 
         public void EnableCamera() {
             var cam = Camera.main;
@@ -126,31 +104,6 @@ namespace GamersGrotto.Multiplayer_Sample
                     cameraController.target = transform;
                 } else Debug.LogWarning("Camera Controller not found on MainCam");
             } else Debug.LogWarning($"Main Camera not found in Scene {SceneManager.GetActiveScene().name}");
-        }
-
-        [ClientRpc]
-        public void SetPlayerNameClientRpc()
-        {
-            return;
-            // var players = SessionManager.Instance.ActiveSession.Players;
-            //
-            // foreach (var player in players)
-            // {
-            //     var hasName = player.Properties.TryGetValue(SessionManager.PLAYER_NAME_PROPERTY_KEY, out var playerName);
-            //     var hasId = player.Properties.TryGetValue(SessionManager.PLAYER_ID_PROPERTY_KEY, out var playerId);
-            //     
-            //     
-            //     Debug.Log($"Player : {player.Id} name : {playerName?.Value}, player id : {playerId?.Value}");
-            //     
-            //     if(hasId && hasName)
-            //     {
-            //         if(playerId.Value == OwnerClientId.ToString())
-            //         {
-            //             Debug.Log("Disco");
-            //             GetComponentInChildren<PlayerWorldSpaceUI>().SetPlayerName(player.Properties[SessionManager.PLAYER_NAME_PROPERTY_KEY].Value);
-            //         }
-            //     }
-            // }
         }
     }
 }

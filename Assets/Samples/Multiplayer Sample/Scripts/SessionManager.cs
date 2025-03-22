@@ -86,7 +86,7 @@ namespace GamersGrotto.Multiplayer_Sample {
         }
 
         void OnClientConnected(ulong clientId) {
-            Debug.Log("Client Started + " + clientId);
+            Debug.Log("Client Connected + " + clientId);
             if (clientId != NetworkManager.LocalClientId) return;
 
             var playerSessionData = new PlayerSessionData {
@@ -96,14 +96,13 @@ namespace GamersGrotto.Multiplayer_Sample {
             AddPlayerSessionDataServerRpc(playerSessionData);
         }
 
-        void OnClientDisconnected(ulong obj) {
-            Debug.Log("Client Disconnected + " + obj);
+        void OnClientDisconnected(ulong clientId) {
+            Debug.Log("Client Disconnected + " + clientId);
             if (!IsHost) return;
-            playerData.Remove(playerData.AsList().FirstOrDefault(p => p.clientId == obj));
+            playerData.Remove(playerData.AsList().FirstOrDefault(p => p.clientId == clientId));
         }
 
         void OnPlayerDataChanged(NetworkListEvent<PlayerSessionData> changeevent) {
-            Debug.Log("PlayerData list changed");
             OnPlayerDataChangedEvent?.Invoke(playerData.AsList());
         }
 
