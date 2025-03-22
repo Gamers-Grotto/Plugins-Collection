@@ -31,6 +31,8 @@ namespace GamersGrotto.Multiplayer_Sample
 
         private void OnSceneChanged(Scene previousScene, Scene newScene)
         {
+            Debug.Log($"On Scene Loaded : Player position = {transform.position}");
+            GetComponent<Rigidbody>().useGravity = true;
             EnableCamera();
         }
 
@@ -89,6 +91,7 @@ namespace GamersGrotto.Multiplayer_Sample
             if (IsOwner && !IsHost) {
                 EnableCamera();
             }
+            Debug.Log("Player Position on Spawn = "+transform.position);
             gameObject.name = $"Player {OwnerClientId}";
             Debug.Log(gameObject.name + " spawned");
         }
