@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GamersGrotto.GG_Broker;
+using GamersGrotto.Multiplayer_Sample.Messages;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -26,7 +28,22 @@ namespace GamersGrotto.Multiplayer_Sample
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-
+        
+        private void OnEnable()
+        {
+            Scores.OnListChanged += OnListChanged;
+            Broker.Subscribe<PlayerDeathMessage>(OnPlayerDeathMessage);
+        }
+        private void OnDisable()
+        {
+            Scores.OnListChanged -= OnListChanged;
+            Broker.Unsubscribe<PlayerDeathMessage>(OnPlayerDeathMessage);
+        }
+        
+        void OnPlayerDeathMessage(PlayerDeathMessage obj) {
+            AddScore(obj.KillerId, 1);
+        }
+        
         public static void AddScore(ulong attackerClientId, int points) {
             Instance.AddScoreServerRpc(attackerClientId, points);
         }
@@ -63,17 +80,6 @@ namespace GamersGrotto.Multiplayer_Sample
         public void ResetScores()
         {
             Scores.Clear();
-        }
-
-
-        private void OnEnable()
-        {
-            Scores.OnListChanged += OnListChanged;
-        }
-
-        private void OnDisable()
-        {
-            Scores.OnListChanged -= OnListChanged;
         }
 
         private void OnListChanged(NetworkListEvent<ScoreData> changeevent)

@@ -1,4 +1,6 @@
 ﻿using System;
+using GamersGrotto.GG_Broker;
+using GamersGrotto.Multiplayer_Sample.Messages;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -37,7 +39,7 @@ namespace GamersGrotto.Multiplayer_Sample
             if(health.Value <= 0)
             {
                 Debug.Log($"Player {OwnerClientId} has died");
-                ScoreManager.AddScore(attackerClientId, 1);
+                new PlayerDeathMessage(OwnerClientId, attackerClientId).Invoke();
             }
         }
         
