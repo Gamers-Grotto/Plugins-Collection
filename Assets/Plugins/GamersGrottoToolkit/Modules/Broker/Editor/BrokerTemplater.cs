@@ -2,7 +2,7 @@
 using GamersGrotto.Core.Editor;
 using UnityEditor;
 
-namespace GamersGrotto.Broker.Editor {
+namespace GamersGrotto.GG_Broker.Editor {
     public class BrokerTemplater : BaseTemplater {
         private const string TEMPLATE_PATHS = "Assets/Plugins/GamersGrottoToolkit/Modules/Broker/Editor/Templates/";
         private const string ASSET_PATH_SUFFIX = "Broker/";

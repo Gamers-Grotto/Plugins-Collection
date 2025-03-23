@@ -1,4 +1,4 @@
-using GamersGrotto.Runtime.Modules.Broker;
+using GamersGrotto.Runtime.Modules.GG_Broker;
 
 public class #SCRIPTNAME# : IMessage
 {	

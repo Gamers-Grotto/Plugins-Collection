@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GamersGrotto.Broker
+namespace GamersGrotto.GG_Broker
 {
     public static class Broker
     {
@@ -23,7 +23,7 @@ namespace GamersGrotto.Broker
         }
         
         public static void Invoke(this IMessage message){
-            Broker.InvokeSubscribers(message.GetType(), message);
+           InvokeSubscribers(message.GetType(), message);
         }
         private static void InvokeSubscribers(Type type, IMessage data)
         {
