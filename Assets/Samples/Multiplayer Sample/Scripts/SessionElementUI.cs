@@ -15,7 +15,7 @@ namespace GamersGrotto.Multiplayer_Sample {
 
         private void Update()
         {
-            joinButton.interactable = Session != null && SessionManager.PlayerNameRequirementsMet(SessionManager.Instance.PlayerName);
+            joinButton.interactable = Session != null && PlayersManager.PlayerNameRequirementsMet(PlayersManager.Instance.GetLocalPlayerName());
         }
 
         public void SetSession(ISessionInfo session) {

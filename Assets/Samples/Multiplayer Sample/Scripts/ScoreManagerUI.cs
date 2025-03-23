@@ -33,7 +33,7 @@ namespace GamersGrotto.Multiplayer_Sample
                 return;
             }
             
-            var text = string.Join("\n", arg0.Select(x => $"{SessionManager.Instance.GetPlayerName(x.PlayerId)} : {x.Score}"));
+            var text = string.Join("\n", arg0.Select(x => $"{PlayersManager.Instance.GetPlayerName(x.PlayerId)} : {x.Score}"));
             scoreText.text = text;
         }
     }

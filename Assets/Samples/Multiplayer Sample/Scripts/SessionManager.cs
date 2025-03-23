@@ -13,37 +13,15 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace GamersGrotto.Multiplayer_Sample {
-    [GenerateSerializationForType(typeof(PlayerSessionData))]
-    public struct PlayerSessionData : IEquatable<PlayerSessionData>, INetworkSerializeByMemcpy {
-        public ulong clientId;
-        public FixedString32Bytes playerName;
-
-        public bool Equals(PlayerSessionData other) =>
-            clientId == other.clientId && playerName.Equals(other.playerName);
-
-        public override bool Equals(object obj) => obj is PlayerSessionData other && Equals(other);
-
-        public override int GetHashCode() => HashCode.Combine(clientId, playerName);
-    }
-
     public class SessionManager : NetworkBehaviour {
         public short maxPlayers = 8;
         public string sessionName = "Default Session";
         public string sessionPassword = null;
-        string playerName;
+
         public static SessionManager Instance { get; private set; }
         NetworkManager networkManager;
 
-        public const string PLAYER_NAME_PROPERTY_KEY = "playerName";
-        public const string PLAYER_ID_PROPERTY_KEY = "playerId";
-
-        public NetworkList<PlayerSessionData> playerData = new();
-        public UnityEvent<List<PlayerSessionData>> OnPlayerDataChangedEvent;
-
-
         ISession activeSession;
-
-        public string PlayerName => playerName;
 
         public ISession ActiveSession {
             get => activeSession;
@@ -73,62 +51,10 @@ namespace GamersGrotto.Multiplayer_Sample {
             catch (Exception e) {
                 Debug.LogException(e);
             }
-
-            playerData.OnListChanged += OnPlayerDataChanged;
-            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-            NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
-            SceneManager.activeSceneChanged += OnSceneChanged;
-        }
-
-        private void OnSceneChanged(Scene arg0, Scene arg1)
-        {
-            if(!IsHost)
-                return;
-            
-            OnPlayerDataChangedEvent?.Invoke(playerData.AsList());
         }
 
         void OnDisable() {
-            playerData.OnListChanged -= OnPlayerDataChanged;
-            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnected;
-            NetworkManager.Singleton.OnClientDisconnectCallback -= OnClientDisconnected;
-            SceneManager.activeSceneChanged -= OnSceneChanged;
             UnregisterSessionEvents();
-        }
-
-        void OnClientConnected(ulong clientId) {
-            Debug.Log("Client Connected + " + clientId);
-            if (clientId != NetworkManager.LocalClientId) return;
-
-            var playerSessionData = new PlayerSessionData {
-                clientId = clientId,
-                playerName = playerName
-            };
-            AddPlayerSessionDataServerRpc(playerSessionData);
-        }
-
-        void OnClientDisconnected(ulong clientId) {
-            Debug.Log("Client Disconnected + " + clientId);
-            if (!IsHost) return;
-            playerData.Remove(playerData.AsList().FirstOrDefault(p => p.clientId == clientId));
-        }
-
-        void OnPlayerDataChanged(NetworkListEvent<PlayerSessionData> changeevent) {
-            OnPlayerDataChangedEvent?.Invoke(playerData.AsList());
-        }
-
-        public string GetPlayerName(ulong clientId) {
-            var player = playerData.AsList().FirstOrDefault(p => p.clientId == clientId);
-            return player.playerName.ToString();
-        }
-
-        [ServerRpc(RequireOwnership = false)]
-        public void AddPlayerSessionDataServerRpc(PlayerSessionData playerSessionData) {
-            if (playerData.AsList().Any(p => p.clientId == playerSessionData.clientId)) return;
-
-            if (!PlayerNameRequirementsMet(playerSessionData.playerName.ToString())) return;
-
-            playerData.Add(playerSessionData);
         }
 
 
@@ -163,31 +89,9 @@ namespace GamersGrotto.Multiplayer_Sample {
 
         #endregion
 
-
-        /// <summary>
-        /// Custom game-specific properties that apply to an individual player.
-        /// Examples, name, id, level, role etc.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<Dictionary<string, PlayerProperty>> GetPlayerProperties() {
-            var playerName = await AuthenticationService.Instance.GetPlayerNameAsync();
-            var playerId = AuthenticationService.Instance.PlayerId;
-
-            var playerNameProperty = new PlayerProperty(playerName, VisibilityPropertyOptions.Member);
-            var playerIdProperty = new PlayerProperty(playerId, VisibilityPropertyOptions.Member);
-
-            var playerProperties = new Dictionary<string, PlayerProperty> {
-                { PLAYER_NAME_PROPERTY_KEY, playerNameProperty },
-                { PLAYER_ID_PROPERTY_KEY, playerIdProperty }
-            };
-
-            return playerProperties;
-        }
-
-
         [Button]
         public async void StartSessionAsHost() {
-            var playerProperties = await GetPlayerProperties();
+            var playerProperties = await PlayersManager.GetPlayerProperties();
             var options = new SessionOptions {
                 Name = sessionName,
                 MaxPlayers = maxPlayers,
@@ -213,7 +117,7 @@ namespace GamersGrotto.Multiplayer_Sample {
 
         public async Task JoinSessionById(string sessionId) {
             var options = new JoinSessionOptions() {
-                PlayerProperties = await GetPlayerProperties(),
+                PlayerProperties = await PlayersManager.GetPlayerProperties(),
             };
 
             ActiveSession = await MultiplayerService.Instance.JoinSessionByIdAsync(sessionId, options);
@@ -259,25 +163,6 @@ namespace GamersGrotto.Multiplayer_Sample {
             return results.Sessions;
         }
 
-        public async Task SetPlayerName(string name) {
-            if (!PlayerNameRequirementsMet(name)) {
-                Debug.LogError("Player name needs to be min 2 characters");
-                return;
-            }
-
-            if (playerName == name) {
-                Debug.Log("Player name is already set to " + playerName);
-                return;
-            }
-
-            playerName = name;
-            await AuthenticationService.Instance.UpdatePlayerNameAsync(playerName);
-        }
-
-        public static bool PlayerNameRequirementsMet(string playerName) {
-            return !string.IsNullOrEmpty(playerName) && !string.IsNullOrWhiteSpace(playerName) &&
-                   playerName.Length >= 2;
-        }
 
         public static bool SessionsNameRequirementsMet(string sessionsName) {
             return !string.IsNullOrEmpty(sessionsName) && !string.IsNullOrWhiteSpace(sessionsName) &&

@@ -39,12 +39,12 @@ namespace GamersGrotto.Multiplayer_Sample
         void Start() {
             CheckRequirementsSet(string.Empty);
 
-            if (PlayerPrefs.HasKey(SessionManager.PLAYER_NAME_PROPERTY_KEY))
-                playerNameInput.text = PlayerPrefs.GetString(SessionManager.PLAYER_NAME_PROPERTY_KEY);
+            if (PlayerPrefs.HasKey(PlayersManager.PLAYER_NAME_PROPERTY_KEY))
+                playerNameInput.text = PlayerPrefs.GetString(PlayersManager.PLAYER_NAME_PROPERTY_KEY);
         }
 
         void CheckRequirementsSet(string _) {
-            var playerNameRequirementsMet = SessionManager.PlayerNameRequirementsMet(playerNameInput.text);
+            var playerNameRequirementsMet = PlayersManager.PlayerNameRequirementsMet(playerNameInput.text);
             var sessionNameRequirementsMet = SessionManager.SessionsNameRequirementsMet(sessionNameInput.text);
             createSessionButton.interactable = playerNameRequirementsMet && sessionNameRequirementsMet;
         }
@@ -79,8 +79,9 @@ namespace GamersGrotto.Multiplayer_Sample
         public async void SetPlayerName(string playerName) {
             if(!string.IsNullOrEmpty(playerName))
             {
-                await SessionManager.Instance.SetPlayerName(playerName);
-                PlayerPrefs.SetString(SessionManager.PLAYER_NAME_PROPERTY_KEY, playerName);
+                await PlayersManager.Instance.SetPlayerName(playerName);
+                PlayerPrefs.SetString(PlayersManager.PLAYER_NAME_PROPERTY_KEY, playerName);
+                
             }
         }
         
@@ -91,7 +92,7 @@ namespace GamersGrotto.Multiplayer_Sample
         
         public async void QuickHost() {
             SessionManager.Instance.sessionName = "Quick Hosted Session";
-            await SessionManager.Instance.SetPlayerName("QuickHost");
+            await PlayersManager.Instance.SetPlayerName("QuickHost");
             SessionManager.Instance.StartSessionAsHost();
         }
     }

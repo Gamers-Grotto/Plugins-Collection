@@ -10,18 +10,18 @@ namespace GamersGrotto.Multiplayer_Sample
         
         private void Start()
         {
-           SessionManager.Instance.OnPlayerDataChangedEvent.AddListener(OnClientConnected);
+           PlayersManager.Instance.OnPlayerDataChangedEvent.AddListener(OnClientConnected);
            if(IsHost)
                OnClientConnected();
         }
 
         void OnDisable() {
-            SessionManager.Instance.OnPlayerDataChangedEvent.RemoveListener(OnClientConnected);
+            PlayersManager.Instance.OnPlayerDataChangedEvent.RemoveListener(OnClientConnected);
         }
 
         void OnClientConnected(List<PlayerSessionData> _ = default) {
             var ownerID = GetComponent<NetworkObject>().OwnerClientId;
-            playerWorldSpaceUI.SetPlayerName(SessionManager.Instance.GetPlayerName(ownerID));
+            playerWorldSpaceUI.SetPlayerName(PlayersManager.Instance.GetPlayerName(ownerID));
         }
     }
 }
