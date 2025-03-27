@@ -1,0 +1,22 @@
+{
+  "name": "gamersgrotto.gg_service-locator",
+  "version": "0.0.1",
+  "displayName": "GG_Service Locator",
+  "description": "Description of the package, what it does and how to use it.",
+  "unity": "6000.0",
+  "unityRelease": "20f1",
+  "documentationUrl": null,
+  "changelogUrl": null,
+  "licensesUrl": null,
+  "dependencies": {},
+  "keywords": null,
+  "author": {
+    "name": "GamersGrotto",
+    "email": "gamersgrottodevelopers@gmail.com",
+    "url": null
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gamers-Grotto/GamersGrottoToolkit.git"
+  }
+}

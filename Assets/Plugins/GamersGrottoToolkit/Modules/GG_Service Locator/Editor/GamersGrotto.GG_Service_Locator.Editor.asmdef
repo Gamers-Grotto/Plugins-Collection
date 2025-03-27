@@ -1,0 +1,11 @@
+{
+  "name": "GamersGrotto.GG_Service_Locator.Editor",
+  "references": [
+    "gamersgrotto.core.editor",
+    "GamersGrotto.Core"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "rootNamespace": "GamersGrotto.GG_Service_Locator.Editor"
+}

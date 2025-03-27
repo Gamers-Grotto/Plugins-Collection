@@ -1,0 +1,17 @@
+{
+    "name": "GamersGrotto.GG_Service_Locator",
+    "rootNamespace": "GamersGrotto.GG_Service_Locator",
+    "references": [
+        "GamersGrotto.Core",
+        "Unity.Collections"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
